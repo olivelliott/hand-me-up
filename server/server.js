@@ -26,6 +26,11 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
+
+  // wildcard for pages not found
+  app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, './public/404.html'));
+  })
 }
 
 // Create a new instance of an Apollo server with the GraphQL schema
@@ -44,4 +49,4 @@ const startApolloServer = async (typeDefs, resolvers) => {
 };
 
 // Call the async function to start the server
-startApolloServer();
+startApolloServer(typeDefs, resolvers);
