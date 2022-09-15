@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema({
   purchaseData: {
-    type: DataTransfer,
+    type: Date,
     default: Date.now,
   },
   products: [
