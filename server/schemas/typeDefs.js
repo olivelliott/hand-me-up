@@ -5,7 +5,8 @@
 // user has an array of products
 // needed to connect the product type to the user... did this by adding the user's email address to the product type
 // added products to populate in the user query resolver
-    //!: update the seed file to work w this^ + check the models
+// model looks good to work with this
+// updated seed file so each product has the email address of the seller
 
 // TODO: AddProduct mutation that will return the User with their products for sale in an array
 // I believe this will be taken care of now that the user query in the resolver has been updated to populate with the user's products
@@ -65,7 +66,7 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID
+        token: ID!
         user: User
     }
 

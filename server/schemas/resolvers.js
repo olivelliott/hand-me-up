@@ -41,7 +41,7 @@ const resolvers = {
         product: async (parent, { _id }) => {
             return await Product.findById(_id).populate('category');
         },
-        // GET single user by the token in the context
+        // GET single user by the token in the context which saves user._id
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
