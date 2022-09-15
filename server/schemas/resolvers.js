@@ -22,7 +22,7 @@ const resolvers = {
             return await Category.find();
         },
         // GET all products in a category
-        products: async (parent, { category, name }) => {
+        products: async (parent, { category, name, user }) => {
             const params = {};
 
             if (category) {
