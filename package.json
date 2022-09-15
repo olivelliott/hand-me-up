@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/olivelliott/hand-me-up/issues"
   },
-  "homepage": "https://github.com/olivelliott/hand-me-up#readme"
+  "homepage": "https://github.com/olivelliott/hand-me-up#readme",
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
 }
