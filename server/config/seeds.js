@@ -24,6 +24,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "pamela@testmail.com"
     },
     {
       name: "Linen Tank Top",
@@ -34,6 +35,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "pamela@testmail.com"
     },
     {
       name: "Black Long Sleeve",
@@ -45,6 +47,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "pamela@testmail.com"
     },
     {
       name: "Printed Maxi Dress",
@@ -56,6 +59,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "eholt@testmail.com"
     },
     {
       name: "Color Block Sneakers",
@@ -67,6 +71,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "jswilson@testmail.com"
     },
     {
       name: "Black Long Sleeve",
@@ -78,6 +83,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
+      email: "jswilson@testmail.com"
     },
     // {
     //   name: "Sweatshirt",
