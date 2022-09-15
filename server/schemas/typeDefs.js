@@ -1,5 +1,10 @@
 // define every piece of data that the client can expect to work with
+
 // TODO: We need to make sure the Products that the user is creating is associated with that user
+// product belongs to user as thought belongs to user in 'deep-thoughts- module
+// user has an array of products
+// needed to connect the product type to the user... did this by adding the user's email address to the product type
+
 // TODO: AddProduct mutation that will return the User with their products for sale in an array
 
 // ? how to set up the additional donation -- this could be an add-on product that's 'suggested to add to cart' on the checkout page?
@@ -33,6 +38,7 @@ const typeDefs = gql`
         quantity: Int
         price: Float
         category: Category
+        email: String
     }
 
     type Order {
