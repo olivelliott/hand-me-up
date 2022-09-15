@@ -1,6 +1,18 @@
 // define every piece of data that the client can expect to work with
+// TODO: We need to make sure the Products that the user is creating is associated with that user
+// TODO: AddProduct mutation that will return the User with their products for sale in an array
 
-// TODO: how to set up the additional donation -- this could be an add-on product that's 'suggested to add to cart' on the checkout page? then, it will easily show up in the order as a product purchased.. maybe MVP has a few charities to choose from this way we can create them as products that can be added to the cart in $1 increments?
+// ? how to set up the additional donation -- this could be an add-on product that's 'suggested to add to cart' on the checkout page?
+// ? then, it will easily show up in the order as a product purchased.. maybe MVP has a few charities to choose from this way we can 
+// ? create them as products that can be added to the cart in $1 increments?
+
+// ? Also, do you want to do categories for the MVP? I think it will be easy but could prove to be harder than we thought
+
+// * I like the idea of the suggested add to cart for donations because I think it will work easier with stripe (if we do that)
+// * We could also have it be a front end form on the product page with a drop down of different prices to choose from
+// * with the base price being the one to cover the cost of shipping 
+
+// ! I'm going to add another model for our charities so that they don't have to be hard corded in the front end 
 
 const { gql } = require("apollo-server-express");
 
