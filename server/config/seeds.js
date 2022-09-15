@@ -2,6 +2,31 @@ const db = require("./connection");
 const { User, Product, Charity, Category } = require("../models");
 
 db.once("open", async () => {
+  await User.deleteMany();
+
+  // !added by CPM to connected products to a user.
+  // !Oliva - I commented out the individuate create users below... not sure the benefit of individual vs the array but I think I needed an array in order to get the user email connected to a product
+  const users = await User.insertMany([
+    {
+      firstName: "Pamela",
+      lastName: "Washington",
+      email: "pamela@testmail.com",
+      password: "password12345",
+    },
+    {
+      firstName: "Elijah",
+      lastName: "Holt",
+      email: "eholt@testmail.com",
+      password: "password12345",
+    },
+    {
+      firstName: "Jamie",
+      lastName: "Wilson",
+      email: "jswilson@testmail.com",
+      password: "password12345",
+    }
+  ]);
+
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
@@ -142,31 +167,6 @@ db.once("open", async () => {
   ]);
 
   console.log("products seeded 💫");
-
-  await User.deleteMany();
-
-  // !added by CPM to connected products to a user.
-  // !Oliva - I commented out the individuate create users below... not sure the benefit of individual vs the array but I think I needed an array in order to get the user email connected to a product
-  const users = await User.insertMany([
-    {
-      firstName: "Pamela",
-      lastName: "Washington",
-      email: "pamela@testmail.com",
-      password: "password12345",
-    },
-    {
-      firstName: "Elijah",
-      lastName: "Holt",
-      email: "eholt@testmail.com",
-      password: "password12345",
-    },
-    {
-      firstName: "Jamie",
-      lastName: "Wilson",
-      email: "jswilson@testmail.com",
-      password: "password12345",
-    }
-  ]);
 
 //   TODO: I need to fix the order & products, its not working in connecting to the user
   // await User.create({
