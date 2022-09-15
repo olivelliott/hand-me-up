@@ -13,12 +13,15 @@ const resolvers = {
     // QUERIES
     // =======
     Query: {
+        // test db connection
         helloWorld: () => {
             return 'Hello, world!';
         },
+        // GET all categories
         categories: async () => {
             return await Category.find();
         },
+        // GET all products in a category
         products: async (parent, { category, name }) => {
             const params = {};
 
@@ -34,14 +37,17 @@ const resolvers = {
 
             return await Product.find(params).populate('category');
         },
+        // GET single product by id
         product: async (parent, { _id }) => {
             return await Product.findById(_id).populate('category');
         },
+        // GET single user by the token in the context
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
                     path: 'orders.products',
-                    populate: 'category'
+                    populate: 'category',
+                    populate: 'products'
                 });
                 user.orders.sort((a, b) => b.purchaseData - a.purchaseDate);
 
@@ -49,6 +55,7 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in.')
         },
+        // GET single order by id
         order: async (parent, { _id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({

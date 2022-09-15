@@ -4,6 +4,8 @@
 // product belongs to user as thought belongs to user in 'deep-thoughts- module
 // user has an array of products
 // needed to connect the product type to the user... did this by adding the user's email address to the product type
+// added prudcts to populate in the user query resolver
+    //TODO: update the seed file to work w this^ + check the models
 
 // TODO: AddProduct mutation that will return the User with their products for sale in an array
 
