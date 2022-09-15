@@ -14,6 +14,7 @@ import {
   Textarea,
   Input,
   Button,
+  Image,
   ButtonGroup,
   Container
 } from '@chakra-ui/react'
@@ -56,7 +57,7 @@ export function PhotoDrop() {
           <div className="upload__image-wrapper">
             <Button
               mb={5}
-              colorScheme='teal'
+              colorScheme='gray'
               variant='outline'
               style={isDragging ? { color: 'red' } : undefined}
               onClick={onImageUpload}
