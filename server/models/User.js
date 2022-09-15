@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const bcrypt = require("bcrypt");
 const Order = require("./Order");
+const Product = require("./Product");
 
 const userSchema = new Schema({
   firstName: {
@@ -27,12 +28,14 @@ const userSchema = new Schema({
   },
   // * can connect order schema here for order history if we have time
   orders: [Order.schema],
+  // * this connects our user with THEIR products that they have for sale
+  products: [Product.schema]
 });
 
 userSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, salt, saltRounds);
+    this.password = await bcrypt.hash(this.password, saltRounds);
   }
   next();
 });
