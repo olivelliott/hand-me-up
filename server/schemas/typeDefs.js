@@ -43,7 +43,7 @@ const typeDefs = gql`
         quantity: Int
         price: Float
         category: Category
-        email: String
+        user: User
     }
 
     type Order {
@@ -76,6 +76,7 @@ const typeDefs = gql`
         products(category: ID, name: String): [Product]
         product(_id: ID!): Product
         user: User
+        users: [User]
         order(_id: ID!): Order
         checkout(products: [ID]!): Checkout
     }

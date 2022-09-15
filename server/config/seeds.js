@@ -24,7 +24,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "pamela@testmail.com"
+      user: users[0]
     },
     {
       name: "Linen Tank Top",
@@ -35,7 +35,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "pamela@testmail.com"
+      user: users[0]
     },
     {
       name: "Black Long Sleeve",
@@ -47,7 +47,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "pamela@testmail.com"
+      user: users[0]
     },
     {
       name: "Printed Maxi Dress",
@@ -59,7 +59,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "eholt@testmail.com"
+      user: users[1]
     },
     {
       name: "Color Block Sneakers",
@@ -71,7 +71,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "jswilson@testmail.com"
+      user: users[2]
     },
     {
       name: "Black Long Sleeve",
@@ -83,7 +83,7 @@ db.once("open", async () => {
       quantity: 1,
       price: 2.99,
       category: categories[0]._id,
-      email: "jswilson@testmail.com"
+      user: users[2]
     },
     // {
     //   name: "Sweatshirt",
@@ -145,37 +145,60 @@ db.once("open", async () => {
 
   await User.deleteMany();
 
+  // !added by CPM to connected products to a user.
+  // !Oliva - I commented out the individuate create users below... not sure the benefit of individual vs the array but I think I needed an array in order to get the user email connected to a product
+  const users = await User.insertMany([
+    {
+      firstName: "Pamela",
+      lastName: "Washington",
+      email: "pamela@testmail.com",
+      password: "password12345",
+    },
+    {
+      firstName: "Elijah",
+      lastName: "Holt",
+      email: "eholt@testmail.com",
+      password: "password12345",
+    },
+    {
+      firstName: "Jamie",
+      lastName: "Wilson",
+      email: "jswilson@testmail.com",
+      password: "password12345",
+    }
+  ]);
+
 //   TODO: I need to fix the order & products, its not working in connecting to the user
-  await User.create({
-    firstName: "Pamela",
-    lastName: "Washington",
-    email: "pamela@testmail.com",
-    password: "password12345",
-    // orders: [
-    //   {
-    //     products: [products[0]._id, products[1]._id],
-    //   },
-    // ],
-    // products: [products[3]._id, products[4]._id, products[5]._id],
-  });
+  // await User.create({
+  //   firstName: "Pamela",
+  //   lastName: "Washington",
+  //   email: "pamela@testmail.com",
+  //   password: "password12345",
+  //   // orders: [
+  //   //   {
+  //   //     products: [products[0]._id, products[1]._id],
+  //   //   },
+  //   // ],
+  //   // products: [products[3]._id, products[4]._id, products[5]._id],
+  // });
 
-  await User.create({
-    firstName: "Elijah",
-    lastName: "Holt",
-    email: "eholt@testmail.com",
-    password: "password12345",
-    // orders: [],
-    // products: [products[6]._id, products[7]._id, products[8]._id],
-  });
+  // await User.create({
+  //   firstName: "Elijah",
+  //   lastName: "Holt",
+  //   email: "eholt@testmail.com",
+  //   password: "password12345",
+  //   // orders: [],
+  //   // products: [products[6]._id, products[7]._id, products[8]._id],
+  // });
 
-  await User.create({
-    firstName: "Jamie",
-    lastName: "Wilson",
-    email: "jswilson@testmail.com",
-    password: "password12345",
-    // orders: [],
-    // products: [products[9]._id, products[10]._id],
-  });
+  // await User.create({
+  //   firstName: "Jamie",
+  //   lastName: "Wilson",
+  //   email: "jswilson@testmail.com",
+  //   password: "password12345",
+  //   // orders: [],
+  //   // products: [products[9]._id, products[10]._id],
+  // });
 
   console.log("users seeded");
 

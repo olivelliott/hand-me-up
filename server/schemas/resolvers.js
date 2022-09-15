@@ -55,6 +55,11 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in.')
         },
+        // GET all users
+        users: async () => {
+            return User.find()
+            .select('-__v -password')
+        },
         // GET single order by id
         order: async (parent, { _id }, context) => {
             if (context.user) {
