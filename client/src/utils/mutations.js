@@ -45,18 +45,29 @@ export const ADD_USER = gql`
   }
 `;
 
-/*
+// users can upload their own products for sale
+// ! I THINK quantity and price are int and float, not number
 export const ADD_PRODUCT = gql`
-    mutation addProduct($name: String!, $brand: String, $size: String!, $description: String, $image: String, $quantity: Number, $price: Number, $user: User._id) {
-        addProduct(
-            name: $name
-            brand: $brand
-            size: $size
-            description: $description
-            image: $image
-            quantity: $quantity
-            price: $price
-            user: $user._id
-        )
-    }
-`*/
+  mutation addProduct(
+    $name: String!,
+    $brand: String,
+    $size: String!,
+    $description: String,
+    $image: String,
+    $quantity: Int,
+    $price: Float,
+    $user: User._id
+  )
+  {
+    addProduct(
+      name: $name
+      brand: $brand
+      size: $size
+      description: $description
+      image: $image
+      quantity: $quantity
+      price: $price
+      user: $user._id
+    )
+  }
+`;
