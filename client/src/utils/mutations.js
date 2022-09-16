@@ -48,7 +48,6 @@ export const ADD_USER = gql`
 `;
 
 // users can upload their own products for sale
-// ! I THINK quantity and price are int and float, not number
 export const ADD_PRODUCT = gql`
   mutation addProduct(
     $name: String!,
