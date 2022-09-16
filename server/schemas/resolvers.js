@@ -147,7 +147,7 @@ const resolvers = {
 
             return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
         },
-        addProduct: async (parent, args, context) => {
+        addProduct: async (parent, args, context, { user, category }) => {
             if (context.user) {
                 const product =  await Product.create(args);
                 await User.findByIdAndUpdate(context.user._id, { $push: { products: product } } )
