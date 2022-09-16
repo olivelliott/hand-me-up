@@ -15,19 +15,12 @@ export default function Form() {
       <InputGroup size='md'>
         <Stack spacing={3}>
         <Input htmlSize={4} width='auto' placeholder='Username' />
-        <Input
-              mt={0}
-              size="lg"
-              type="email"
-              placeholder="Enter your email..."
-              required
-            />
         <Input pr='4.5rem' placeholder='Enter password' />
         {/* <Input pr='4.5rem' type={show ? 'text' : 'password'} placeholder='Enter password' /> */}
         {/* <InputRightElement width='4.5rem'>
           <Button h='1.75rem' size='sm' onClick={handleClick}> {show ? 'Hide' : 'Show'}</Button>
         </InputRightElement> */}
-        <Button
+          <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
@@ -38,9 +31,8 @@ export default function Form() {
               bg: '#001219',
             }}
           >
-            Create My Account!
+            Sign In!
           </Button>
-
         </Stack>
       </InputGroup>
     )
