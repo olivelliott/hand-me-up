@@ -11,6 +11,8 @@ import {
   FormHelperText,
   Input,
   Button,
+  Box,
+  Heading
 } from "@chakra-ui/react";
 
 export default function SignupForm() {
@@ -43,11 +45,14 @@ export default function SignupForm() {
   }
 
   return (
+    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
-
+      <Heading mb='20px'>Create an Account</Heading>
         <FormLabel htmlFor='firstNameInput'>First Name</FormLabel>
         <Input
+          border='2px'
+          mb='20px'
           type='text'
           name='firstName'
           id='firstNameInput'
@@ -55,19 +60,23 @@ export default function SignupForm() {
 
         <FormLabel>Last Name</FormLabel>
         <Input
+          border='2px'
+          mb='20px'
           type='text'
           name='lastName'
           onChange={handleChange} />
 
         <FormLabel>Email address</FormLabel>
         <Input
+         border='2px'
+         mb='20px'
           type='email'
           name='email'
           onChange={handleChange} />
-          <FormHelperText textAlign="left">We'll never share your email.</FormHelperText>
 
         <FormLabel>Password</FormLabel>
         <Input
+          border='2px'
           type='password'
           name='password'
           onChange={handleChange} />
@@ -89,5 +98,6 @@ export default function SignupForm() {
       Create My Account!
     </Button>
     </form>
+    </Box>
   )
 }

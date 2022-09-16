@@ -13,6 +13,8 @@ import {
   Button,
   Stack,
   useStatStyles,
+  Box,
+  Heading
 } from "@chakra-ui/react";
 
 export default function LoginForm() {
@@ -45,16 +47,21 @@ export default function LoginForm() {
   }
 
   return (
+    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired >
+      <Heading mb='20px'>Log In</Heading>
         <FormLabel>Email</FormLabel>
         <Input
+        border='2px'
+        mb='20px'
           name='email'
           type='email'
           onChange={handleChange}/>
 
         <FormLabel>Password</FormLabel>
         <Input
+        border='2px'
         name='password'
         type='password' 
         onChange={handleChange}/>
@@ -76,5 +83,6 @@ export default function LoginForm() {
         Sign In!
       </Button>
     </form>
+    </Box>
   )
 }
