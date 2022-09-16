@@ -22,6 +22,8 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 
+import headerLogo from '../assets/header_logo.png'
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
 
@@ -58,7 +60,7 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            Logo
+            <img src={headerLogo} alt="hand me up logo" />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -86,10 +88,10 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'#0A9396'}
+            bg={'pink.400'}
             href={'#'}
             _hover={{
-              bg: '#001219',
+              bg: 'pink.300',
             }}
           >
             Sign Up
