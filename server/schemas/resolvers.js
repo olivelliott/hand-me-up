@@ -154,9 +154,9 @@ const resolvers = {
         //         return product;
         //     }
             
-            //throw new AuthenticationError('Not logged in.');
+        //     throw new AuthenticationError('Not logged in.');
 
-        //},
+        // },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
