@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-export default function Form() {
+export default function LoginForm() {
     // const [show, setShow] = React.useState(false)
     // const handleClick = () => setShow(!show)
   

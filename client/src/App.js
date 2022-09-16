@@ -11,7 +11,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { PhotoDrop, LoginForm, SignupForm, SubmitProduct } from './pages/PhotoDrop';
+
+import AllProducts from './pages/AllProducts';
+import SignupForm from './pages/SignupForm'
+import LoginForm from './pages/LoginForm'
+import SubmitProduct from './pages/SubmitProduct'
+import Cart from './pages/Cart'
 
 function App() {
   const httpLink = createHttpLink({
