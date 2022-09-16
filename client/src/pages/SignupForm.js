@@ -8,10 +8,8 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
-  InputGroup,
   Input,
   Button,
-  Stack,
 } from "@chakra-ui/react";
 
 export default function SignupForm() {
@@ -42,13 +40,9 @@ export default function SignupForm() {
       console.log(data)
       Auth.login(data.addUser.token)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
-
-  // ===============================================
-  // const [show, setShow] = React.useState(false)
-  // const handleClick = () => setShow(!show)
 
   // this error is for testing purposes. Replace with functioning error
   let isFirstNameError = false
@@ -61,20 +55,30 @@ export default function SignupForm() {
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
 
-        <FormLabel for='firstNameInput'>First Name</FormLabel>
-        <Input type='text' name='firstName' id='firstNameInput' onChange={handleChange} />
+        <FormLabel htmlFor='firstNameInput'>First Name</FormLabel>
+        <Input
+          type='text'
+          name='firstName'
+          id='firstNameInput'
+          onChange={handleChange} />
         {!isFirstNameError &&
           <FormErrorMessage>First name is required. Please enter a name to continue.</FormErrorMessage>
         }
 
         <FormLabel>Last Name</FormLabel>
-        <Input type='text' name='lastName' onChange={handleChange} />
+        <Input
+          type='text'
+          name='lastName'
+          onChange={handleChange} />
         {!isLastNameError &&
           <FormErrorMessage>Last name is required. Please enter a name to continue.</FormErrorMessage>
         }
 
         <FormLabel>Email address</FormLabel>
-        <Input type='email' name='email' onChange={handleChange} />
+        <Input
+          type='email'
+          name='email'
+          onChange={handleChange} />
         {!isEmailError ? (
           <FormHelperText textAlign="left">We'll never share your email.</FormHelperText>
         ) : (
@@ -82,7 +86,10 @@ export default function SignupForm() {
         )}
 
         <FormLabel>Password</FormLabel>
-        <Input type='password' name='password' onChange={handleChange} />
+        <Input
+          type='password'
+          name='password'
+          onChange={handleChange} />
         {!isPasswordError &&
           <FormErrorMessage>Last name is required. Please enter a password to continue.</FormErrorMessage>
         }
