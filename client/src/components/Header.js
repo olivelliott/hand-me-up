@@ -23,6 +23,8 @@ import {
 } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
 
+import headerLogo from '../assets/header_logo.png'
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
 
@@ -59,7 +61,11 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <RouterLink to='/'>Logo</RouterLink>
+            <img
+              style={{ width: '200px', height: '50px' }}
+              src={headerLogo}
+              alt="hand me up logo"
+            />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -73,31 +79,28 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
-            <Button
-              as={'a'}
-              fontSize={'sm'}
-              fontWeight={400}
-              variant={'link'}
-            >
-              <RouterLink to='/login'>
-                Log In
-              </RouterLink>
-            </Button>
-          <RouterLink to='signup'>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'#0A9396'}
-              href={'#'}
-              _hover={{
-                bg: '#001219',
-              }}
-            >
-              Sign Up
-            </Button>
-          </RouterLink>
+          <Button
+            as={'a'}
+            fontSize={'sm'}
+            fontWeight={400}
+            variant={'link'}
+            href={'#'}
+          >
+            Sign In
+          </Button>
+          <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'black'}
+            href={'#'}
+            _hover={{
+              bg: '#0A9396',
+            }}
+          >
+            Sign Up
+          </Button>
         </Stack>
       </Flex>
 
@@ -157,8 +160,7 @@ const DesktopNav = () => {
   )
 }
 
-// const DesktopSubNav = ({ label, href, subLabel }: NavItem) => { removing TS
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Link
       href={href}
@@ -166,13 +168,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+      _hover={{ bg: useColorModeValue('#94d2bd', 'gray.900') }}
     >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: '#001219' }}
             fontWeight={500}
           >
             {label}
@@ -188,7 +190,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'#001219'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -209,8 +211,7 @@ const MobileNav = () => {
   )
 }
 
-// const MobileNavItem = ({ label, children, href }: NavItem) => { removing TS
-const MobileNavItem = ({ label, children, href }) => {
+const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -263,7 +264,6 @@ const MobileNavItem = ({ label, children, href }) => {
   )
 }
 
-
 interface NavItem {
   label: string;
   subLabel?: string;
@@ -273,41 +273,41 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'How it Works',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Organizations and Charities',
+        subLabel: 'See who we work with',
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'How Can I Help?',
+        subLabel: 'Learn more',
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Find Resources',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Career services',
+        subLabel: 'Connect with our career consultants',
         href: '#',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Beyond clothing',
+        subLabel: 'Find more help',
         href: '#',
       },
     ],
   },
   {
-    label: 'Learn Design',
+    label: "Men's Clothing",
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: "Women's Clothing",
     href: '#',
   },
 ]
