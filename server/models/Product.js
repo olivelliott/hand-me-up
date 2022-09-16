@@ -32,14 +32,18 @@ const productSchema = new Schema({
   },
   price: {
     type: Number,
-    // ! This could be where we require the base shipping price
-    min: 0.99,
+    min: 2.99,
   },
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

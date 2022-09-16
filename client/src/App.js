@@ -11,6 +11,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
+import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
+import { PhotoDrop } from './pages/PhotoDrop';
 
 function App() {
   const httpLink = createHttpLink({
@@ -42,6 +46,10 @@ function App() {
           <div>
             <Routes>
               {/* routes to pages go here */}
+              <Route path='/' element={<Hero />} />
+              <Route path='/signup' element={<SignupForm />} />
+              <Route path='/login' element={<LoginForm />} />
+              <Route path='/photodrop' element={<PhotoDrop />} />
             </Routes>
           </div>
           <Footer />

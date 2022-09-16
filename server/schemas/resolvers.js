@@ -13,13 +13,16 @@ const resolvers = {
     // QUERIES
     // =======
     Query: {
+        // test db connection
         helloWorld: () => {
             return 'Hello, world!';
         },
+        // GET all categories
         categories: async () => {
             return await Category.find();
         },
-        products: async (parent, { category, name }) => {
+        // GET all products in a category
+        products: async (parent, { category, name, user }) => {
             const params = {};
 
             if (category) {
@@ -34,14 +37,17 @@ const resolvers = {
 
             return await Product.find(params).populate('category');
         },
+        // GET single product by id
         product: async (parent, { _id }) => {
             return await Product.findById(_id).populate('category');
         },
+        // GET single user by the token in the context which saves user._id
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
                     path: 'orders.products',
-                    populate: 'category'
+                    populate: 'category',
+                    populate: 'products'
                 });
                 user.orders.sort((a, b) => b.purchaseData - a.purchaseDate);
 
@@ -49,6 +55,12 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in.')
         },
+        // GET all users
+        users: async () => {
+            return User.find()
+            .select('-__v -password')
+        },
+        // GET single order by id
         order: async (parent, { _id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
@@ -135,6 +147,16 @@ const resolvers = {
 
             return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
         },
+        // addProduct: async (parent, args, context) => {
+        //     if (context.user) {
+        //         const product = Product.create(args);
+        //         await User.findByIdAndUpdate(context.user.id, { $push: { products: product } } )
+        //         return product;
+        //     }
+            
+            //throw new AuthenticationError('Not logged in.');
+
+        //},
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
