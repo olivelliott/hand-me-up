@@ -46,7 +46,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <FormControl>
+      <FormControl isRequired >
         <FormLabel>Email</FormLabel>
         <Input
           name='email'
