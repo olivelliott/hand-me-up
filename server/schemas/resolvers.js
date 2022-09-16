@@ -147,16 +147,16 @@ const resolvers = {
 
             return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
         },
-        // addProduct: async (parent, args, context) => {
-        //     if (context.user) {
-        //         const product = Product.create(args);
-        //         await User.findByIdAndUpdate(context.user.id, { $push: { products: product } } )
-        //         return product;
-        //     }
-            
-            //throw new AuthenticationError('Not logged in.');
+        addProduct: async (parent, args, context) => {
+            if (context.user) {
+                const product =  await Product.create(args);
+                await User.findByIdAndUpdate(context.user._id, { $push: { products: product } } )
+                return product;
+            }
 
-        //},
+            throw new AuthenticationError('Not logged in.');
+
+        },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
