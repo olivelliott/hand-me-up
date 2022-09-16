@@ -86,21 +86,25 @@ export default function WithSubnavigation() {
             variant={'link'}
             href={'#'}
           >
-            Sign In
+            <RouterLink to='/login'>
+              Log In
+            </RouterLink>
           </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'black'}
-            href={'#'}
-            _hover={{
-              bg: '#0A9396',
-            }}
-          >
-            Sign Up
-          </Button>
+          <RouterLink to='signup'>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'#0A9396'}
+              href={'#'}
+              _hover={{
+                bg: '#001219',
+              }}
+            >
+              Sign Up
+            </Button>
+          </RouterLink>
         </Stack>
       </Flex>
 
