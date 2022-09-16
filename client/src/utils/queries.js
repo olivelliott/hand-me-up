@@ -45,29 +45,6 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
-// I believe only necessary if we do a profile page, but just in case
-export const QUERY_USER = gql`
-  {
-    user {
-      firstName
-      lastName
-      email
-        products {
-          _id
-          name
-          brand
-          size
-          description
-          image
-          quantity
-          price
-          category
-        }
-      }
-    }
-  }
-`;
-
 // TODO: Test functionality
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
