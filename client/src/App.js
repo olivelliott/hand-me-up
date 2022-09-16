@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { PhotoDrop } from './pages/PhotoDrop';
 
 function App() {
   const httpLink = createHttpLink({
@@ -42,6 +43,7 @@ function App() {
           <div>
             <Routes>
               {/* routes to pages go here */}
+              <Route path='/photodrop' element={<PhotoDrop />} />
             </Routes>
           </div>
           <Footer />
