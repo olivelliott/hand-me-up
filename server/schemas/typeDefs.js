@@ -87,9 +87,11 @@ const typeDefs = gql`
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         updateProduct(_id: ID!, quantity: Int!): Product
         login(email: String!, password: String!): Auth
-        addProduct(_id: ID!, $name: String!, $brand: String, $size: String!, $description: String, $image: String, $quantity: Int, $price: Float, $category: String, $user: User._id): Product
+        addProduct($name: String!, $brand: String, $size: String!, $description: String, $image: String, $quantity: Int, $price: Float, $category: String): Product
     }
 `;
 
-// ? I dont know if the addProduct 'user' part is correct - 
+// ? I dont know if the addProduct 'user' part is correct -
+// ? I updated, i think this is closer, may need to add userID: ID! if doens't work... - cpm
+
 module.exports = typeDefs;
