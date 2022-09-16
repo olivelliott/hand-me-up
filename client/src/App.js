@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
 import { PhotoDrop } from './pages/PhotoDrop';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <div>
             <Routes>
               {/* routes to pages go here */}
+              <Route path='/' element={<Hero />} />
               <Route path='/photodrop' element={<PhotoDrop />} />
             </Routes>
           </div>

@@ -45,6 +45,7 @@ export const ADD_USER = gql`
   }
 `;
 
+/*
 export const ADD_PRODUCT = gql`
     mutation addProduct($name: String!, $brand: String, $size: String!, $description: String, $image: String, $quantity: Number, $price: Number, $user: User._id) {
         addProduct(
@@ -58,4 +59,4 @@ export const ADD_PRODUCT = gql`
             user: $user._id
         )
     }
-`
+`*/
