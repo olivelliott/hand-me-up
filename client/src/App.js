@@ -11,10 +11,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Hero from './components/Hero';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
-import { PhotoDrop } from './pages/PhotoDrop';
+
+import AllProducts from './pages/AllProducts';
+import SignupForm from './pages/SignupForm'
+import LoginForm from './pages/LoginForm'
+import SubmitProduct from './pages/SubmitProduct'
+import Cart from './pages/Cart'
+import NoMatch from './pages/NoMatch';
+
+import { Container } from '@chakra-ui/react'
 
 function App() {
   const httpLink = createHttpLink({
@@ -43,15 +48,16 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <div>
+          <Container my={5}>
             <Routes>
-              {/* routes to pages go here */}
-              <Route path='/' element={<Hero />} />
+              <Route path='/' element={<AllProducts />} />
               <Route path='/signup' element={<SignupForm />} />
               <Route path='/login' element={<LoginForm />} />
-              <Route path='/photodrop' element={<PhotoDrop />} />
+              <Route path='/submit-product' element={<SubmitProduct />} />
+              <Route path='/my-cart' element={<Cart />} />
+              <Route path='*' element={<NoMatch />} />
             </Routes>
-          </div>
+          </Container>
           <Footer />
         </div>
       </Router>
