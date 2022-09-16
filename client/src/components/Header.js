@@ -21,6 +21,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
+import { Link as RouterLink } from 'react-router-dom'
 
 import headerLogo from '../assets/header_logo.png'
 
@@ -310,13 +311,3 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '#',
   },
 ]
-
-// import React from 'react'
-
-// const Header = () => {
-//   return(
-//     <h1>Header Component</h1>
-//   )
-// }
-
-// export default Header

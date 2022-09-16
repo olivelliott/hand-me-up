@@ -58,7 +58,7 @@ const resolvers = {
         // GET all users
         users: async () => {
             return User.find()
-            .select('-__v -password')
+            .select('-__v')
         },
         // GET single order by id
         order: async (parent, { _id }, context) => {
