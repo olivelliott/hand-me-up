@@ -62,7 +62,7 @@ export default function WithSubnavigation() {
             color={useColorModeValue('gray.800', 'white')}
           >
             <img
-              style={{ width: '100px', height: '50px' }}
+              style={{ width: '200px', height: '50px' }}
               src={headerLogo}
               alt="hand me up logo"
             />
@@ -93,10 +93,10 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
-            bg={'pink.400'}
+            bg={'black'}
             href={'#'}
             _hover={{
-              bg: 'pink.300',
+              bg: '#0A9396',
             }}
           >
             Sign Up
@@ -168,13 +168,13 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+      _hover={{ bg: useColorModeValue('#94d2bd', 'gray.900') }}
     >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: '#001219' }}
             fontWeight={500}
           >
             {label}
@@ -190,7 +190,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'#001219'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -273,41 +273,41 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Inspiration',
+    label: 'How it Works',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Organizations and Charities',
+        subLabel: 'See who we work with',
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'How Can I Help?',
+        subLabel: 'Learn more',
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
+    label: 'Find Resources',
     children: [
       {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
+        label: 'Career services',
+        subLabel: 'Connect with our career consultants',
         href: '#',
       },
       {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
+        label: 'Beyond clothing',
+        subLabel: 'Find more help',
         href: '#',
       },
     ],
   },
   {
-    label: 'Learn Design',
+    label: "Men's Clothing",
     href: '#',
   },
   {
-    label: 'Hire Designers',
+    label: "Women's Clothing",
     href: '#',
   },
 ]
