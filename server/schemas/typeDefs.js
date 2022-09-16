@@ -92,6 +92,6 @@ const typeDefs = gql`
 `;
 
 // ? I dont know if the addProduct 'user' part is correct -
-// ? I updated, i think this is closer, may need to add userID: ID! if doens't work... - cpm
+// ? I updated, i think this 99% it, i don't think we need the user id bc it's not an input field, but if needed, userID: ID! if doens't work... - cpm
 
 module.exports = typeDefs;
