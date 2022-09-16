@@ -60,7 +60,11 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <img src={headerLogo} alt="hand me up logo" />
+            <img
+              style={{ width: '100px', height: '50px' }}
+              src={headerLogo}
+              alt="hand me up logo"
+            />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
