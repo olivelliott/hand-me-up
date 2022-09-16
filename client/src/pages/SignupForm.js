@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from '../utils/mutations'
+import Auth from '../utils/auth'
+
 import {
   FormControl,
   FormLabel,
@@ -8,10 +12,41 @@ import {
   Input,
   Button,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 
 export default function SignupForm() {
+  const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  })
+  const [addUser, { error }] = useMutation(ADD_USER)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    })
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const { data } = await addUser({
+        variables: { ...formState }
+      })
+      console.log(data)
+      Auth.login(data.addUser.token)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // ===============================================
   // const [show, setShow] = React.useState(false)
   // const handleClick = () => setShow(!show)
 
@@ -20,25 +55,26 @@ export default function SignupForm() {
   let isLastNameError = false
   let isEmailError = false
   let isPasswordError = false
+  // ===============================================
 
   return (
-    <form>
+    <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
 
-        <FormLabel>First Name</FormLabel>
-        <Input type='text' />
+        <FormLabel for='firstNameInput'>First Name</FormLabel>
+        <Input type='text' name='firstName' id='firstNameInput' onChange={handleChange} />
         {!isFirstNameError &&
           <FormErrorMessage>First name is required. Please enter a name to continue.</FormErrorMessage>
         }
 
         <FormLabel>Last Name</FormLabel>
-        <Input type='text' />
+        <Input type='text' name='lastName' onChange={handleChange} />
         {!isLastNameError &&
           <FormErrorMessage>Last name is required. Please enter a name to continue.</FormErrorMessage>
         }
 
         <FormLabel>Email address</FormLabel>
-        <Input type='email' />
+        <Input type='email' name='email' onChange={handleChange} />
         {!isEmailError ? (
           <FormHelperText textAlign="left">We'll never share your email.</FormHelperText>
         ) : (
@@ -46,13 +82,14 @@ export default function SignupForm() {
         )}
 
         <FormLabel>Password</FormLabel>
-        <Input type='password' />
+        <Input type='password' name='password' onChange={handleChange} />
         {!isPasswordError &&
           <FormErrorMessage>Last name is required. Please enter a password to continue.</FormErrorMessage>
         }
       </FormControl>
 
       <Button
+      type='submit'
       display={{ base: 'none', md: 'inline-flex' }}
       fontSize={'sm'}
       fontWeight={600}
