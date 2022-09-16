@@ -19,6 +19,8 @@ import SubmitProduct from './pages/SubmitProduct'
 import Cart from './pages/Cart'
 import NoMatch from './pages/NoMatch';
 
+import { Container } from '@chakra-ui/react'
+
 function App() {
   const httpLink = createHttpLink({
     uri: '/graphql',
@@ -46,7 +48,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <main>
+          <Container my={5}>
             <Routes>
               <Route path='/' element={<AllProducts />} />
               <Route path='/signup' element={<SignupForm />} />
@@ -55,7 +57,7 @@ function App() {
               <Route path='/my-cart' element={<Cart />} />
               <Route path='*' element={<NoMatch />} />
             </Routes>
-          </main>
+          </Container>
           <Footer />
         </div>
       </Router>
