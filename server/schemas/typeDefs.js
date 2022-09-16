@@ -86,8 +86,10 @@ const typeDefs = gql`
         addOrder(products: [ID]!): Order
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         updateProduct(_id: ID!, quantity: Int!): Product
+        addProduct(_id: ID!, name: String!, brand: String, size: String!, description: String, image: String, quantity: Number, price: Number, user: User._id): Product
         login(email: String!, password: String!): Auth
     }
 `;
 
+// ? I dont know if the addProduct 'user' part is correct - 
 module.exports = typeDefs;
