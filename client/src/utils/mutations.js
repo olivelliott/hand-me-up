@@ -58,7 +58,6 @@ export const ADD_PRODUCT = gql`
     $quantity: Int,
     $price: Float,
     $category: String,
-    $user: User._id
   )
   {
     addProduct(
@@ -70,7 +69,20 @@ export const ADD_PRODUCT = gql`
       quantity: $quantity
       price: $price
       category: $category
-      user: $user._id
     )
+    {
+      id
+      name
+      brand
+      size
+      description
+      image
+      quantity
+      price
+      category
+      user {
+        _id
+      }
+    }
   }
 `;
