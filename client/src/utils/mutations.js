@@ -56,6 +56,7 @@ export const ADD_PRODUCT = gql`
     $image: String,
     $quantity: Int,
     $price: Float,
+    $category: String,
     $user: User._id
   )
   {
@@ -67,6 +68,7 @@ export const ADD_PRODUCT = gql`
       image: $image
       quantity: $quantity
       price: $price
+      category: $category
       user: $user._id
     )
   }
