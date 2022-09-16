@@ -21,6 +21,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
@@ -72,28 +73,31 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'#'}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'#0A9396'}
-            href={'#'}
-            _hover={{
-              bg: '#001219',
-            }}
-          >
-            Sign Up
-          </Button>
+            <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+            >
+              <RouterLink to='/login'>
+                Log In
+              </RouterLink>
+            </Button>
+          <RouterLink to='signup'>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'#0A9396'}
+              href={'#'}
+              _hover={{
+                bg: '#001219',
+              }}
+            >
+              Sign Up
+            </Button>
+          </RouterLink>
         </Stack>
       </Flex>
 
@@ -153,7 +157,8 @@ const DesktopNav = () => {
   )
 }
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+// const DesktopSubNav = ({ label, href, subLabel }: NavItem) => { removing TS
+const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
@@ -204,7 +209,8 @@ const MobileNav = () => {
   )
 }
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+// const MobileNavItem = ({ label, children, href }: NavItem) => { removing TS
+const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -257,6 +263,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
+
 interface NavItem {
   label: string;
   subLabel?: string;
@@ -304,13 +311,3 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '#',
   },
 ]
-
-// import React from 'react'
-
-// const Header = () => {
-//   return(
-//     <h1>Header Component</h1>
-//   )
-// }
-
-// export default Header

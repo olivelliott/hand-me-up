@@ -17,6 +17,7 @@ import SignupForm from './pages/SignupForm'
 import LoginForm from './pages/LoginForm'
 import SubmitProduct from './pages/SubmitProduct'
 import Cart from './pages/Cart'
+import NoMatch from './pages/NoMatch';
 
 function App() {
   const httpLink = createHttpLink({
@@ -52,6 +53,7 @@ function App() {
               <Route path='/login' element={<LoginForm />} />
               <Route path='/submit-product' element={<SubmitProduct />} />
               <Route path='/my-cart' element={<Cart />} />
+              <Route path='*' element={<NoMatch />} />
             </Routes>
           </main>
           <Footer />
