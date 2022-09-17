@@ -48,7 +48,7 @@ export default function SignupForm() {
     <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
-
+      <Heading mb='20px'>Create an Account</Heading>
         <FormLabel htmlFor='firstNameField'>First Name</FormLabel>
         <Input
           border='2px'

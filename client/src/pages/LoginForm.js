@@ -51,18 +51,20 @@ export default function LoginForm() {
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired >
       <Heading mb='20px'>Log In</Heading>
-        <FormLabel>Email</FormLabel>
+        <FormLabel htmlFor='emailField'>Email</FormLabel>
         <Input
         border='2px'
         mb='20px'
           name='email'
+          id='emailField'
           type='email'
           onChange={handleChange}/>
 
-        <FormLabel>Password</FormLabel>
+        <FormLabel htmlFor='passwordField'>Password</FormLabel>
         <Input
         border='2px'
         name='password'
+        id='passwordField'
         type='password' 
         onChange={handleChange}/>
       </FormControl>
