@@ -1,5 +1,6 @@
 import {
   Flex,
+  Spacer,
   Box,
   Grid,
   GridItem,
