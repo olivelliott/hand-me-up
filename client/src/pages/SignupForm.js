@@ -74,20 +74,20 @@ export default function SignupForm() {
       </FormControl>
 
       <Button
-      type='submit'
-      display={{ base: 'none', md: 'inline-flex' }}
-      fontSize={'sm'}
-      fontWeight={600}
-      color={'white'}
-      bg={'#0A9396'}
-      my={5}
-      href={'#'}
-      _hover={{
-        bg: '#001219',
-      }}
-      >
-      Create My Account!
-    </Button>
+        type='submit'
+        display={{ base: 'none', md: 'inline-flex' }}
+        fontSize={'sm'}
+        fontWeight={600}
+        color={'white'}
+        bg={'#0A9396'}
+        my={5}
+        href={'#'}
+        _hover={{
+          bg: '#001219',
+        }}
+        >
+        Create My Account!
+      </Button>
     </form>
   )
 }
