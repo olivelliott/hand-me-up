@@ -47,15 +47,17 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired >
-        <FormLabel>Email</FormLabel>
+        <FormLabel htmlFor='emailField'>Email</FormLabel>
         <Input
           name='email'
+          id='emailField'
           type='email'
           onChange={handleChange}/>
 
-        <FormLabel>Password</FormLabel>
+        <FormLabel htmlFor='passwordField'>Password</FormLabel>
         <Input
         name='password'
+        id='passwordField'
         type='password' 
         onChange={handleChange}/>
       </FormControl>
