@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react'
 
+import { SimpleGrid } from '@chakra-ui/react'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
@@ -106,7 +107,7 @@ function Allproducts() {
 
   return (
     <div>
-      <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+      <SimpleGrid columns={{ sm: 1, md: 4 }} spacing="40px">
         {products.map((product) => (
           <Flex p={50} w="full" alignItems="center" justifyContent="center">
             <Box
@@ -195,7 +196,7 @@ function Allproducts() {
             </Box>
           </Flex>
         ))}
-      </Grid>
+      </SimpleGrid>
     </div>
   )
 }
