@@ -1,16 +1,14 @@
 import {
   Flex,
-  Circle,
   Box,
   Image,
-  Badge,
   useColorModeValue,
   Icon,
   chakra,
   Tooltip,
 } from '@chakra-ui/react'
 import { FiShoppingCart } from 'react-icons/fi'
-// import Product from '../../../server/models/Product'
+import { gql } from '@apollo/client'
 
 function AllProducts() {
   const productsArr = [{ name: 'Test Name', description: 'Test Description' }]
@@ -27,16 +25,6 @@ function AllProducts() {
             shadow="lg"
             position="relative"
           >
-            {product.isNew && (
-              <Circle
-                size="10px"
-                position="absolute"
-                top={2}
-                right={2}
-                bg="red.200"
-              />
-            )}
-
             <Image
               src={product.image}
               alt={`Picture of ${product.name}`}
@@ -44,18 +32,7 @@ function AllProducts() {
             />
 
             <Box p="6">
-              <Box d="flex" alignItems="baseline">
-                {product.isNew && (
-                  <Badge
-                    rounded="full"
-                    px="2"
-                    fontSize="0.8em"
-                    colorScheme="red"
-                  >
-                    New
-                  </Badge>
-                )}
-              </Box>
+              <Box d="flex" alignItems="baseline"></Box>
               <Flex mt="1" justifyContent="space-between" alignContent="center">
                 <Box
                   fontSize="2xl"
@@ -104,3 +81,12 @@ function AllProducts() {
 }
 
 export default AllProducts
+
+export const QUERY_PRODUCTS = gql`
+  query products {
+    product {
+      name
+      description
+    }
+  }
+`
