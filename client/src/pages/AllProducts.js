@@ -4,6 +4,7 @@ import {
   Grid,
   GridItem,
   Wrap,
+  WrapItem,
   AspectRatio,
   Image,
   useColorModeValue,
@@ -107,9 +108,9 @@ function Allproducts() {
 
   return (
     <div>
-      <SimpleGrid columns={{ sm: 1, md: 4 }} spacing="40px">
+      <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
         {products.map((product) => (
-          <Flex p={50} w="full" alignItems="center" justifyContent="center">
+          <Wrap>
             <Box
               bg="#94d2bd"
               maxW="sm"
@@ -194,7 +195,7 @@ function Allproducts() {
                 </Flex>
               </Box>
             </Box>
-          </Flex>
+          </Wrap>
         ))}
       </SimpleGrid>
     </div>
