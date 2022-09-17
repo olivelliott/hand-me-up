@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
 
 import AllProducts from './pages/AllProducts';
 import SignupForm from './pages/SignupForm'
@@ -51,6 +52,7 @@ function App() {
           <Container my={5}>
             <Routes>
               <Route path='/' element={<AllProducts />} />
+              <Route path='hero' element={<Hero />} />
               <Route path='/signup' element={<SignupForm />} />
               <Route path='/login' element={<LoginForm />} />
               <Route path='/submit-product' element={<SubmitProduct />} />

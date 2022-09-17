@@ -48,55 +48,58 @@ export default function SignupForm() {
     <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
-      <Heading mb='20px'>Create an Account</Heading>
-        <FormLabel htmlFor='firstNameInput'>First Name</FormLabel>
+
+        <FormLabel htmlFor='firstNameField'>First Name</FormLabel>
         <Input
           border='2px'
           mb='20px'
           type='text'
           name='firstName'
-          id='firstNameInput'
+          id='firstNameField'
           onChange={handleChange} />
 
-        <FormLabel>Last Name</FormLabel>
+        <FormLabel htmlFor='lastNameField'>Last Name</FormLabel>
         <Input
           border='2px'
           mb='20px'
           type='text'
           name='lastName'
+          id='lastNameField'
           onChange={handleChange} />
 
-        <FormLabel>Email address</FormLabel>
+        <FormLabel htmlFor='emailField'>Email address</FormLabel>
         <Input
          border='2px'
          mb='20px'
           type='email'
           name='email'
+          id='emailField'
           onChange={handleChange} />
 
-        <FormLabel>Password</FormLabel>
+        <FormLabel htmlFor='passwordField'>Password</FormLabel>
         <Input
           border='2px'
           type='password'
           name='password'
+          id='passwordField'
           onChange={handleChange} />
       </FormControl>
 
       <Button
-      type='submit'
-      display={{ base: 'none', md: 'inline-flex' }}
-      fontSize={'sm'}
-      fontWeight={600}
-      color={'white'}
-      bg={'#0A9396'}
-      my={5}
-      href={'#'}
-      _hover={{
-        bg: '#001219',
-      }}
-      >
-      Create My Account!
-    </Button>
+        type='submit'
+        display={{ base: 'none', md: 'inline-flex' }}
+        fontSize={'sm'}
+        fontWeight={600}
+        color={'white'}
+        bg={'#0A9396'}
+        my={5}
+        href={'#'}
+        _hover={{
+          bg: '#001219',
+        }}
+        >
+        Create My Account!
+      </Button>
     </form>
     </Box>
   )

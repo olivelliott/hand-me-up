@@ -79,17 +79,17 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'#'}
-          >
-            <RouterLink to='/login'>
+          <RouterLink to='/login'>
+            <Button
+              fontSize={'md'}
+              mt='3'
+              fontWeight={400}
+              variant={'link'}
+            >
               Log In
-            </RouterLink>
-          </Button>
+            </Button>
+
+          </RouterLink>
           <RouterLink to='signup'>
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
@@ -97,7 +97,6 @@ export default function WithSubnavigation() {
               fontWeight={600}
               color={'white'}
               bg={'#0A9396'}
-              href={'#'}
               _hover={{
                 bg: '#001219',
               }}
