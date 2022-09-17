@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // this must match what was set up on the server
 
@@ -32,7 +32,12 @@ export const ADD_ORDER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($firstName: String! $lastName: String! $email: String! $password: String!) {
+  mutation addUser(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $password: String!
+  ) {
     addUser(
       firstName: $firstName
       lastName: $lastName
@@ -49,40 +54,18 @@ export const ADD_USER = gql`
 
 // users can upload their own products for sale
 export const ADD_PRODUCT = gql`
-  mutation addProduct(
-    $name: String!,
-    $brand: String,
-    $size: String!,
-    $description: String,
-    $image: String,
-    $quantity: Int,
-    $price: Float,
-    $category: String,
-  )
-  {
-    addProduct(
-      name: $name
-      brand: $brand
-      size: $size
-      description: $description
-      image: $image
-      quantity: $quantity
-      price: $price
-      category: $category
-    )
-    {
-      id
-      name
-      brand
-      size
-      description
-      image
-      quantity
-      price
-      category
-      user {
-        _id
-      }
+mutation Mutation($name: String!, $size: String!, $brand: String, $description: String, $image: String, $quantity: Int, $price: Float, $user: [ID]) {
+  addProduct(name: $name, size: $size, brand: $brand, description: $description, image: $image, quantity: $quantity, price: $price, user: $user) {
+    _id
+    name
+    brand
+    size
+    description
+    image
+    quantity
+    price
+    user {
+      _id
     }
   }
-`;
+}}`;
