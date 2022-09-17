@@ -1,6 +1,15 @@
-import React from 'react'
-import { Box, Badge, Image, Flex, Link, chakra } from '@chakra-ui/react'
-import { Helmet } from 'react-helmet'
+import {
+  Flex,
+  Circle,
+  Box,
+  Image,
+  Badge,
+  useColorModeValue,
+  Icon,
+  chakra,
+  Tooltip,
+} from '@chakra-ui/react'
+import { FiShoppingCart } from 'react-icons/fi'
 
 function AllProducts() {
   const productArr = [
@@ -77,121 +86,84 @@ function AllProducts() {
     },
   ]
 
-  return (
-    <Flex
-      bg="navy"
-      _dark={{
-        bg: '#3e3e3e',
-      }}
-      p={50}
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-      flexWrap="wrap"
-    >
-      <Helmet>
-        <title>Product</title>
-      </Helmet>
+  return function ProductAddToCart() {
+    return (
+      <Flex p={50} w="full" alignItems="center" justifyContent="center">
+        <Box
+          bg={useColorModeValue('white', 'gray.800')}
+          maxW="sm"
+          borderWidth="1px"
+          rounded="lg"
+          shadow="lg"
+          position="relative"
+        >
+          {Product.isNew && (
+            <Circle
+              size="10px"
+              position="absolute"
+              top={2}
+              right={2}
+              bg="red.200"
+            />
+          )}
 
-      {productArr.map(
-        ({
-          name,
-          brand,
-          size,
-          description,
-          image,
-          quantity,
-          price,
-          category,
-          user,
-        }) => {
-          return (
-            <Box
-              m={5}
-              bg="gray.800"
-              _dark={{
-                bg: 'gray.800',
-              }}
-              mx={{
-                lg: 8,
-              }}
-              display={{
-                lg: 'flex',
-              }}
-              maxW={{
-                lg: '5xl',
-              }}
-              shadow={{
-                lg: 'lg',
-              }}
-              rounded={{
-                lg: 'lg',
-              }}
-            >
-              <Box w={{ lg: '50%' }}>
-                <Image
-                  h={{ base: 64, lg: 'full', md: 'full', sm: 'full' }}
-                  rounded={{
-                    lg: 'lg',
-                  }}
-                  bgSize="cover"
-                  // src={imagePath}
-                ></Image>
-              </Box>
+          <Image
+            src={Product.image}
+            alt={`Picture of ${Product.name}`}
+            roundedTop="lg"
+          />
 
-              <Box
-                py={12}
-                px={6}
-                maxW={{
-                  base: 'xl',
-                  lg: '5xl',
-                }}
-                w={{
-                  lg: '50%',
-                }}
-              >
-                <chakra.h2
-                  fontSize={{
-                    base: '2xl',
-                    md: '3xl',
-                  }}
-                  color="white"
-                  _dark={{
-                    color: 'white',
-                  }}
-                  fontWeight="bold"
-                >
-                  {name}
-                </chakra.h2>
-                <Badge
-                  borderRadius="full"
-                  px="2"
-                  backgroundColor="orange"
-                  color="gray.800"
-                ></Badge>
-                <chakra.p
-                  mt={4}
-                  color="white"
-                  _dark={{
-                    color: 'gray.400',
-                  }}
-                >
-                  {description}
-                </chakra.p>
-
-                <Box mt={8}></Box>
-
-                <Box mt={8}></Box>
-              </Box>
+          <Box p="6">
+            <Box d="flex" alignItems="baseline">
+              {Product.isNew && (
+                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+                  New
+                </Badge>
+              )}
             </Box>
-          )
-        },
-      )}
-    </Flex>
-  )
+            <Flex mt="1" justifyContent="space-between" alignContent="center">
+              <Box
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                {Product.name}
+              </Box>
+              <Tooltip
+                label="Add to cart"
+                bg="white"
+                placement={'top'}
+                color={'gray.800'}
+                fontSize={'1.2em'}
+              >
+                <chakra.a href={'#'} display={'flex'}>
+                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
+                </chakra.a>
+              </Tooltip>
+            </Flex>
+
+            <Flex justifyContent="space-between" alignContent="center">
+              <Box
+                fontSize="2xl"
+                color={useColorModeValue('gray.800', 'white')}
+              >
+                <Box as="span" color={'gray.600'} fontSize="lg">
+                  £
+                </Box>
+                {Product.price.toFixed(2)}
+              </Box>
+            </Flex>
+          </Box>
+        </Box>
+      </Flex>
+    )
+  }
 }
 
 export default AllProducts
+// export default ProductAddToCart
 
 // image={product.image}
 // name={product.name}
