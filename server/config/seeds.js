@@ -32,10 +32,8 @@ db.once("open", async () => {
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
-    { name: "Women",
-},
-    { name: "Men",
- },
+    { name: "Women"},
+    { name: "Men"},
   ]);
 
 console.log("categories seeded 💫");
@@ -53,7 +51,7 @@ console.log("categories seeded 💫");
       image: "fp_sweater_set.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[0],
     },
     {
@@ -64,7 +62,7 @@ console.log("categories seeded 💫");
       image: "linen_tank.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[0],
     },
     {
@@ -76,7 +74,7 @@ console.log("categories seeded 💫");
       image: "navy_long_sleeve.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[0],
     },
     {
@@ -88,7 +86,7 @@ console.log("categories seeded 💫");
       image: "maxi_dress.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[1],
     },
     {
@@ -100,7 +98,7 @@ console.log("categories seeded 💫");
       image: "color_block_sneakers.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[2],
     },
     {
@@ -112,7 +110,7 @@ console.log("categories seeded 💫");
       image: "blue_button_shirt.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[2],
     },
     {
@@ -124,7 +122,7 @@ console.log("categories seeded 💫");
       image: "mens_sweatshirt.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c4",
+      category: categories[1].id,
       user: users[2],
     },
     {
@@ -136,7 +134,7 @@ console.log("categories seeded 💫");
       image: "white_pants.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c4",
+      category: categories[1].id,
       user: users[2],
     },
     {
@@ -148,7 +146,7 @@ console.log("categories seeded 💫");
       image: "flannel.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c4",
+      category: categories[1].id,
       user: users[0],
     },
     {
@@ -160,7 +158,7 @@ console.log("categories seeded 💫");
       image: "navy_long_sleeve.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c3",
+      category: categories[0].id,
       user: users[2],
     },
     {
@@ -171,7 +169,7 @@ console.log("categories seeded 💫");
       image: "navy_tie.jpeg",
       quantity: 1,
       price: 2.99,
-      category: "632773609f2ec62779eb19c4",
+      category: categories[1].id,
       user: users[2],
     },
   ]);

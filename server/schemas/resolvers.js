@@ -153,20 +153,12 @@ const resolvers = {
     },
     addProduct: async (parent, args, context, { user, category }) => {
       if (context.user) {
-            // const params = {};
-
-            // if (args.category) {
-            //     params.category = category;
-            // }
-
-
         const product = await Product.create(args);
         await User.findByIdAndUpdate(
           context.user._id,
           { $push: { products: product } },
           { new: true }
         );
-        // await Category.findByIdAndUpdate( { $push: { products: product } } )
         return product;
       }
 
