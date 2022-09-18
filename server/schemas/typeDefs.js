@@ -31,6 +31,7 @@ const typeDefs = gql`
     type Category {
         _id: ID
         name: String
+        products: [Product]
     }
 
     type Product {
@@ -42,8 +43,8 @@ const typeDefs = gql`
         image: String
         quantity: Int
         price: Float
-        category: Category
-        user: User
+        category: [Category]
+        user: [User]
     }
 
     type Order {
@@ -87,10 +88,13 @@ const typeDefs = gql`
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         updateProduct(_id: ID!, quantity: Int!): Product
         login(email: String!, password: String!): Auth
+        addProduct(name: String!, brand: String, size: String!, description: String, image: String, quantity: Int, price: Float, user: [ID]): Product
     }
 `;
+// ! I think our problem is the category in the mutation is expecting a String but were referencing the Category schema in the typeDef above if that makes sense,
+// ! I made it so that it does add it to the user database, but I can't seem to connect the category
 
-// ? I dont know if the addProduct 'user' part is correct - 
+// ? I dont know if the addProduct 'user' part is correct -
+// ? I updated, i think this 99% it, i don't think we need the user id bc it's not an input field, but if needed, userID: ID! if doens't work... - cpm
+
 module.exports = typeDefs;
-
-//addProduct(_id: ID!, name: String!, brand: String, size: String!, description: String, image: String, quantity: Number, price: Number, user: User._id): Product
