@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
-
+import { Container } from '@chakra-ui/react'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
@@ -30,15 +30,19 @@ function Allproducts() {
 
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
-    <div>
+    <Container bg="gray">
       {/* ADD CART LINK TO HEADER */}
       <a href="./my-cart">*** GO TO CART LINK ***</a>
-      <SimpleGrid minChildWidth="130px" spacing="10px" width="100%">
+      <SimpleGrid
+        minChildWidth="150px"
+        spacing="10px"
+        maxWidth="1366px"
+        border="2px"
+      >
         {products.map((product) => (
           <Wrap>
             <Box
-              bg="#94d2bd"
-              maxW="sm"
+              bg=""
               borderWidth="1px"
               rounded="lg"
               shadow="lg"
@@ -53,9 +57,8 @@ function Allproducts() {
                   bg="red.200"
                 />
               )}
-
               <Image
-                src={product.image}
+                src={`../assets/images/${product.image}`}
                 alt={`Picture of ${product.name}`}
                 roundedTop="lg"
               />
@@ -131,7 +134,7 @@ function Allproducts() {
           </Wrap>
         ))}
       </SimpleGrid>
-    </div>
+    </Container>
   )
 }
 
