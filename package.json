@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/olivelliott/hand-me-up#readme",
   "dependencies": {
+    "@chakra-ui/layout": "^2.1.6",
     "concurrently": "^7.4.0"
   }
 }
