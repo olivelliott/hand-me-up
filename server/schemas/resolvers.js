@@ -18,8 +18,14 @@ const resolvers = {
             return 'Hello, world!';
         },
         // GET all categories
-        categories: async () => {
-            return await Category.find();
+        productByCategory: async (parent, { category }) => {
+            const params = {};
+
+            if (category) {
+                params.category = category;
+            }
+
+            return await Product.find(params);
         },
         // GET all products in a category
         products: async (parent, { category, name, user }) => {
@@ -35,7 +41,7 @@ const resolvers = {
                 };
             }
 
-            return await Product.find(params).populate('category');
+            return await Product.find(params).populate('category').populate('user');
         },
         // GET single product by id
         product: async (parent, { _id }) => {

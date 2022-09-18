@@ -24,19 +24,10 @@ db.once("open", async () => {
       lastName: "Wilson",
       email: "jswilson@testmail.com",
       password: "password12345",
-    }
+    },
   ]);
 
   console.log("users seeded 💫");
-
-  await Category.deleteMany();
-
-  const categories = await Category.insertMany([
-    { name: "Women" },
-    { name: "Men" },
-  ]);
-
-  console.log("categories seeded 💫");
 
   await Product.deleteMany();
 
@@ -50,8 +41,8 @@ db.once("open", async () => {
       image: "fp_sweater_set.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[0]
+      category: "Womens",
+      user: users[0],
     },
     {
       name: "Linen Tank Top",
@@ -61,8 +52,8 @@ db.once("open", async () => {
       image: "linen_tank.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[0]
+      category: "Womens",
+      user: users[0],
     },
     {
       name: "Black Long Sleeve",
@@ -73,8 +64,8 @@ db.once("open", async () => {
       image: "navy_long_sleeve.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[0]
+      category: "Womens",
+      user: users[0],
     },
     {
       name: "Printed Maxi Dress",
@@ -85,8 +76,8 @@ db.once("open", async () => {
       image: "maxi_dress.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[1]
+      category: "Womens",
+      user: users[1],
     },
     {
       name: "Color Block Sneakers",
@@ -97,8 +88,8 @@ db.once("open", async () => {
       image: "color_block_sneakers.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[2]
+      category: "Womens",
+      user: users[2],
     },
     {
       name: "Black Long Sleeve",
@@ -109,8 +100,8 @@ db.once("open", async () => {
       image: "blue_button_shirt.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[2]
+      category: "Womens",
+      user: users[2],
     },
     {
       name: "Sweatshirt",
@@ -121,9 +112,8 @@ db.once("open", async () => {
       image: "mens_sweatshirt.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[1],
-    user: users[2]
-
+      category: "Mens",
+      user: users[2],
     },
     {
       name: "Cargo Pants",
@@ -134,8 +124,8 @@ db.once("open", async () => {
       image: "white_pants.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[1],
-      user: users[2]
+      category: "Mens",
+      user: users[2],
     },
     {
       name: "Black Flannel",
@@ -146,8 +136,8 @@ db.once("open", async () => {
       image: "flannel.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[1],
-      user: users[0]
+      category: "Mens",
+      user: users[0],
     },
     {
       name: "Black Long Sleeve",
@@ -158,8 +148,8 @@ db.once("open", async () => {
       image: "navy_long_sleeve.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[0],
-      user: users[2]
+      category: "Womens",
+      user: users[2],
     },
     {
       name: "Navy Striped Tie",
@@ -169,12 +159,25 @@ db.once("open", async () => {
       image: "navy_tie.jpeg",
       quantity: 1,
       price: 2.99,
-      category: categories[1],
-      user: users[2]
+      category: "Mens",
+      user: users[2],
     },
   ]);
 
   console.log("products seeded 💫");
+
+  // await Category.deleteMany();
+
+  //   const categories = await Category.insertMany([
+  //     { name: "Women",
+  //     products: products[0]
+  // },
+  //     { name: "Men",
+  //   products: products[1]
+  //  },
+  //   ]);
+
+  // console.log("categories seeded 💫");
 
   process.exit();
 });
