@@ -57,19 +57,37 @@ export const ADD_USER = gql`
 
 // users can upload their own products for sale
 export const ADD_PRODUCT = gql`
-mutation Mutation($name: String!, $size: String!, $brand: String, $description: String, $image: String, $quantity: Int, $price: Float, $user: [ID]) {
-  addProduct(name: $name, size: $size, brand: $brand, description: $description, image: $image, quantity: $quantity, price: $price, user: $user) {
-    _id
-    name
-    brand
-    size
-    description
-    image
-    quantity
-    price
-    user {
+  mutation Mutation(
+    $name: String!
+    $size: String!
+    $brand: String
+    $description: String
+    $image: String
+    $quantity: Int
+    $price: Float
+    $user: [ID]
+  ) {
+    addProduct(
+      name: $name
+      size: $size
+      brand: $brand
+      description: $description
+      image: $image
+      quantity: $quantity
+      price: $price
+      user: $user
+    ) {
       _id
+      name
+      brand
+      size
+      description
+      image
+      quantity
+      price
+      user {
+        _id
+      }
     }
   }
-}}`;
-
+`;
