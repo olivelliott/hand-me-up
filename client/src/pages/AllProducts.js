@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
-import { Grid } from '@chakra-ui/react'
 
 import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
@@ -34,7 +33,7 @@ function Allproducts() {
     <div>
       {/* ADD CART LINK TO HEADER */}
       <a href="./my-cart">*** GO TO CART LINK ***</a>
-      <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
+      <SimpleGrid minChildWidth="130px" spacing="10px" width="100%">
         {products.map((product) => (
           <Wrap>
             <Box
