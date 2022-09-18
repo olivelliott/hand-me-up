@@ -35,6 +35,21 @@ export const QUERY_SPECIFIC_PRODUCTS = gql`
   }
 `;
 
+export const QUERY_SINGLE_PRODUCT = gql`
+  query getSingleProduct($id: ID!) {
+    product(_id: $id) {
+      _id
+      name
+      description
+      price
+      quantity
+      image
+      category {
+        _id
+      }
+    }
+  }
+`;
 
 export const QUERY_CATEGORIES = gql`
   {
