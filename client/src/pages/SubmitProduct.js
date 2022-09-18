@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { ADD_PRODUCT } from "../utils/mutations";
 import Auth from '../utils/auth'
 
@@ -26,6 +26,7 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { Form } from "react-router-dom";
+import { QUERY_CATEGORIES } from "../utils/queries";
 
 export default function SubmitProduct () {
   const [formState, setFormState] = useState({
@@ -38,6 +39,11 @@ export default function SubmitProduct () {
     price: '',
     category: ''
   })
+
+    const { data } = useQuery(QUERY_CATEGORIES)
+    // console.log(data);
+    console.log(data.categories[0]._id);
+    console.log(data.categories[1]._id);
 
   const [addProduct, { error }] = useMutation(ADD_PRODUCT)
 
