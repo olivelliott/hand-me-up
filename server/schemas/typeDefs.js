@@ -74,7 +74,8 @@ const typeDefs = gql`
     type Query {
         helloWorld: String
         categories: [Category]
-        products(category: ID, name: String): [Product]
+        productByCategory(category: ID): [Product]
+        products: [Product]
         product(_id: ID!): Product
         user: User
         users: [User]
@@ -88,7 +89,7 @@ const typeDefs = gql`
         updateUser(firstName: String, lastName: String, email: String, password: String): User
         updateProduct(_id: ID!, quantity: Int!): Product
         login(email: String!, password: String!): Auth
-        addProduct(name: String!, brand: String, size: String!, description: String, image: String, quantity: Int, price: Float, user: [ID]): Product
+        addProduct(name: String!, brand: String, size: String!, description: String, image: String, quantity: Int, price: Float, category: ID!, user: [ID]): Product
     }
 `;
 // ! I think our problem is the category in the mutation is expecting a String but were referencing the Category schema in the typeDef above if that makes sense,
@@ -97,4 +98,6 @@ const typeDefs = gql`
 // ? I dont know if the addProduct 'user' part is correct -
 // ? I updated, i think this 99% it, i don't think we need the user id bc it's not an input field, but if needed, userID: ID! if doens't work... - cpm
 
+// * Ok, I don't think we can connect it to anything other than the ID because of the association in the model
+// * When I try to connect it to the whole schema, it doesn't seem to like it
 module.exports = typeDefs;
