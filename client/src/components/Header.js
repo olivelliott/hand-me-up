@@ -347,7 +347,7 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: 'Career services',
-        subLabel: 'Connect with our career consultants',
+        subLabel: 'Connect with us',
         href: '#',
       },
       {

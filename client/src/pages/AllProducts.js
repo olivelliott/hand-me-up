@@ -11,6 +11,8 @@ import {
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
+
 import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
@@ -26,6 +28,7 @@ function Allproducts() {
   }
 
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
+
   return (
     <div>
       <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
@@ -33,7 +36,7 @@ function Allproducts() {
           <Wrap>
             <Box
               bg="#94d2bd"
-              maxW="sm"
+              // maxW="sm"
               borderWidth="1px"
               rounded="lg"
               shadow="lg"
@@ -104,9 +107,7 @@ function Allproducts() {
                 </Flex>
 
                 <Flex justifyContent="space-between" alignContent="center">
-                  <Box
-                    fontSize="2xl"
-                  >
+                  <Box fontSize="2xl">
                     <Box as="span" color={'gray.600'} fontSize="lg">
                       £
                     </Box>
@@ -123,13 +124,3 @@ function Allproducts() {
 }
 
 export default Allproducts
-
-// image={product.image}
-// name={product.name}
-// size={product.size}
-// description={product.description}
-// brand={product.brand}
-// price={product.price}
-// category={product.category}
-// quantity={product.quantity}
-// user={product.user}
