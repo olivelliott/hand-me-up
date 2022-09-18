@@ -48,6 +48,10 @@ export const QUERY_SINGLE_PRODUCT = gql`
       quantity
       image
       category {
+        name
+      }
+      user {
+        email
         _id
       }
     }

@@ -1,15 +1,23 @@
 import React from "react";
 import {
   Box,
+  List,
   Flex,
   Heading,
-  HStack,
+  Image,
+  Spacer,
   Link,
+  ListItem,
   Stack,
   useColorModeValue as mode,
+  Container,
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
-import { QUERY_SINGLE_PRODUCT } from '../utils/queries'
+import { QUERY_ALL_PRODUCTS } from '../utils/queries'
+
+// TODO IF TIME GET SINGLE QUERY WORKING SO WE DON'T PULL ALL DATA TO GET CART UPDATED
+// TODO IF TIME RE WORK TO USE COOKIES INSTEAD OF SESSION STORAGE
+// TODO USE STATE TO MANAGE QUANTITIES AND NUMBER ORDERED
 
 export default function Cart () {
 
@@ -93,63 +101,76 @@ export default function Cart () {
     },
   ]
 
-  const { loading, data } = useQuery(QUERY_SINGLE_PRODUCT)
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
 
-  return (
-    <div className='content'>
-      NEED A "CONTINUE SHOPPING" LINK
-      <ul className='products'>
-        {
-          cart_items.map(product =>
-          <li key={product._id} className='product-li'>
-            <div className='product'>
-              {/* <img className='product-image' src={product.image} alt="product" /> */}
-              <a href='https://placeholder.com/'><img className='product-image' src="https://via.placeholder.com/150" alt="product" /></a>
-              <div className='product-name'>{product.name}</div>
-              <div className='product-brand'>{product.brand}</div>
-              <div className='product-price'>${product.price}</div>
-            </div>
-          </li>
-          )
-        }
-      </ul>
-      </div>
+  // return (
+  //   <div className='content'>
+  //     NEED A "CONTINUE SHOPPING" LINK
+  //     <ul className='products'>
+  //       {
+  //         cart_items.map(product =>
+  //         <li key={product._id} className='product-li'>
+  //           <div className='product'>
+  //             {/* <img className='product-image' src={product.image} alt="product" /> */}
+  //             <a href='https://placeholder.com/'><img className='product-image' src="https://via.placeholder.com/150" alt="product" /></a>
+  //             <div className='product-name'>{product.name}</div>
+  //             <div className='product-brand'>{product.brand}</div>
+  //             <div className='product-price'>${product.price}</div>
+  //           </div>
+  //         </li>
+  //         )
+  //       }
+  //     </ul>
+  //     </div>
+  // )
+   return(
+  <Box key={'main-box'}
+    // maxW={{ base: '3xl', lg: '7xl' }}
+    // mx="auto"
+    // px={{ base: '4', md: '8', lg: '12' }}
+    // py={{ base: '6', md: '8', lg: '12' }}
+  >
+    <Stack
+      // direction={{ base: 'column', lg: 'row' }}
+      // align={{ lg: 'flex-start' }}
+      // spacing={{ base: '8', md: '16' }}
+    >
+      <Stack>
+      {/* <Stack spacing={{ base: '8', md: '10' }} flex="2"> */}
+
+        <Heading key='main-heading' fontSize="2xl" fontWeight="extrabold">
+          Shopping Cart
+        </Heading>
+
+          <List key='product-list'>
+          {cart_items.map((item) => (
+          <React.Fragment key={item._id}>
+          <Flex>
+            <Box minH='200px' maxH='200px' minW='200px' maxW='200px'>
+              <Image boxSize='200px' objectFit='cover' src="https://via.placeholder.com/200" alt="product" />
+            </Box>
+              <ListItem key={'name_'+item._id}><b>{item.name}</b></ListItem>
+              <ListItem key={'desc_'+item._id}>{item.description}</ListItem>
+          </Flex>
+          </React.Fragment>
+          ))
+          }
+          </List>
+      </Stack>
+
+      {/* <Flex direction="column" align="center" flex="1">
+        <CartOrderSummary />
+        <HStack mt="6" fontWeight="semibold">
+          <p>or</p>
+          <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
+        </HStack>
+      </Flex> */}
+    </Stack>
+  </Box>
   )
       }
 
-  // return(
-  // <Box
-  //   maxW={{ base: '3xl', lg: '7xl' }}
-  //   mx="auto"
-  //   px={{ base: '4', md: '8', lg: '12' }}
-  //   py={{ base: '6', md: '8', lg: '12' }}
-  // >
-  //   <Stack
-  //     direction={{ base: 'column', lg: 'row' }}
-  //     align={{ lg: 'flex-start' }}
-  //     spacing={{ base: '8', md: '16' }}
-  //   >
-  //     <Stack spacing={{ base: '8', md: '10' }} flex="2">
-  //       <Heading fontSize="2xl" fontWeight="extrabold">
-  //         Shopping Cart (3 items)
-  //       </Heading>
-
-  //       <Stack spacing="6">
-  //         {cartData.map((item) => (
-  //           <CartItem key={item.id} {...item} />
-  //         ))}
-  //       </Stack>
-  //     </Stack>
-
-  //     <Flex direction="column" align="center" flex="1">
-  //       <CartOrderSummary />
-  //       <HStack mt="6" fontWeight="semibold">
-  //         <p>or</p>
-  //         <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
-  //       </HStack>
-  //     </Flex>
-  //   </Stack>
-  // </Box>
-  // )
+ 
