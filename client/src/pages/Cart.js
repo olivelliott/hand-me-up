@@ -128,18 +128,18 @@ export default function Cart () {
   // )
    return(
   <Box key={'main-box'}
-    // maxW={{ base: '3xl', lg: '7xl' }}
-    // mx="auto"
-    // px={{ base: '4', md: '8', lg: '12' }}
-    // py={{ base: '6', md: '8', lg: '12' }}
+    maxW={{ base: '3xl', lg: '7xl' }}
+    mx="auto"
+    px={{ base: '4', md: '8', lg: '12' }}
+    py={{ base: '6', md: '8', lg: '12' }}
   >
     <Stack
-      // direction={{ base: 'column', lg: 'row' }}
-      // align={{ lg: 'flex-start' }}
-      // spacing={{ base: '8', md: '16' }}
+      direction={{ base: 'column', lg: 'row' }}
+      align={{ lg: 'flex-start' }}
+      spacing={{ base: '8', md: '16' }}
     >
-      <Stack>
-      {/* <Stack spacing={{ base: '8', md: '10' }} flex="2"> */}
+      {/* <Stack> */}
+      <Stack spacing={{ base: '8', md: '10' }} flex="2">
 
         <Heading key='main-heading' fontSize="2xl" fontWeight="extrabold">
           Shopping Cart
