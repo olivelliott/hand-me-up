@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useMutation } from '@apollo/client'
 import { ADD_PRODUCT } from "../utils/mutations";
 import Auth from '../utils/auth'
@@ -35,11 +36,12 @@ export default function SubmitProduct () {
     description: '',
     image: 'null',
     quantity: '',
-    price: '',
+    price: 0,
     category: ''
   })
 
   const loggedIn = Auth.loggedIn()
+  const navigate = useNavigate()
 
   const [addProduct, { error }] = useMutation(ADD_PRODUCT)
 
@@ -57,7 +59,7 @@ export default function SubmitProduct () {
   }
 
   const handlePriceChange = (e) => {
-    const price = (e.target.value).toFixed(2)
+    const price = parseFloat(e.target.value)
     setFormState({ ...formState, price: price })
   }
 
@@ -68,6 +70,7 @@ export default function SubmitProduct () {
       await addProduct({
         variables: { ...formState }
       })
+      navigate('/')
     } catch (err) {
       console.error(err)
     }
