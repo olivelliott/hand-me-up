@@ -140,12 +140,12 @@ function Allproducts() {
           </li>
           )
         }
-
-
       </ul>
     </div>
   )
 }
+
+
       // {/* <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
       //   {products.map((product) => (
       //     <Wrap>

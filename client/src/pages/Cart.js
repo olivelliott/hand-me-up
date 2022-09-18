@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  Stack,
+  useColorModeValue as mode,
+} from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import { QUERY_SINGLE_PRODUCT } from '../utils/queries'
 
@@ -97,6 +106,7 @@ export default function Cart () {
           <li key={product._id} className='product-li'>
             <div className='product'>
               {/* <img className='product-image' src={product.image} alt="product" /> */}
+              <a href='https://placeholder.com/'><img className='product-image' src="https://via.placeholder.com/150" alt="product" /></a>
               <div className='product-name'>{product.name}</div>
               <div className='product-brand'>{product.brand}</div>
               <div className='product-price'>${product.price}</div>
@@ -107,4 +117,39 @@ export default function Cart () {
       </ul>
       </div>
   )
-}
+      }
+
+  // return(
+  // <Box
+  //   maxW={{ base: '3xl', lg: '7xl' }}
+  //   mx="auto"
+  //   px={{ base: '4', md: '8', lg: '12' }}
+  //   py={{ base: '6', md: '8', lg: '12' }}
+  // >
+  //   <Stack
+  //     direction={{ base: 'column', lg: 'row' }}
+  //     align={{ lg: 'flex-start' }}
+  //     spacing={{ base: '8', md: '16' }}
+  //   >
+  //     <Stack spacing={{ base: '8', md: '10' }} flex="2">
+  //       <Heading fontSize="2xl" fontWeight="extrabold">
+  //         Shopping Cart (3 items)
+  //       </Heading>
+
+  //       <Stack spacing="6">
+  //         {cartData.map((item) => (
+  //           <CartItem key={item.id} {...item} />
+  //         ))}
+  //       </Stack>
+  //     </Stack>
+
+  //     <Flex direction="column" align="center" flex="1">
+  //       <CartOrderSummary />
+  //       <HStack mt="6" fontWeight="semibold">
+  //         <p>or</p>
+  //         <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
+  //       </HStack>
+  //     </Flex>
+  //   </Stack>
+  // </Box>
+  // )
