@@ -29,19 +29,22 @@ function Allproducts() {
 
 // TODO Add conditional rendering so the page displays 'loading' until data loads from db
 return (
-  <div>
+  <div key={'mainDiv'}>
     {/* ADD CART LINK TO HEADER */}
     <a href="./my-cart">*** GO TO CART LINK ***</a>
-    <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
+    <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px" minChildWidth='200px'>
       {products.map((product) => (
-        <Wrap>
-          <Box
+        <Wrap key={'wrap_'+product._id}>
+          <Box key={'newProduct_'+product._id}
             bg="#94d2bd"
-            maxW="sm"
+            minW='200px'
+            maxW="200px"
             borderWidth="1px"
             rounded="lg"
             shadow="lg"
             position="relative"
+            minH='150px'
+            maxH='150px'
           >
             {product.isNew && (
               <Circle
@@ -53,14 +56,15 @@ return (
               />
             )}
 
-            <Image
-              src={product.image}
+            <Image key={'img_'+product._id}
+              src={`images/${product.image}`}
+              // src='/images/blue_button_shirt.jpeg'
               alt={`Picture of ${product.name}`}
               roundedTop="lg"
             />
 
-            <Box p="6">
-              <Box d="flex" alignItems="baseline">
+            <Box key={'badgeBox_'+product._id} p="6">
+              <Box key={'box_'+product._id} d="flex" alignItems="baseline">
                 {product.isNew && (
                   <Badge
                     rounded="full"
@@ -77,13 +81,12 @@ return (
                 justifyContent="space-between"
                 alignContent="center"
               >
-                <Box
+                <Box key={'name_'+product._id}
                   mr="5"
                   fontSize="2xl"
                   fontWeight="semibold"
                   as="h4"
                   lineHeight="tight"
-                  isTruncated
                 >
                   {product.name}
                 </Box>
@@ -108,10 +111,10 @@ return (
               </Flex>
 
               <Flex justifyContent="space-between" alignContent="center">
-                <Box
+                <Box key={'price_'+product._id}
                   fontSize="2xl"
                 >
-                  <Box as="span" color={'gray.600'} fontSize="lg">
+                  <Box key={'span_'+product._id} as="span" color={'gray.600'} fontSize="lg">
                     £
                   </Box>
                   {product.price.toFixed(2)}
