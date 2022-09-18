@@ -29,6 +29,18 @@ db.once("open", async () => {
 
   console.log("users seeded 💫");
 
+  await Category.deleteMany();
+
+  const categories = await Category.insertMany([
+    { name: "Women",
+},
+    { name: "Men",
+ },
+  ]);
+
+console.log("categories seeded 💫");
+
+
   await Product.deleteMany();
 
   const products = await Product.insertMany([
@@ -166,18 +178,6 @@ db.once("open", async () => {
 
   console.log("products seeded 💫");
 
-  // await Category.deleteMany();
-
-  //   const categories = await Category.insertMany([
-  //     { name: "Women",
-  //     products: products[0]
-  // },
-  //     { name: "Men",
-  //   products: products[1]
-  //  },
-  //   ]);
-
-  // console.log("categories seeded 💫");
 
   process.exit();
 });

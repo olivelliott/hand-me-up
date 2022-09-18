@@ -34,14 +34,14 @@ const productSchema = new Schema({
     type: Number,
     min: 2.99,
   },
-  category: {
-    type: String
-  },
+  // category: {
+  //   type: String
+  // },
   // category: [Category.schema],
-  // category: [{
-  //   type: Schema.Types.ObjectId.apply,
-  //   ref: 'Category'
-  // }],
+  category: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Category'
+  }],
   user: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
