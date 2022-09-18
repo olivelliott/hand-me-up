@@ -159,6 +159,9 @@ const resolvers = {
             throw new AuthenticationError('Not logged in.');
 
         },
+        deleteProduct: async(parent, { _id }) => {
+          return await Product.findByIdAndDelete(_id)
+        },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 

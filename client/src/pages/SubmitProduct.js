@@ -57,7 +57,7 @@ export default function SubmitProduct () {
   }
 
   const handlePriceChange = (e) => {
-    const price = parseFloat(e.target)
+    const price = (e.target.value).toFixed(2)
     setFormState({ ...formState, price: price })
   }
 
@@ -133,6 +133,9 @@ export default function SubmitProduct () {
                       children='$'
                     />
                     <Input
+                      type='number'
+                      min="0.01"
+                      step="0.01"
                       placeholder='Enter amount'
                       name='price'
                       onChange={handlePriceChange} />

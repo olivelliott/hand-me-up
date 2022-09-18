@@ -89,6 +89,7 @@ const typeDefs = gql`
         updateProduct(_id: ID!, quantity: Int!): Product
         login(email: String!, password: String!): Auth
         addProduct(name: String!, brand: String, size: String!, description: String, image: String, quantity: Int, price: Float, user: [ID]): Product
+        deleteProduct(_id: ID): Product
     }
 `;
 // ! I think our problem is the category in the mutation is expecting a String but were referencing the Category schema in the typeDef above if that makes sense,
