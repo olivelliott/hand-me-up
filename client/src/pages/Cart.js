@@ -133,7 +133,7 @@ export default function Cart () {
           <Box key={'purchases_'+item._id}>
           <Flex>
             <Box mb='5' mr='5' minH='200px' maxH='200px' minW='200px' maxW='200px'>
-              <Image boxSize='200px' objectFit='cover' src="https://via.placeholder.com/200" alt="product" />
+              <Image boxSize='200px' objectFit='cover' src={`images/${item.image}`} alt="product" />
             </Box>
             <Box>
               <ListItem key={'brand_'+item._id} mr='5' maxH='20px' minW='200px' maxW='200px'>{item.brand}</ListItem>
