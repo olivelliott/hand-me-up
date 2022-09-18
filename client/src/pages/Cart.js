@@ -12,7 +12,6 @@ import {
   InputGroup,
   InputLeftAddon,
   Button,
-  useColorModeValue as mode,
   Container,
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
