@@ -25,8 +25,14 @@ import { Link as RouterLink } from 'react-router-dom'
 
 import headerLogo from '../assets/header_logo.png'
 
+import Auth from '../utils/auth'
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
+  const logout = (e) => {
+    e.preventDefault()
+    Auth.logout()
+  }
 
   return (
     <Box>
@@ -73,37 +79,81 @@ export default function WithSubnavigation() {
           </Flex>
         </Flex>
 
+        {/* conditional navigation */}
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
           spacing={6}
         >
-          <RouterLink to='/login'>
-            <Button
-              fontSize={'md'}
-              mt='3'
-              fontWeight={400}
-              variant={'link'}
-            >
-              Log In
-            </Button>
+          {Auth.loggedIn() ? (
+            <>
+              <RouterLink to='/submit-product'>
+                <Button
+                  fontSize={'md'}
+                  mt='3'
+                  fontWeight={400}
+                  variant={'link'}
+                >
+                  Submit A New Item
+                </Button>
+              </RouterLink>
 
-          </RouterLink>
-          <RouterLink to='signup'>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'#0A9396'}
-              _hover={{
-                bg: '#001219',
-              }}
-            >
-              Sign Up
-            </Button>
-          </RouterLink>
+              <RouterLink to='/my-cart'>
+                <Button
+                  fontSize={'md'}
+                  mt='3'
+                  fontWeight={400}
+                  variant={'link'}
+                >
+                  My Cart
+                </Button>
+              </RouterLink>
+
+              <Button
+                onClick={logout}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'#0A9396'}
+                _hover={{
+                  bg: '#001219',
+                }}
+              >
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            // if logged out
+            <>
+              <RouterLink to='/login'>
+                <Button
+                  fontSize={'md'}
+                  mt='3'
+                  fontWeight={400}
+                  variant={'link'}
+                >
+                  Log In
+                </Button>
+              </RouterLink>
+
+              <RouterLink to='signup'>
+                <Button
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize={'sm'}
+                  fontWeight={600}
+                  color={'white'}
+                  bg={'#0A9396'}
+                  _hover={{
+                    bg: '#001219',
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </RouterLink>
+            </>
+          )}
         </Stack>
       </Flex>
 
