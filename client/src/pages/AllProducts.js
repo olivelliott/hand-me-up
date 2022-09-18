@@ -1,19 +1,28 @@
 import {
   Flex,
-  Circle,
+  Spacer,
   Box,
+  Grid,
+  GridItem,
+  Wrap,
+  WrapItem,
+  AspectRatio,
   Image,
-  Badge,
   useColorModeValue,
   Icon,
   chakra,
   Tooltip,
 } from '@chakra-ui/react'
-import { FiShoppingCart } from 'react-icons/fi'
 
-function AllProducts() {
+import { SimpleGrid } from '@chakra-ui/react'
+import { FiShoppingCart } from 'react-icons/fi'
+import { useQuery } from '@apollo/client'
+import { QUERY_ALL_PRODUCTS } from '../utils/queries'
+
+function Allproducts() {
   const productArr = [
     {
+      _id: '1',
       name: 'Sweater Set',
       brand: 'Free People',
       size: 'Medium',
@@ -26,6 +35,7 @@ function AllProducts() {
       // user: users[0],
     },
     {
+      _id: '2',
       name: 'Linen Tank Top',
       brand: 'Old Navy',
       size: 'XX-Large',
@@ -37,6 +47,7 @@ function AllProducts() {
       // user: users[0],
     },
     {
+      _id: '3',
       name: 'Black Long Sleeve',
       brand: 'J Crew',
       size: 'Small',
@@ -49,6 +60,7 @@ function AllProducts() {
       // user: users[0],
     },
     {
+      _id: '4',
       name: 'Printed Maxi Dress',
       brand: 'Anthropologie',
       size: 'Large',
@@ -61,6 +73,7 @@ function AllProducts() {
       // user: users[1],
     },
     {
+      _id: '5',
       name: 'Color Block Sneakers',
       brand: 'New Balance',
       size: 'Ten',
@@ -73,6 +86,7 @@ function AllProducts() {
       // user: users[2],
     },
     {
+      _id: '6',
       name: 'Black Long Sleeve',
       brand: 'Tommy Hilfiger',
       size: 'Medium',
@@ -86,84 +100,110 @@ function AllProducts() {
     },
   ]
 
-  return function ProductAddToCart() {
-    return (
-      <Flex p={50} w="full" alignItems="center" justifyContent="center">
-        <Box
-          bg={useColorModeValue('white', 'gray.800')}
-          maxW="sm"
-          borderWidth="1px"
-          rounded="lg"
-          shadow="lg"
-          position="relative"
-        >
-          {Product.isNew && (
-            <Circle
-              size="10px"
-              position="absolute"
-              top={2}
-              right={2}
-              bg="red.200"
-            />
-          )}
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+  const products = data?.products || productArr
 
-          <Image
-            src={Product.image}
-            alt={`Picture of ${Product.name}`}
-            roundedTop="lg"
-          />
-
-          <Box p="6">
-            <Box d="flex" alignItems="baseline">
-              {Product.isNew && (
-                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  New
-                </Badge>
-              )}
-            </Box>
-            <Flex mt="1" justifyContent="space-between" alignContent="center">
-              <Box
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated
-              >
-                {Product.name}
-              </Box>
-              <Tooltip
-                label="Add to cart"
-                bg="white"
-                placement={'top'}
-                color={'gray.800'}
-                fontSize={'1.2em'}
-              >
-                <chakra.a href={'#'} display={'flex'}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
-                </chakra.a>
-              </Tooltip>
-            </Flex>
-
-            <Flex justifyContent="space-between" alignContent="center">
-              <Box
-                fontSize="2xl"
-                color={useColorModeValue('gray.800', 'white')}
-              >
-                <Box as="span" color={'gray.600'} fontSize="lg">
-                  £
-                </Box>
-                {Product.price.toFixed(2)}
-              </Box>
-            </Flex>
-          </Box>
-        </Box>
-      </Flex>
-    )
+  const handleAddToCart = () => {
+    console.log('handleAddToCart fired')
   }
+
+  return (
+    <div>
+      <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
+        {products.map((product) => (
+          <Wrap>
+            <Box
+              bg="#94d2bd"
+              maxW="sm"
+              borderWidth="1px"
+              rounded="lg"
+              shadow="lg"
+              position="relative"
+            >
+              {product.isNew && (
+                <Circle
+                  size="10px"
+                  position="absolute"
+                  top={2}
+                  right={2}
+                  bg="red.200"
+                />
+              )}
+
+              <Image
+                src={product.image}
+                alt={`Picture of ${product.name}`}
+                roundedTop="lg"
+              />
+
+              <Box p="6">
+                <Box d="flex" alignItems="baseline">
+                  {product.isNew && (
+                    <Badge
+                      rounded="full"
+                      px="2"
+                      fontSize="0.8em"
+                      colorScheme="red"
+                    >
+                      New
+                    </Badge>
+                  )}
+                </Box>
+                <Flex
+                  mt="1"
+                  justifyContent="space-between"
+                  alignContent="center"
+                >
+                  <Box
+                    mr="5"
+                    fontSize="2xl"
+                    fontWeight="semibold"
+                    as="h4"
+                    lineHeight="tight"
+                    isTruncated
+                  >
+                    {product.name}
+                  </Box>
+                  <Tooltip
+                    label="Add to cart"
+                    bg="white"
+                    placement={'top'}
+                    color={'gray.800'}
+                    fontSize={'1.2em'}
+                  >
+                    <chakra.a href={'#'} display={'flex'}>
+                      <Icon
+                        as={FiShoppingCart}
+                        h={7}
+                        w={7}
+                        alignSelf={'center'}
+                        onClick={handleAddToCart}
+                      />
+                    </chakra.a>
+                  </Tooltip>
+                </Flex>
+
+                <Flex justifyContent="space-between" alignContent="center">
+                  <Box
+                    fontSize="2xl"
+                    // color={useColorModeValue('gray.800', 'white')}
+                  >
+                    <Box as="span" color={'gray.600'} fontSize="lg">
+                      £
+                    </Box>
+                    {product.price.toFixed(2)}
+                  </Box>
+                </Flex>
+              </Box>
+            </Box>
+          </Wrap>
+        ))}
+      </SimpleGrid>
+    </div>
+  )
 }
 
-export default AllProducts
-// export default ProductAddToCart
+export default Allproducts
 
 // image={product.image}
 // name={product.name}
