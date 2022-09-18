@@ -9,7 +9,7 @@ import {
   chakra,
   Tooltip,
   list,
-  Button
+  Button,
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
@@ -26,20 +26,20 @@ function Allproducts() {
   const handleAddToCart = async (e) => {
     e.preventDefault()
     console.log('handleAddToCart fired for ' + e.target.id)
-    sessionStorage.setItem(e.target.id, e.target.id);
+    sessionStorage.setItem(e.target.id, e.target.id)
   }
 
-<<<<<<< HEAD
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
-
   return (
     <div>
+      {/* ADD CART LINK TO HEADER */}
+      <a href="./my-cart">*** GO TO CART LINK ***</a>
       <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
         {products.map((product) => (
           <Wrap>
             <Box
               bg="#94d2bd"
-              // maxW="sm"
+              maxW="sm"
               borderWidth="1px"
               rounded="lg"
               shadow="lg"
@@ -59,41 +59,56 @@ function Allproducts() {
                 src={product.image}
                 alt={`Picture of ${product.name}`}
                 roundedTop="lg"
-=======
-// TODO Add conditional rendering so the page displays 'loading' until data loads from db
-return (
-  <div>
-    {/* ADD CART LINK TO HEADER */}
-    <a href="./my-cart">*** GO TO CART LINK ***</a>
-    <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
-      {products.map((product) => (
-        <Wrap>
-          <Box
-            bg="#94d2bd"
-            maxW="sm"
-            borderWidth="1px"
-            rounded="lg"
-            shadow="lg"
-            position="relative"
-          >
-            {product.isNew && (
-              <Circle
-                size="10px"
-                position="absolute"
-                top={2}
-                right={2}
-                bg="red.200"
->>>>>>> dev
               />
-            )}
 
-            <Image
-              src={product.image}
-              alt={`Picture of ${product.name}`}
-              roundedTop="lg"
-            />
+              <Box p="6">
+                <Box d="flex" alignItems="baseline">
+                  {product.isNew && (
+                    <Badge
+                      rounded="full"
+                      px="2"
+                      fontSize="0.8em"
+                      colorScheme="red"
+                    >
+                      New
+                    </Badge>
+                  )}
+                </Box>
+                <Flex
+                  mt="1"
+                  justifyContent="space-between"
+                  alignContent="center"
+                >
+                  <Box
+                    mr="5"
+                    fontSize="2xl"
+                    fontWeight="semibold"
+                    as="h4"
+                    lineHeight="tight"
+                    isTruncated
+                  >
+                    {product.name}
+                  </Box>
+                  {/* TODO make this button add the item to cart in app state */}
+                  <Tooltip
+                    label="Add to cart"
+                    bg="white"
+                    placement={'top'}
+                    color={'gray.800'}
+                    fontSize={'1.2em'}
+                  >
+                    <chakra.a href={'#'} display={'flex'}>
+                      <Icon
+                        as={FiShoppingCart}
+                        h={7}
+                        w={7}
+                        alignSelf={'center'}
+                        // onClick={handleAddToCart}
+                      />
+                    </chakra.a>
+                  </Tooltip>
+                </Flex>
 
-<<<<<<< HEAD
                 <Flex justifyContent="space-between" alignContent="center">
                   <Box fontSize="2xl">
                     <Box as="span" color={'gray.600'} fontSize="lg">
@@ -102,83 +117,23 @@ return (
                     {product.price.toFixed(2)}
                   </Box>
                 </Flex>
-=======
-            <Box p="6">
-              <Box d="flex" alignItems="baseline">
-                {product.isNew && (
-                  <Badge
-                    rounded="full"
-                    px="2"
-                    fontSize="0.8em"
-                    colorScheme="red"
-                  >
-                    New
-                  </Badge>
-                )}
->>>>>>> dev
               </Box>
-              <Flex
-                mt="1"
-                justifyContent="space-between"
-                alignContent="center"
-              >
-                <Box
-                  mr="5"
-                  fontSize="2xl"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
-                  isTruncated
-                >
-                  {product.name}
-                </Box>
-                {/* TODO make this button add the item to cart in app state */}
-                <Tooltip
-                  label="Add to cart"
-                  bg="white"
-                  placement={'top'}
-                  color={'gray.800'}
-                  fontSize={'1.2em'}
-                >
-                  <chakra.a href={'#'} display={'flex'}>
-                    <Icon
-                      as={FiShoppingCart}
-                      h={7}
-                      w={7}
-                      alignSelf={'center'}
-                      // onClick={handleAddToCart}
-                    />
-                  </chakra.a>
-                </Tooltip>
-              </Flex>
-
-              <Flex justifyContent="space-between" alignContent="center">
-                <Box
-                  fontSize="2xl"
-                >
-                  <Box as="span" color={'gray.600'} fontSize="lg">
-                    £
-                  </Box>
-                  {product.price.toFixed(2)}
-                </Box>
-              </Flex>
             </Box>
-          </Box>
-          <Button
+            <Button
               mb={5}
-              colorScheme='gray'
-              variant='outline'
+              colorScheme="gray"
+              variant="outline"
               style={{ color: 'red' }}
               id={product._id}
               onClick={handleAddToCart}
             >
               Add to Cart
             </Button>
-        </Wrap>
-      ))}
-    </SimpleGrid>
-  </div>
-)
+          </Wrap>
+        ))}
+      </SimpleGrid>
+    </div>
+  )
 }
 
 export default Allproducts
