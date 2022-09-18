@@ -71,5 +71,5 @@ mutation Mutation($name: String!, $size: String!, $brand: String, $description: 
       _id
     }
   }
-}}`;
+}`;
 
