@@ -13,6 +13,7 @@ import {
   InputLeftAddon,
   Button,
   useColorModeValue as mode,
+  Container,
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
@@ -109,6 +110,7 @@ export default function Cart () {
   const cart_items = products.filter(product => product._id in sessionStorage)
 
    return(
+  <Container>
   <Flex d='columns'>
   <Box align='left' key={'main-box'}
     // TODO ADD A "CONTINUE SHOPPING" LINK
@@ -184,6 +186,7 @@ export default function Cart () {
     </Stack>
 </Box>
   </Flex>
+  </Container>
   )
   }
 
