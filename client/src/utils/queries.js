@@ -14,7 +14,10 @@ export const QUERY_ALL_PRODUCTS = gql`
       category {
         name
       }
-      user
+      user {
+        email
+        _id
+      }
     }
   }
 `;

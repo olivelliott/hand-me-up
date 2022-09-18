@@ -1,14 +1,10 @@
 import {
   Flex,
-  Spacer,
+  Badge,
   Box,
-  Grid,
-  GridItem,
+  Circle,
   Wrap,
-  WrapItem,
-  AspectRatio,
   Image,
-  useColorModeValue,
   Icon,
   chakra,
   Tooltip,
@@ -20,93 +16,16 @@ import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
 
 function Allproducts() {
-  const productArr = [
-    {
-      _id: '1',
-      name: 'Sweater Set',
-      brand: 'Free People',
-      size: 'Medium',
-      description:
-        'Free People gently used sweater set. Perfect for lounging at home!',
-      image: 'fp_sweater_set.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '2',
-      name: 'Linen Tank Top',
-      brand: 'Old Navy',
-      size: 'XX-Large',
-      description: 'Used linen tank top. Has one small stain on the back!',
-      image: 'linen_tank.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '3',
-      name: 'Black Long Sleeve',
-      brand: 'J Crew',
-      size: 'Small',
-      description:
-        'Simple black long sleeve top. Great for layering in the cold months!',
-      image: 'navy_long_sleeve.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '4',
-      name: 'Printed Maxi Dress',
-      brand: 'Anthropologie',
-      size: 'Large',
-      description:
-        'In new condition without tags. Wore it once and its just not really my style.',
-      image: 'maxi_dress.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[1],
-    },
-    {
-      _id: '5',
-      name: 'Color Block Sneakers',
-      brand: 'New Balance',
-      size: 'Ten',
-      description:
-        'Super fun color block sneakers! In used condition but they have some miles to go!',
-      image: 'color_block_sneakers.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[2],
-    },
-    {
-      _id: '6',
-      name: 'Black Long Sleeve',
-      brand: 'Tommy Hilfiger',
-      size: 'Medium',
-      description:
-        'Button down collared linen shirt. Great for spring and summer and appropriate for work!',
-      image: 'blue_button_shirt.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[2],
-    },
-  ]
-
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
-  const products = data?.products || productArr
+  const products = data?.products || []
+
+  console.log(data)
 
   const handleAddToCart = () => {
     console.log('handleAddToCart fired')
   }
 
+  // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
     <div>
       <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px">
@@ -164,6 +83,7 @@ function Allproducts() {
                   >
                     {product.name}
                   </Box>
+                  {/* TODO make this button add the item to cart in app state */}
                   <Tooltip
                     label="Add to cart"
                     bg="white"
@@ -186,7 +106,6 @@ function Allproducts() {
                 <Flex justifyContent="space-between" alignContent="center">
                   <Box
                     fontSize="2xl"
-                    // color={useColorModeValue('gray.800', 'white')}
                   >
                     <Box as="span" color={'gray.600'} fontSize="lg">
                       £
