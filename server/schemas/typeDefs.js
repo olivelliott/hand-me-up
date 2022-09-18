@@ -43,7 +43,7 @@ const typeDefs = gql`
         image: String
         quantity: Int
         price: Float
-        category: String
+        category: [Category]
         user: [User]
     }
 
@@ -73,7 +73,8 @@ const typeDefs = gql`
 
     type Query {
         helloWorld: String
-        productByCategory(category: String): [Product]
+        categories: [Category]
+        productByCategory(category: ID): [Product]
         products(category: ID, name: String): [Product]
         product(_id: ID!): Product
         user: User

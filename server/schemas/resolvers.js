@@ -17,6 +17,9 @@ const resolvers = {
         helloWorld: () => {
             return 'Hello, world!';
         },
+        categories: async () => {
+            return await Category.find();
+        },
         // GET all categories
         productByCategory: async (parent, { category }) => {
             const params = {};
@@ -25,6 +28,7 @@ const resolvers = {
                 params.category = category;
             }
 
+            console.log(params);
             return await Product.find(params);
         },
         // GET all products in a category
