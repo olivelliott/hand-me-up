@@ -67,11 +67,13 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <img
-              style={{ width: '200px', height: '50px' }}
-              src={headerLogo}
-              alt="hand me up logo"
-            />
+            <a href="/">
+              <img
+                style={{ width: '200px', height: '50px' }}
+                src={headerLogo}
+                alt="hand me up logo"
+              />
+            </a>
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -88,10 +90,10 @@ export default function WithSubnavigation() {
         >
           {Auth.loggedIn() ? (
             <>
-              <RouterLink to='/submit-product'>
+              <RouterLink to="/submit-product">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                 >
@@ -99,10 +101,10 @@ export default function WithSubnavigation() {
                 </Button>
               </RouterLink>
 
-              <RouterLink to='/my-cart'>
+              <RouterLink to="/my-cart">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                 >
@@ -127,10 +129,10 @@ export default function WithSubnavigation() {
           ) : (
             // if logged out
             <>
-              <RouterLink to='/login'>
+              <RouterLink to="/login">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                 >
@@ -138,7 +140,7 @@ export default function WithSubnavigation() {
                 </Button>
               </RouterLink>
 
-              <RouterLink to='signup'>
+              <RouterLink to="signup">
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
