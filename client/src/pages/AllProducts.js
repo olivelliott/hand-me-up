@@ -17,7 +17,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
 
-function AllProducts() {
+function Allproducts() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
   const products = data?.products || []
 
@@ -139,7 +139,7 @@ return (
 )
 }
 
-export default AllProducts;
+export default Allproducts
 
 // image={product.image}
 // name={product.name}
