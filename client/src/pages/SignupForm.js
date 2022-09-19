@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from '../utils/mutations'
+import { useNavigate } from 'react-router-dom'
 import Auth from '../utils/auth'
 import { validateEmail } from '../utils/helpers'
 
@@ -23,11 +24,13 @@ export default function SignupForm() {
     password: '',
   })
   const [addUser, { error }] = useMutation(ADD_USER)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
 
     setFormState({ ...formState, [name]: value })
+    console.log(formState)
     }
 
   const handleFormSubmit = async (e) => {
@@ -39,6 +42,7 @@ export default function SignupForm() {
       })
       console.log(data)
       Auth.login(data.addUser.token)
+      navigate('/')
     } catch (err) {
       console.error(err)
     }
