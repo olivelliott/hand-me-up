@@ -15,21 +15,6 @@
 // import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 // import { BiMailSend } from 'react-icons/bi'
 
-<<<<<<< HEAD
-const Logo = (props: any) => {
-  return (
-    <svg
-      height={32}
-      viewBox="0 0 120 28"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    ></svg>
-  )
-}
-=======
->>>>>>> dev
-
-
 // const SocialButton = ({
 //   children,
 //   label,
@@ -154,7 +139,6 @@ const Logo = (props: any) => {
 
 // export default Footer
 
-
 // import {
 //   ButtonGroup,
 //   Container,
@@ -218,39 +202,40 @@ import {
   Image,
   useColorModeValue,
   VisuallyHidden,
-} from '@chakra-ui/react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
-import footerlogo from '../assets/footer-logo-1.png';
-
-
+} from '@chakra-ui/react'
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import footerlogo from '../assets/footer-logo-1.png'
 
 export default function Footer() {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
+      color={useColorModeValue('gray.700', 'gray.200')}
+    >
       <Container
         as={Stack}
         maxW={'6xl'}
         py={4}
         spacing={4}
         justify={'center'}
-        align={'center'}>
-        <Image src={footerlogo} maxW='10rem'/>
+        align={'center'}
+      >
+        <Image src={footerlogo} maxW="10rem" />
         <Stack direction={'row'} spacing={6}>
-          <Link to='/'>Home</Link>
-          <Link to='/signup'>Sign Up</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/all-products'>Products</Link>
+          <Link to="/">Home</Link>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/all-products">Products</Link>
         </Stack>
       </Container>
 
       <Box
         borderTopWidth={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}>
+        borderColor={useColorModeValue('gray.200', 'gray.700')}
+      >
         <Container
           as={Stack}
           maxW={'6xl'}
@@ -258,14 +243,14 @@ export default function Footer() {
           direction={{ base: 'column', md: 'row' }}
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}>
+          align={{ base: 'center', md: 'center' }}
+        >
           <Text fontSize="sm" align="center">
-          &copy; {new Date().getFullYear()} All Rights Reserved
-        </Text>
-          <Stack direction={'row'} spacing={6}>
-          </Stack>
+            &copy; {new Date().getFullYear()} All Rights Reserved
+          </Text>
+          <Stack direction={'row'} spacing={6}></Stack>
         </Container>
       </Box>
     </Box>
-  );
-};
+  )
+}
