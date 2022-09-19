@@ -178,7 +178,7 @@ export default function Cart () {
           <InputLeftAddon children="Total" />
           <Input placeholder="25" />
         </InputGroup>
-      <Button colorScheme="blue" size="lg" fontSize="md">
+      <Button bg='red' color='white' size="lg" fontSize="md" _hover={{ bg: 'brick_red'}}>
         Checkout
       </Button>
     </Stack>
