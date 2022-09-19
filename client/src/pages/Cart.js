@@ -5,11 +5,13 @@ import {
   Flex,
   Heading,
   Image,
-  Spacer,
-  Link,
+  Select,
   ListItem,
+  Input,
   Stack,
-  useColorModeValue as mode,
+  InputGroup,
+  InputLeftAddon,
+  Button,
   Container,
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
@@ -106,28 +108,11 @@ export default function Cart () {
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
 
-  // return (
-  //   <div className='content'>
-  //     NEED A "CONTINUE SHOPPING" LINK
-  //     <ul className='products'>
-  //       {
-  //         cart_items.map(product =>
-  //         <li key={product._id} className='product-li'>
-  //           <div className='product'>
-  //             {/* <img className='product-image' src={product.image} alt="product" /> */}
-  //             <a href='https://placeholder.com/'><img className='product-image' src="https://via.placeholder.com/150" alt="product" /></a>
-  //             <div className='product-name'>{product.name}</div>
-  //             <div className='product-brand'>{product.brand}</div>
-  //             <div className='product-price'>${product.price}</div>
-  //           </div>
-  //         </li>
-  //         )
-  //       }
-  //     </ul>
-  //     </div>
-  // )
    return(
-  <Box key={'main-box'}
+  <Container>
+  <Flex d='columns'>
+  <Box align='left' key={'main-box'}
+    // TODO ADD A "CONTINUE SHOPPING" LINK
     maxW={{ base: '3xl', lg: '7xl' }}
     mx="auto"
     px={{ base: '4', md: '8', lg: '12' }}
@@ -138,39 +123,70 @@ export default function Cart () {
       align={{ lg: 'flex-start' }}
       spacing={{ base: '8', md: '16' }}
     >
-      {/* <Stack> */}
       <Stack spacing={{ base: '8', md: '10' }} flex="2">
-
         <Heading key='main-heading' fontSize="2xl" fontWeight="extrabold">
           Shopping Cart
         </Heading>
 
           <List key='product-list'>
           {cart_items.map((item) => (
-          <React.Fragment key={item._id}>
+          <Box key={'purchases_'+item._id}>
           <Flex>
-            <Box minH='200px' maxH='200px' minW='200px' maxW='200px'>
-              <Image boxSize='200px' objectFit='cover' src="https://via.placeholder.com/200" alt="product" />
+            <Box mb='5' mr='5' minH='200px' maxH='200px' minW='200px' maxW='200px'>
+              <Image boxSize='200px' objectFit='cover' src={`images/${item.image}`} alt="product" />
             </Box>
-              <ListItem key={'name_'+item._id}><b>{item.name}</b></ListItem>
-              <ListItem key={'desc_'+item._id}>{item.description}</ListItem>
+            <Box>
+              <ListItem key={'brand_'+item._id} mr='5' maxH='20px' minW='200px' maxW='200px'>{item.brand}</ListItem>
+              <ListItem key={'name_'+item._id} mb='2' mr='5' minH='30px' maxH='30px' minW='200px' maxW='200px'><b>{item.name}</b></ListItem>
+              <ListItem key={'size_'+item._id} mb='5' mr='5' maxH='10px' minW='200px' maxW='200px'>{item.size}</ListItem>
+              <ListItem key={'desc_'+item._id} mr='5' minH='175px' maxH='200px' minW='200px' maxW='200px'>{item.description}</ListItem>
+
+              </Box>
+              <Box  minH='200px' maxH='200px' minW='125px' maxW='200px'>
+              <ListItem key={'price_'+item._id} mb='10' mr='5' maxH='10px' minW='200px' maxW='200px'><b>${item.price}</b></ListItem>
+              <ListItem key={'select_'+item._id}>
+              <Select maxW='75px' border='2px' borderColor='black' aria-label="Select quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </Select>
+              </ListItem>
+              </Box>
           </Flex>
-          </React.Fragment>
+          </Box>
           ))
           }
           </List>
       </Stack>
-
-      {/* <Flex direction="column" align="center" flex="1">
-        <CartOrderSummary />
-        <HStack mt="6" fontWeight="semibold">
-          <p>or</p>
-          <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
-        </HStack>
-      </Flex> */}
     </Stack>
-  </Box>
+</Box>
+<Box mt='50px'>
+<Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
+      <Heading size="md">Order Summary</Heading>
+
+      <Stack spacing="6">
+        <InputGroup>
+          <InputLeftAddon children="Subtotal" />
+          <Input placeholder="15" />
+        </InputGroup>
+        <InputGroup>
+          <InputLeftAddon children="Shipping + Tax" />
+          <Input placeholder="10" />
+        </InputGroup>
+        <InputGroup>
+          <InputLeftAddon children="Total" />
+          <Input placeholder="25" />
+        </InputGroup>
+      <Button colorScheme="blue" size="lg" fontSize="md">
+        Checkout
+      </Button>
+    </Stack>
+    </Stack>
+</Box>
+  </Flex>
+  </Container>
   )
-      }
+  }
 
  
