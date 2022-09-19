@@ -154,19 +154,23 @@ export default function Hero() {
               size={"lg"}
               fontWeight={"normal"}
               px={6}
-              _hover={{ bg: "red" }}
+              bg='red'
+              color='white'
+              _hover={{ bg: "brick_red" }}
             >
               {" "}
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">Get Started!</Link>
             </Button>
             <Button
               rounded={"full"}
               size={"lg"}
               fontWeight={"normal"}
               px={6}
-              _hover={{ bg: "red" }}
+              bg='red'
+              color='white'
+              _hover={{ bg: "brick_red" }}
             >
-              <Link to="/login">Log In</Link>
+              <Link to="/all-products">Products</Link>
             </Button>
           </Stack>
         </Stack>
