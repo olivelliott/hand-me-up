@@ -26,7 +26,6 @@ import {
   NumberDecrementStepper,
   Button,
 } from '@chakra-ui/react'
-import { Form } from "react-router-dom";
 import { QUERY_CATEGORIES } from "../utils/queries";
 
 export default function SubmitProduct () {
@@ -45,8 +44,8 @@ export default function SubmitProduct () {
   const navigate = useNavigate()
   const { data } = useQuery(QUERY_CATEGORIES)
   const arr = data?.categories
-  console.log("arr[0] >>>", data.categories[0]._id);
-  console.log("arr[1] >>>", data.categories[1]._id);
+  // console.log("arr[0] >>>", data.categories[0]._id);
+  // console.log("arr[1] >>>", data.categories[1]._id);
 
   const [addProduct, { error }] = useMutation(ADD_PRODUCT)
 
