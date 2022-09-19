@@ -43,10 +43,10 @@ export default function SubmitProduct () {
 
   const loggedIn = Auth.loggedIn()
   const navigate = useNavigate()
-    const { data } = useQuery(QUERY_CATEGORIES)
-    // console.log(data);
-    console.log(data.categories[0]._id);
-    console.log(data.categories[1]._id);
+  const { data } = useQuery(QUERY_CATEGORIES)
+  const arr = data?.categories
+  console.log("arr[0] >>>", data.categories[0]._id);
+  console.log("arr[1] >>>", data.categories[1]._id);
 
   const [addProduct, { error }] = useMutation(ADD_PRODUCT)
 
@@ -66,6 +66,15 @@ export default function SubmitProduct () {
   const handlePriceChange = (e) => {
     const price = parseFloat(e.target.value)
     setFormState({ ...formState, price: price })
+  }
+
+  const handleSetCategory = (e) => {
+    console.log(e.target.value)
+    if (e.target.value === 'women') {
+      setFormState({ ...formState, category: arr[0]._id })
+    } else {
+      setFormState({ ...formState, category: arr[1]._id })
+    }
   }
 
   const handleFormSubmit = async (e) => {
@@ -173,7 +182,7 @@ export default function SubmitProduct () {
             <Select
               placeholder='choose a category'
               name='category'
-              onChange={handleChange}>
+              onChange={handleSetCategory}>
               <option value='men'>Men's</option>
               <option value='women'>Women's</option>
             </Select>

@@ -26,7 +26,7 @@ const resolvers = {
       if (category) {
         params.category = category;
       }
-      
+
       console.log(params);
       return await Product.find(params).populate('category');
     },
@@ -118,20 +118,14 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-<<<<<<< HEAD
-        },
-        deleteProduct: async(parent, { _id }) => {
-          return await Product.findByIdAndDelete(_id)
-        },
-        login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
-=======
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
       return { token, user };
     },
     addOrder: async (parent, { products }, context) => {
       if (context.user) {
         const order = new Order({ products });
->>>>>>> dev
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { orders: order },
