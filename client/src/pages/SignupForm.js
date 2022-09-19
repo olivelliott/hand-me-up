@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from '../utils/mutations'
 import { useNavigate } from 'react-router-dom'
 import Auth from '../utils/auth'
-import { validateEmail } from '../utils/helpers'
 
 import {
   FormControl,
@@ -40,6 +39,7 @@ export default function SignupForm() {
       const { data } = await addUser({
         variables: { ...formState }
       })
+      console.log('try add user >>>', data)
       console.log(data)
       Auth.login(data.addUser.token)
       navigate('/')
@@ -73,8 +73,8 @@ export default function SignupForm() {
 
         <FormLabel htmlFor='emailField'>Email address</FormLabel>
         <Input
-         border='2px'
-         mb='20px'
+          border='2px'
+          mb='20px'
           type='email'
           name='email'
           id='emailField'
