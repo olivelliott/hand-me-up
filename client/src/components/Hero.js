@@ -93,7 +93,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import image from "../assets/hand-me-up.png";
+import image from "../assets/donation.png";
 
 export default function Hero() {
   return (

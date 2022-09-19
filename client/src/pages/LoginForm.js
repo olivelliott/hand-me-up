@@ -75,11 +75,11 @@ export default function LoginForm() {
         fontSize={'sm'}
         fontWeight={600}
         color={'white'}
-        bg={'#0A9396'}
+        bg='red'
         my={5}
         href={'#'}
         _hover={{
-          bg: '#001219',
+          bg: 'brick_red',
         }}
       >
         Sign In!
