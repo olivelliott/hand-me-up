@@ -18,6 +18,7 @@ import AllProducts from "./pages/AllProducts";
 import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/LoginForm";
 import SubmitProduct from "./pages/SubmitProduct";
+import MensProducts from './pages/MensProducts'
 import Cart from "./pages/Cart";
 import NoMatch from "./pages/NoMatch";
 
@@ -61,6 +62,7 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/submit-product" element={<SubmitProduct />} />
                 <Route path="/my-cart" element={<Cart />} />
+                <Route path='/mens-products' element={<MensProducts />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
             </Container>

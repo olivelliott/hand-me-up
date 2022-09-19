@@ -63,17 +63,13 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}
-          >
+          <RouterLink to='/'>
             <Image
             maxW='10rem'
               src={headerLogo}
               alt="hand me up logo"
             />
-          </Text>
+          </RouterLink>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -95,6 +91,10 @@ export default function WithSubnavigation() {
                   mt='3'
                   fontWeight={400}
                   variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'brick_red'
+                  }}
                 >
                   Submit A New Item
                 </Button>
@@ -106,6 +106,10 @@ export default function WithSubnavigation() {
                   mt='3'
                   fontWeight={400}
                   variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'brick_red'
+                  }}
                 >
                   My Cart
                 </Button>
@@ -117,9 +121,9 @@ export default function WithSubnavigation() {
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
-                bg={'#0A9396'}
+                bg={'red'}
                 _hover={{
-                  bg: '#001219',
+                  bg: 'brick_red',
                 }}
               >
                 Sign Out
@@ -151,8 +155,7 @@ export default function WithSubnavigation() {
                   color={'white'}
                   bg='red'
                   _hover={{
-                    bg: 'cream',
-                    color: 'black'
+                    bg: 'brick_red'
                   }}
                 >
                   Sign Up

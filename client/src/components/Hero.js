@@ -93,7 +93,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import image from "../assets/hand-me-up.png";
+import image from "../assets/donation.png";
 
 export default function Hero() {
   return (
@@ -154,19 +154,23 @@ export default function Hero() {
               size={"lg"}
               fontWeight={"normal"}
               px={6}
-              _hover={{ bg: "red" }}
+              bg='red'
+              color='white'
+              _hover={{ bg: "brick_red" }}
             >
               {" "}
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">Get Started!</Link>
             </Button>
             <Button
               rounded={"full"}
               size={"lg"}
               fontWeight={"normal"}
               px={6}
-              _hover={{ bg: "red" }}
+              bg='red'
+              color='white'
+              _hover={{ bg: "brick_red" }}
             >
-              <Link to="/login">Log In</Link>
+              <Link to="/all-products">Products</Link>
             </Button>
           </Stack>
         </Stack>
