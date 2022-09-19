@@ -365,4 +365,8 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Women's Clothing",
     href: '#',
   },
+  {
+    label: 'Go to Cart',
+    href: './my-cart',
+  },
 ]

@@ -30,8 +30,6 @@ function Allproducts() {
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
     <div key={'mainDiv'}>
-      {/* ADD CART LINK TO HEADER */}
-      <a href="./my-cart">*** GO TO CART LINK ***</a>
       <SimpleGrid
         columns={{ sm: 2, md: 5 }}
         spacing="40px"
