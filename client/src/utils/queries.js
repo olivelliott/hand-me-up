@@ -65,6 +65,16 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
+export const QUERY_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+    }
+  }
+`
+
 // TODO: Test functionality
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {

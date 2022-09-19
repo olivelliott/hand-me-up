@@ -26,7 +26,7 @@ const resolvers = {
       if (category) {
         params.category = category;
       }
-      
+
       console.log(params);
       return await Product.find(params).populate('category');
     },
@@ -118,6 +118,9 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
       return { token, user };
     },
     addOrder: async (parent, { products }, context) => {
