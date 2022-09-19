@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   Text,
+  Image,
   IconButton,
   Button,
   Stack,
@@ -23,7 +24,7 @@ import {
 } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
 
-import headerLogo from '../assets/header_logo.png'
+import headerLogo from '../assets/navlogo.png'
 
 import Auth from '../utils/auth'
 
@@ -67,13 +68,7 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <a href="/">
-              <img
-                style={{ width: '200px', height: '50px' }}
-                src={headerLogo}
-                alt="hand me up logo"
-              />
-            </a>
+            <Image maxW="10rem" src={headerLogo} alt="hand me up logo" />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -135,6 +130,10 @@ export default function WithSubnavigation() {
                   mt="3"
                   fontWeight={400}
                   variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'red',
+                  }}
                 >
                   Log In
                 </Button>
@@ -146,9 +145,10 @@ export default function WithSubnavigation() {
                   fontSize={'sm'}
                   fontWeight={600}
                   color={'white'}
-                  bg={'#0A9396'}
+                  bg="red"
                   _hover={{
-                    bg: '#001219',
+                    bg: 'cream',
+                    color: 'black',
                   }}
                 >
                   Sign Up
