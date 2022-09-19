@@ -113,7 +113,7 @@ export default function Hero() {
             <Text
               as={"span"}
               position={"relative"}
-              font="body"
+              fontFamily="header"
               _after={{
                 content: "''",
                 width: "full",
@@ -128,7 +128,7 @@ export default function Hero() {
               CLEAN OUT YOUR CLOSET AND
             </Text>
             <br />
-            <Text as={"span"} color={"red"}>
+            <Text as={"span"} color={"red"} fontFamily='header'>
               GIVE BACK
             </Text>
           </Heading>
