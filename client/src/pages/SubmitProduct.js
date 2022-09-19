@@ -42,10 +42,8 @@ export default function SubmitProduct () {
 
   const loggedIn = Auth.loggedIn()
   const navigate = useNavigate()
-  const { data } = useQuery(QUERY_CATEGORIES)
-  const arr = data?.categories
-  // console.log("arr[0] >>>", data.categories[0]._id);
-  // console.log("arr[1] >>>", data.categories[1]._id);
+  const { data: categoryArray } = useQuery(QUERY_CATEGORIES)
+  console.log('categories >>>', categoryArray)
 
   const [addProduct, { error }] = useMutation(ADD_PRODUCT)
 
@@ -69,10 +67,11 @@ export default function SubmitProduct () {
 
   const handleSetCategory = (e) => {
     console.log(e.target.value)
+
     if (e.target.value === 'women') {
-      setFormState({ ...formState, category: arr[0]._id })
+      setFormState({ ...formState, category: categoryArray.categories[0]._id })
     } else {
-      setFormState({ ...formState, category: arr[1]._id })
+      setFormState({ ...formState, category: categoryArray.categories[1]._id })
     }
   }
 
@@ -150,7 +149,7 @@ export default function SubmitProduct () {
                     />
                     <Input
                       type='number'
-                      min="0.01"
+                      min="2.99"
                       step="0.01"
                       placeholder='Enter amount'
                       name='price'
