@@ -63,12 +63,8 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <RouterLink to='/'>
-            <Image
-            maxW='10rem'
-              src={headerLogo}
-              alt="hand me up logo"
-            />
+          <RouterLink to="/">
+            <Image maxW="10rem" src={headerLogo} alt="hand me up logo" />
           </RouterLink>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -85,30 +81,30 @@ export default function WithSubnavigation() {
         >
           {Auth.loggedIn() ? (
             <>
-              <RouterLink to='/submit-product'>
+              <RouterLink to="/submit-product">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                   _hover={{
                     textDecoration: 'none',
-                    color: 'brick_red'
+                    color: 'brick_red',
                   }}
                 >
                   Submit A New Item
                 </Button>
               </RouterLink>
 
-              <RouterLink to='/my-cart'>
+              <RouterLink to="/my-cart">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                   _hover={{
                     textDecoration: 'none',
-                    color: 'brick_red'
+                    color: 'brick_red',
                   }}
                 >
                   My Cart
@@ -132,30 +128,30 @@ export default function WithSubnavigation() {
           ) : (
             // if logged out
             <>
-              <RouterLink to='/login'>
+              <RouterLink to="/login">
                 <Button
                   fontSize={'md'}
-                  mt='3'
+                  mt="3"
                   fontWeight={400}
                   variant={'link'}
                   _hover={{
                     textDecoration: 'none',
-                    color: 'red'
+                    color: 'red',
                   }}
                 >
                   Log In
                 </Button>
               </RouterLink>
 
-              <RouterLink to='signup'>
+              <RouterLink to="signup">
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
                   fontWeight={600}
                   color={'white'}
-                  bg='red'
+                  bg="red"
                   _hover={{
-                    bg: 'brick_red'
+                    bg: 'brick_red',
                   }}
                 >
                   Sign Up
@@ -354,7 +350,7 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: 'Career services',
-        subLabel: 'Connect with our career consultants',
+        subLabel: 'Connect with us',
         href: '#',
       },
       {
@@ -371,5 +367,9 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Women's Clothing",
     href: '#',
+  },
+  {
+    label: 'Go to Cart',
+    href: './my-cart',
   },
 ]
