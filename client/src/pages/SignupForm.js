@@ -39,8 +39,6 @@ export default function SignupForm() {
       const { data } = await addUser({
         variables: { ...formState }
       })
-      console.log('try add user >>>', data)
-      console.log(data)
       Auth.login(data.addUser.token)
       navigate('/')
     } catch (err) {
