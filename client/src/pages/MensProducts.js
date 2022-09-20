@@ -34,15 +34,15 @@ function MensProducts() {
   const products = data?.products || [];
 
 
-  const productsByCategory = () => {
-    const newproducts = products.filter(product => product.category._id === product.category[0]._id )
-    console.log(newproducts);
-    return newproducts;
-  }
+  // const productsByCategory = () => {
+  //   const newproducts = products.filter(product => product.category._id === product.category[0]._id )
+  //   console.log(newproducts);
+  //   return newproducts;
+  // }
 
-  console.log(productsByCategory);
+  // console.log(productsByCategory);
 
-  console.log(products[0].category[0]._id)
+  // console.log(products[0].category[0]._id)
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -75,6 +75,7 @@ function MensProducts() {
                   }}
                   shadow="lg"
                   rounded="lg"
+                  key={name}
                 >
                   <chakra.h1
                     color="gray.800"
