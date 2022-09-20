@@ -15,12 +15,34 @@ import {
 import { SimpleGrid } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { QUERY_ALL_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
 import { Link } from "react-router-dom";
 
 function MensProducts() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+
+  // function filterProducts() {
+  //   if (!currentCategory) {
+  //     return state.products;
+  //   }
+
+  //   return state.products.filter(
+  //     (product) => product.category._id === currentCategory
+  //   );
+  // }
   const products = data?.products || [];
+
+
+  const productsByCategory = () => {
+    const newproducts = products.filter(product => product.category._id === product.category[0]._id )
+    console.log(newproducts);
+    return newproducts;
+  }
+
+  console.log(productsByCategory);
+
+  console.log(products[0].category[0]._id)
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
