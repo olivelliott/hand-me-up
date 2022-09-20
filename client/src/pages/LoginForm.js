@@ -41,8 +41,9 @@ export default function LoginForm() {
       })
       console.log(data)
       Auth.login(data.login.token)
-      navigate('/')
+      navigate('/all-products')
     } catch (err) {
+      alert('Incorrect credentials!')
       console.error(err)
     }
 

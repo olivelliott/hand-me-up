@@ -44,6 +44,7 @@ export default function SignupForm() {
       Auth.login(data.addUser.token)
       navigate('/')
     } catch (err) {
+      alert('You already have an account!')
       console.error(err)
     }
   }
