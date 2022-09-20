@@ -105,7 +105,7 @@ export default function Cart () {
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
 
-  const [itmCount, setCount] = React.useState([])
+  const [itmCount, setCount] = React.useState([{itmId: 0, Count: cart_items.length, Price: 2.99 * cart_items.length}])
   const [totalCount, setTotalCount] = React.useState(0)
   const [subTotal, setSubTotal] = React.useState(0)
   const [shipAndTax, setTax] = React.useState(0)
@@ -113,7 +113,7 @@ export default function Cart () {
 
   // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
   // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
-  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo
+  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo, talk w/ team about removing margin in app.js
 
   React.useEffect(() => {setTotalItemCount()}, [itmCount])
   React.useEffect(() => {set_Sub_Total()}, [totalCount])
