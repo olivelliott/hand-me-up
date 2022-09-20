@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   Text,
+  Image,
   IconButton,
   Button,
   Stack,
@@ -23,10 +24,16 @@ import {
 } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
 
-import headerLogo from '../assets/header_logo.png'
+import headerLogo from '../assets/navlogo.png'
+
+import Auth from '../utils/auth'
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
+  const logout = (e) => {
+    e.preventDefault()
+    Auth.logout()
+  }
 
   return (
     <Box>
@@ -56,51 +63,102 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}
-          >
-            <img
-              style={{ width: '200px', height: '50px' }}
-              src={headerLogo}
-              alt="hand me up logo"
-            />
-          </Text>
+          <RouterLink to="/">
+            <Image maxW="10rem" src={headerLogo} alt="hand me up logo" />
+          </RouterLink>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
+        {/* conditional navigation */}
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
           spacing={6}
         >
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={'#'}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'black'}
-            href={'#'}
-            _hover={{
-              bg: '#0A9396',
-            }}
-          >
-            Sign Up
-          </Button>
+          {Auth.loggedIn() ? (
+            <>
+              <RouterLink to="/submit-product">
+                <Button
+                  fontSize={'md'}
+                  mt="3"
+                  fontWeight={400}
+                  variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'brick_red',
+                  }}
+                >
+                  Submit A New Item
+                </Button>
+              </RouterLink>
+
+              <RouterLink to="/my-cart">
+                <Button
+                  fontSize={'md'}
+                  mt="3"
+                  fontWeight={400}
+                  variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'brick_red',
+                  }}
+                >
+                  My Cart
+                </Button>
+              </RouterLink>
+
+              <Button
+                onClick={logout}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'red'}
+                _hover={{
+                  bg: 'brick_red',
+                }}
+              >
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            // if logged out
+            <>
+              <RouterLink to="/login">
+                <Button
+                  fontSize={'md'}
+                  mt="3"
+                  fontWeight={400}
+                  variant={'link'}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'red',
+                  }}
+                >
+                  Log In
+                </Button>
+              </RouterLink>
+
+              <RouterLink to="signup">
+                <Button
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize={'sm'}
+                  fontWeight={600}
+                  color={'white'}
+                  bg="red"
+                  _hover={{
+                    bg: 'brick_red',
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </RouterLink>
+            </>
+          )}
         </Stack>
       </Flex>
 
@@ -292,7 +350,7 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: 'Career services',
-        subLabel: 'Connect with our career consultants',
+        subLabel: 'Connect with us',
         href: '#',
       },
       {
@@ -309,5 +367,9 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Women's Clothing",
     href: '#',
+  },
+  {
+    label: 'Go to Cart',
+    href: './my-cart',
   },
 ]

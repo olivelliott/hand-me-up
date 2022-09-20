@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Flex,
   Badge,
@@ -11,49 +10,50 @@ import {
   Tooltip,
   list,
   Button,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
-import { SimpleGrid } from '@chakra-ui/react'
-import { FiShoppingCart } from 'react-icons/fi'
-import { useQuery } from '@apollo/client'
-import { QUERY_ALL_PRODUCTS } from '../utils/queries'
-import { Link } from 'react-router-dom'
+import { SimpleGrid } from "@chakra-ui/react";
+import { FiShoppingCart } from "react-icons/fi";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { Link } from "react-router-dom";
 
-function Allproducts() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
-  const products = data?.products || []
+function MensProducts() {
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  const products = data?.products || [];
 
   const handleAddToCart = async (e) => {
-    e.preventDefault()
-    console.log('handleAddToCart fired for ' + e.target.id)
-    sessionStorage.setItem(e.target.id, e.target.id)
-  }
+    e.preventDefault();
+    console.log("handleAddToCart fired for " + e.target.id);
+    sessionStorage.setItem(e.target.id, e.target.id);
+  };
 
-  // TODO Add conditional rendering so the page displays 'loading' until data loads from db
+  // TODO: Conditionally render products based
   return (
     <>
+        <Link to="/my-cart" pb={10}>Cart</Link>
+
       <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
-        {
-         React.Children.toArray(
-          products.map(
-          ({ _id, name, brand, size, description, image, quantity, price }) => {
+
+        {products.map(
+          ({ name, brand, size, description, image, quantity, price }) => {
             return (
               <>
-                <Box key={'box1'+_id}
+                <Box
                   maxW="xs"
-                  maxH="lg"
+                  maxH='lg'
                   mx="auto"
                   bg="white"
                   _dark={{
-                    bg: 'gray.800',
+                    bg: "gray.800",
                   }}
                   shadow="lg"
                   rounded="lg"
                 >
-                  <chakra.h1 key={'h1a'+_id}
+                  <chakra.h1
                     color="gray.800"
                     _dark={{
-                      color: 'white',
+                      color: "white",
                     }}
                     fontWeight="bold"
                     fontSize="3xl"
@@ -61,7 +61,7 @@ function Allproducts() {
                   >
                     {name}
                   </chakra.h1>
-                  <Badge key={'badge'+_id}
+                  <Badge
                     borderRadius="full"
                     px="2"
                     backgroundColor="cream"
@@ -69,28 +69,28 @@ function Allproducts() {
                   >
                     {size} | {brand}
                   </Badge>
-                  <Box key={'box2'+_id} px={4} py={2}>
-                    <chakra.p key={'p1'+_id}
+                  <Box px={4} py={2}>
+                    <chakra.p
                       mt={1}
                       fontSize="sm"
                       color="gray.600"
                       _dark={{
-                        color: 'gray.400',
+                        color: "gray.400",
                       }}
                     >
                       {description}
                     </chakra.p>
                   </Box>
-                  <Image key={'image_'+_id}
+                  <Image
                     h={52}
                     w="full"
                     fit="cover"
                     mt={2}
                     src={`images/${image}`}
-                    // src={`images/${products.image}`}
-                    alt={`Picture of ${image}`}
+                    alt="NIKE AIR"
                   />
-                  <Flex key={'flex'+_id}
+
+                  <Flex
                     alignItems="center"
                     justifyContent="space-between"
                     px={4}
@@ -98,13 +98,10 @@ function Allproducts() {
                     bg="darkest_teal"
                     roundedBottom="lg"
                   >
-                    <chakra.h1 key={'h1b'+_id} 
-                    color="white" fontWeight="bold" fontSize="lg">
+                    <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
                       {price}
                     </chakra.h1>
                     <chakra.button
-                      id={_id}
-                      key={'btn'+_id}
                       px={2}
                       py={1}
                       bg="white"
@@ -114,24 +111,23 @@ function Allproducts() {
                       rounded="lg"
                       textTransform="uppercase"
                       _hover={{
-                        bg: 'gray.200',
+                        bg: "gray.200",
                       }}
                       _focus={{
-                        bg: 'gray.400',
+                        bg: "gray.400",
                       }}
-                      onClick={handleAddToCart}
                     >
                       Add to cart
                     </chakra.button>
                   </Flex>
                 </Box>
               </>
-            )
-          },
-        ))}
+            );
+          }
+        )}
       </SimpleGrid>
     </>
-  )
+  );
 }
 
-export default Allproducts
+export default MensProducts;
