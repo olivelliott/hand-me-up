@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Badge,
@@ -9,13 +10,14 @@ import {
   chakra,
   Tooltip,
   list,
-  Button
+  Button,
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
+import { Link } from 'react-router-dom'
 
 function Allproducts() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
@@ -24,129 +26,112 @@ function Allproducts() {
   const handleAddToCart = async (e) => {
     e.preventDefault()
     console.log('handleAddToCart fired for ' + e.target.id)
-    sessionStorage.setItem(e.target.id, e.target.id);
+    sessionStorage.setItem(e.target.id, e.target.id)
   }
 
-// TODO Add conditional rendering so the page displays 'loading' until data loads from db
-return (
-  <div key={'mainDiv'}>
-    {/* ADD CART LINK TO HEADER */}
-    <a href="./my-cart">*** GO TO CART LINK ***</a>
-    <SimpleGrid columns={{ sm: 2, md: 5 }} spacing="40px" minChildWidth='200px'>
-      {products.map((product) => (
-        <Wrap key={'wrap_'+product._id}>
-          <Box key={'newProduct_'+product._id}
-            bg="#94d2bd"
-            minW='200px'
-            maxW="200px"
-            borderWidth="1px"
-            rounded="lg"
-            shadow="lg"
-            position="relative"
-            minH='150px'
-            maxH='150px'
-          >
-            {product.isNew && (
-              <Circle
-                size="10px"
-                position="absolute"
-                top={2}
-                right={2}
-                bg="red.200"
-              />
-            )}
-
-            <Image key={'img_'+product._id}
-              src={`images/${product.image}`}
-              // src='/images/blue_button_shirt.jpeg'
-              alt={`Picture of ${product.name}`}
-              roundedTop="lg"
-            />
-
-            <Box key={'badgeBox_'+product._id} p="6">
-              <Box key={'box_'+product._id} d="flex" alignItems="baseline">
-                {product.isNew && (
-                  <Badge
-                    rounded="full"
-                    px="2"
-                    fontSize="0.8em"
-                    colorScheme="red"
-                  >
-                    New
-                  </Badge>
-                )}
-              </Box>
-              <Flex
-                mt="1"
-                justifyContent="space-between"
-                alignContent="center"
-              >
-                <Box key={'name_'+product._id}
-                  mr="5"
-                  fontSize="2xl"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
-                >
-                  {product.name}
-                </Box>
-                {/* TODO make this button add the item to cart in app state */}
-                <Tooltip
-                  label="Add to cart"
+  // TODO Add conditional rendering so the page displays 'loading' until data loads from db
+  return (
+    <>
+      <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
+        {
+         React.Children.toArray(
+          products.map(
+          ({ _id, name, brand, size, description, image, quantity, price }) => {
+            return (
+              <>
+                <Box key={'box1'+_id}
+                  maxW="xs"
+                  maxH="lg"
+                  mx="auto"
                   bg="white"
-                  placement={'top'}
-                  color={'gray.800'}
-                  fontSize={'1.2em'}
+                  _dark={{
+                    bg: 'gray.800',
+                  }}
+                  shadow="lg"
+                  rounded="lg"
                 >
-                  <chakra.a href={'#'} display={'flex'}>
-                    <Icon
-                      as={FiShoppingCart}
-                      h={7}
-                      w={7}
-                      alignSelf={'center'}
-                      // onClick={handleAddToCart}
-                    />
-                  </chakra.a>
-                </Tooltip>
-              </Flex>
-
-              <Flex justifyContent="space-between" alignContent="center">
-                <Box key={'price_'+product._id}
-                  fontSize="2xl"
-                >
-                  <Box key={'span_'+product._id} as="span" color={'gray.600'} fontSize="lg">
-                    £
+                  <chakra.h1 key={'h1a'+_id}
+                    color="gray.800"
+                    _dark={{
+                      color: 'white',
+                    }}
+                    fontWeight="bold"
+                    fontSize="3xl"
+                    textTransform="uppercase"
+                  >
+                    {name}
+                  </chakra.h1>
+                  <Badge key={'badge'+_id}
+                    borderRadius="full"
+                    px="2"
+                    backgroundColor="cream"
+                    color="gray.800"
+                  >
+                    {size} | {brand}
+                  </Badge>
+                  <Box key={'box2'+_id} px={4} py={2}>
+                    <chakra.p key={'p1'+_id}
+                      mt={1}
+                      fontSize="sm"
+                      color="gray.600"
+                      _dark={{
+                        color: 'gray.400',
+                      }}
+                    >
+                      {description}
+                    </chakra.p>
                   </Box>
-                  {product.price.toFixed(2)}
+                  <Image key={'image_'+_id}
+                    h={52}
+                    w="full"
+                    fit="cover"
+                    mt={2}
+                    src={`images/${image}`}
+                    // src={`images/${products.image}`}
+                    alt={`Picture of ${image}`}
+                  />
+                  <Flex key={'flex'+_id}
+                    alignItems="center"
+                    justifyContent="space-between"
+                    px={4}
+                    py={2}
+                    bg="darkest_teal"
+                    roundedBottom="lg"
+                  >
+                    <chakra.h1 key={'h1b'+_id} 
+                    color="white" fontWeight="bold" fontSize="lg">
+                      {price}
+                    </chakra.h1>
+                    <chakra.button
+                      id={_id}
+                      key={'btn'+_id}
+                      px={2}
+                      py={1}
+                      bg="white"
+                      fontSize="xs"
+                      color="gray.900"
+                      fontWeight="bold"
+                      rounded="lg"
+                      textTransform="uppercase"
+                      _hover={{
+                        bg: 'gray.200',
+                      }}
+                      _focus={{
+                        bg: 'gray.400',
+                      }}
+                      onClick={handleAddToCart}
+                    >
+                      Add to cart
+                    </chakra.button>
+                  </Flex>
                 </Box>
-              </Flex>
-            </Box>
-          </Box>
-          <Button
-              mb={5}
-              colorScheme='gray'
-              variant='outline'
-              style={{ color: 'red' }}
-              id={product._id}
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </Button>
-        </Wrap>
-      ))}
-    </SimpleGrid>
-  </div>
-)
+              </>
+            )
+          },
+        ))}
+      </SimpleGrid>
+    </>
+  )
 }
 
 export default Allproducts
-
-// image={product.image}
-// name={product.name}
-// size={product.size}
-// description={product.description}
-// brand={product.brand}
-// price={product.price}
-// category={product.category}
-// quantity={product.quantity}
-// user={product.user}
