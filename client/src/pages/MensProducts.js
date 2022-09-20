@@ -10,42 +10,39 @@ import {
   Tooltip,
   list,
   Button,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
-import { SimpleGrid } from "@chakra-ui/react";
-import { FiShoppingCart } from "react-icons/fi";
-import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
-import { Link } from "react-router-dom";
+import { SimpleGrid } from '@chakra-ui/react'
+import { FiShoppingCart } from 'react-icons/fi'
+import { useQuery } from '@apollo/client'
+import { QUERY_ALL_PRODUCTS } from '../utils/queries'
+import { Link } from 'react-router-dom'
 
 function MensProducts() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-  const products = data?.products || [];
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+  const products = data?.products || []
 
   const handleAddToCart = async (e) => {
-    e.preventDefault();
-    console.log("handleAddToCart fired for " + e.target.id);
-    sessionStorage.setItem(e.target.id, e.target.id);
-  };
+    e.preventDefault()
+    console.log('handleAddToCart fired for ' + e.target.id)
+    sessionStorage.setItem(e.target.id, e.target.id)
+  }
 
   // TODO: Conditionally render products based
   return (
     <>
-        <Link to="/my-cart" pb={10}>Cart</Link>
-
       <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
-
         {products.map(
           ({ name, brand, size, description, image, quantity, price }) => {
             return (
               <>
                 <Box
                   maxW="xs"
-                  maxH='lg'
+                  maxH="lg"
                   mx="auto"
                   bg="white"
                   _dark={{
-                    bg: "gray.800",
+                    bg: 'gray.800',
                   }}
                   shadow="lg"
                   rounded="lg"
@@ -53,7 +50,7 @@ function MensProducts() {
                   <chakra.h1
                     color="gray.800"
                     _dark={{
-                      color: "white",
+                      color: 'white',
                     }}
                     fontWeight="bold"
                     fontSize="3xl"
@@ -75,7 +72,7 @@ function MensProducts() {
                       fontSize="sm"
                       color="gray.600"
                       _dark={{
-                        color: "gray.400",
+                        color: 'gray.400',
                       }}
                     >
                       {description}
@@ -111,10 +108,10 @@ function MensProducts() {
                       rounded="lg"
                       textTransform="uppercase"
                       _hover={{
-                        bg: "gray.200",
+                        bg: 'gray.200',
                       }}
                       _focus={{
-                        bg: "gray.400",
+                        bg: 'gray.400',
                       }}
                     >
                       Add to cart
@@ -122,12 +119,12 @@ function MensProducts() {
                   </Flex>
                 </Box>
               </>
-            );
-          }
+            )
+          },
         )}
       </SimpleGrid>
     </>
-  );
+  )
 }
 
-export default MensProducts;
+export default MensProducts
