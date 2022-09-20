@@ -138,7 +138,7 @@ console.log("categories seeded 💫");
       user: users[2],
     },
     {
-      name: "Black Flannel",
+      name: "Warm Black Flannel",
       brand: "REI",
       size: "Medium",
       description:

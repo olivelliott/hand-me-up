@@ -31,19 +31,23 @@ function MensProducts() {
   // TODO: Conditionally render products based
   return (
     <>
-        <Link to="/my-cart" pb={10}>Cart</Link>
+      <Link to="/my-cart" pb={10}>
+        <Button mb={5} bg="red" color='white' _hover={{ bg: "brick_red" }}>
+          Go To Cart
+        </Button>
+      </Link>
 
       <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
-
         {products.map(
           ({ name, brand, size, description, image, quantity, price }) => {
             return (
               <>
                 <Box
                   maxW="xs"
-                  maxH='lg'
+                  maxH="lg"
                   mx="auto"
                   bg="white"
+                  textAlign="center"
                   _dark={{
                     bg: "gray.800",
                   }}
@@ -74,6 +78,7 @@ function MensProducts() {
                       mt={1}
                       fontSize="sm"
                       color="gray.600"
+                      minH="75px"
                       _dark={{
                         color: "gray.400",
                       }}
@@ -95,10 +100,10 @@ function MensProducts() {
                     justifyContent="space-between"
                     px={4}
                     py={2}
-                    bg="darkest_teal"
+                    bg="cream"
                     roundedBottom="lg"
                   >
-                    <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
+                    <chakra.h1 fontWeight="bold" fontSize="lg">
                       {price}
                     </chakra.h1>
                     <chakra.button

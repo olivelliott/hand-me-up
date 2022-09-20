@@ -32,6 +32,12 @@ function Allproducts() {
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
     <>
+      <Link to="/my-cart" pb={10}>
+        <Button mb={5} bg="red" color='white' _hover={{ bg: "brick_red" }}>
+          Go To Cart
+        </Button>
+      </Link>
+
       <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
         {
          React.Children.toArray(
@@ -44,6 +50,7 @@ function Allproducts() {
                   maxH="lg"
                   mx="auto"
                   bg="white"
+                  textAlign='center'
                   _dark={{
                     bg: 'gray.800',
                   }}
@@ -95,7 +102,7 @@ function Allproducts() {
                     justifyContent="space-between"
                     px={4}
                     py={2}
-                    bg="darkest_teal"
+                    bg="cream"
                     roundedBottom="lg"
                   >
                     <chakra.h1 key={'h1b'+_id} 
