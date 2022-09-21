@@ -21,14 +21,12 @@ import SubmitProduct from './pages/SubmitProduct'
 import MensProducts from './pages/MensProducts'
 import WomensProducts from './pages/WomensProducts'
 import Cart from './pages/Cart'
+import Sandbox from './pages/Sandbox'
 import NoMatch from './pages/NoMatch'
 
 import theme from './theme'
 
-import { useQuery } from '@apollo/client'
-import { QUERY_CATEGORIES } from './utils/queries'
-
-import { ChakraProvider, Container } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
   const httpLink = createHttpLink({
@@ -69,6 +67,7 @@ function App() {
                 <Route path="/my-cart" element={<Cart />} />
                 <Route path="/mens-products" element={<MensProducts />} />
                 <Route path="/womens-products" element={<WomensProducts />} />
+                <Route path='/sandbox' element={<Sandbox />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
             <Footer />

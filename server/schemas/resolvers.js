@@ -2,7 +2,7 @@
 
 const { AuthenticationError } = require("apollo-server-express");
 const { default: Stripe } = require("stripe");
-const { User, Product, Category, Order } = require("../models");
+const { User, Product, Category, Order, Charity } = require("../models");
 const { signToken } = require("../utils/auth");
 // Put stripe here too
 
@@ -69,6 +69,10 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in.");
     },
+    // GET all charities
+    charities: async () => {
+      return Charity.find()
+    }
     //TODO: checkout query if rough-coded to use stripe, add back in and test if implementing Stripe
     // checkout: async (parent, args, context) => {
     //     const url = new URL(context.headers.referer).origin;
