@@ -44,6 +44,7 @@ export default function LoginForm() {
       Auth.login(data.login.token)
       navigate('/')
     } catch (err) {
+      alert('Incorrect credentials')
       console.error(err)
     }
 
