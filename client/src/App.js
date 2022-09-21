@@ -21,7 +21,6 @@ import SubmitProduct from './pages/SubmitProduct'
 import MensProducts from './pages/MensProducts'
 import WomensProducts from './pages/WomensProducts'
 import Cart from './pages/Cart'
-import CloudinaryPhotoUpload from './pages/CloudinaryPhotoUpload'
 import NoMatch from './pages/NoMatch'
 
 import theme from './theme'
