@@ -27,6 +27,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Button,
+  Container,
 } from '@chakra-ui/react'
 import { QUERY_CATEGORIES } from "../utils/queries";
 
@@ -106,7 +107,7 @@ export default function SubmitProduct () {
   }
 
   return (
-    <div>
+    <Container>
       {loggedIn ? (
         <form onSubmit={handleFormSubmit}>
           <Text fontSize='4xl' as='b'>Submit a new item for sale!</Text>
@@ -228,6 +229,6 @@ export default function SubmitProduct () {
       ) : (
         <h1>You must be logged in to submit new items</h1>
       )}
-    </div>
+    </Container>
   )
 }
