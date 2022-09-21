@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from '@apollo/client'
 import { ADD_PRODUCT } from "../utils/mutations";
 import Auth from '../utils/auth'
+import Axios from 'axios'
 
 import {
   Box,
@@ -13,6 +14,7 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -25,6 +27,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Button,
+  Container,
 } from '@chakra-ui/react'
 import { QUERY_CATEGORIES } from "../utils/queries";
 
@@ -34,7 +37,7 @@ export default function SubmitProduct () {
     brand: '',
     size: '',
     description: '',
-    image: 'null',
+    image: '',
     quantity: '',
     price: 0,
     category: ''
@@ -75,6 +78,21 @@ export default function SubmitProduct () {
     }
   }
 
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append("file", selectedImage)
+    formData.append("upload_preset", "hmuuncfsbcproj3")
+
+    Axios.post("https:/api.cloudinary.com/v1_1/dweqcfhdc/image/upload", formData)
+      .then(res => {
+        const imageUrl = res.data.url
+        console.log("image now stored at ", imageUrl)
+        setFormState({ ...formState, image: imageUrl })
+      })
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
 
@@ -89,7 +107,7 @@ export default function SubmitProduct () {
   }
 
   return (
-    <div>
+    <Container>
       {loggedIn ? (
         <form onSubmit={handleFormSubmit}>
           <Text fontSize='4xl' as='b'>Submit a new item for sale!</Text>
@@ -186,6 +204,14 @@ export default function SubmitProduct () {
             </Select>
           </FormControl>
 
+          <FormControl mb='10'>
+            <FormLabel>Image</FormLabel>
+            <Box boxSize='200px' mx='auto'>
+              <Image src={formState.image} alt='product image' fallbackSrc='https://via.placeholder.com/200' boxSize='200px' mb='2' />
+              <input type='file' onChange={handleImageChange}></input>
+            </Box>
+          </FormControl>
+
           <Button
             type='submit'
             display={{ base: 'none', md: 'inline-flex' }}
@@ -203,6 +229,6 @@ export default function SubmitProduct () {
       ) : (
         <h1>You must be logged in to submit new items</h1>
       )}
-    </div>
+    </Container>
   )
 }

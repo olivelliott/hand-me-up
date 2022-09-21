@@ -94,7 +94,7 @@ function MensProducts() {
                     w="full"
                     fit="cover"
                     mt={2}
-                    src={`images/${image}`}
+                    src={`${image}`}
                     alt="NIKE AIR"
                   />
 

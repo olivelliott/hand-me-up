@@ -110,7 +110,7 @@ function Allproducts() {
                       w="full"
                       fit="cover"
                       mt={2}
-                      src={`images/${image}`}
+                      src={`${image}`}
                       alt={`Picture of ${image}`}
                     />
                     <Flex
