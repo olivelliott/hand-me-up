@@ -19,7 +19,7 @@ import {
   Container
 } from '@chakra-ui/react'
 
-export function PhotoDrop() {
+export default function PhotoDrop() {
   const [images, setImages] = React.useState([]);
   const maxNumber = 10;
 

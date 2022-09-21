@@ -6,6 +6,7 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client'
+import { createUploadLink } from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -21,6 +22,7 @@ import SubmitProduct from './pages/SubmitProduct'
 import MensProducts from './pages/MensProducts'
 import WomensProducts from './pages/WomensProducts'
 import Cart from './pages/Cart'
+import CloudinaryPhotoUpload from './pages/CloudinaryPhotoUpload'
 import NoMatch from './pages/NoMatch'
 
 import theme from './theme'
@@ -31,6 +33,11 @@ function App() {
   const httpLink = createHttpLink({
     uri: '/graphql',
   })
+// function App() {
+//   return <ApolloProvider client={client}>
+//     <UploadForm></UploadForm>
+//   </ApolloProvider>
+// }
 
   // Uncomment this when Auth/jwt is ready
   const authLink = setContext((_, { headers }) => {
@@ -45,6 +52,9 @@ function App() {
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
+    // link: createUploadLink({
+    //   uri: 'http://localhost:3000/',
+    // }),
     // link: httpLink,
     cache: new InMemoryCache(),
   })
@@ -65,6 +75,7 @@ function App() {
                 <Route path="/my-cart" element={<Cart />} />
                 <Route path="/mens-products" element={<MensProducts />} />
                 <Route path="/womens-products" element={<WomensProducts />} />
+                <Route path="/photo-upload" element={<CloudinaryPhotoUpload />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
             </Container>

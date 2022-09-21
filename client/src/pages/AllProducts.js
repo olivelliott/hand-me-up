@@ -86,7 +86,7 @@ function Allproducts() {
                     w="full"
                     fit="cover"
                     mt={2}
-                    src={`images/${image}`}
+                    src={`${image}`}
                     // src={`images/${products.image}`}
                     alt={`Picture of ${image}`}
                   />
