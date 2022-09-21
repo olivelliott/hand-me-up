@@ -70,7 +70,7 @@ db.once('open', async () => {
       brand: 'J Crew',
       size: 'Small',
       description:
-        'Simple black crew neck three-quarter length long sleeve top. High quality cotton. Great for layering in the cold months!',
+        'Simple black crew neck three-quarter length long sleeve top. High quality cotton. Great for layering!',
       image: 'navy_long_sleeve.jpeg',
       quantity: 1,
       price: 2.99,
@@ -154,7 +154,7 @@ db.once('open', async () => {
       brand: 'J Crew',
       size: 'Small',
       description:
-        'Simple black crew neck three-quarter length long sleeve top. High quality cotton. Great for layering in the cold months!!',
+        'Simple black crew neck three-quarter length long sleeve top. High quality cotton. Great for layering!',
       image: 'navy_long_sleeve.jpeg',
       quantity: 1,
       price: 2.99,
