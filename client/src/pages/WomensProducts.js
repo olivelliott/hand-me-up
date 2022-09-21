@@ -31,7 +31,15 @@ function WomensProducts() {
   // TODO: Conditionally render products based
   return (
     <>
-      <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
+      <SimpleGrid
+        columns={[3, null, 4]}
+        spacing="40px"
+        minChildWidth="275px"
+        mt="20"
+        ml="20"
+        mr="20"
+        mb="20"
+      >
         {products.map(
           ({ name, brand, size, description, image, quantity, price }) => {
             return (
@@ -55,12 +63,15 @@ function WomensProducts() {
                     fontWeight="bold"
                     fontSize="3xl"
                     textTransform="uppercase"
+                    ml="2"
+                    mt="2"
                   >
                     {name}
                   </chakra.h1>
                   <Badge
                     borderRadius="full"
                     px="2"
+                    ml="2"
                     backgroundColor="cream"
                     color="gray.800"
                   >
