@@ -347,18 +347,18 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Men's Clothing",
-    href: './mens-products',
+    href: '/mens-products',
   },
   {
     label: "Women's Clothing",
-    href: './womens-products',
+    href: '/womens-products',
   },
   {
     label: 'All Products',
-    href: './all-products',
+    href: '/all-products',
   },
   {
     label: 'Go to Cart',
-    href: './my-cart',
+    href: '/my-cart',
   },
 ]
