@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Badge,
@@ -32,11 +33,13 @@ function Allproducts() {
   return (
     <>
       <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
-        {products.map(
-          ({ name, brand, size, description, image, quantity, price }) => {
+        {
+         React.Children.toArray(
+          products.map(
+          ({ _id, name, brand, size, description, image, quantity, price }) => {
             return (
               <>
-                <Box
+                <Box key={'box1'+_id}
                   maxW="xs"
                   maxH="lg"
                   mx="auto"
@@ -47,7 +50,7 @@ function Allproducts() {
                   shadow="lg"
                   rounded="lg"
                 >
-                  <chakra.h1
+                  <chakra.h1 key={'h1a'+_id}
                     color="gray.800"
                     _dark={{
                       color: 'white',
@@ -58,7 +61,7 @@ function Allproducts() {
                   >
                     {name}
                   </chakra.h1>
-                  <Badge
+                  <Badge key={'badge'+_id}
                     borderRadius="full"
                     px="2"
                     backgroundColor="cream"
@@ -66,8 +69,8 @@ function Allproducts() {
                   >
                     {size} | {brand}
                   </Badge>
-                  <Box px={4} py={2}>
-                    <chakra.p
+                  <Box key={'box2'+_id} px={4} py={2}>
+                    <chakra.p key={'p1'+_id}
                       mt={1}
                       fontSize="sm"
                       color="gray.600"
@@ -78,7 +81,7 @@ function Allproducts() {
                       {description}
                     </chakra.p>
                   </Box>
-                  <Image
+                  <Image key={'image_'+_id}
                     h={52}
                     w="full"
                     fit="cover"
@@ -87,8 +90,7 @@ function Allproducts() {
                     // src={`images/${products.image}`}
                     alt={`Picture of ${image}`}
                   />
-
-                  <Flex
+                  <Flex key={'flex'+_id}
                     alignItems="center"
                     justifyContent="space-between"
                     px={4}
@@ -96,10 +98,13 @@ function Allproducts() {
                     bg="darkest_teal"
                     roundedBottom="lg"
                   >
-                    <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
+                    <chakra.h1 key={'h1b'+_id} 
+                    color="white" fontWeight="bold" fontSize="lg">
                       {price}
                     </chakra.h1>
                     <chakra.button
+                      id={_id}
+                      key={'btn'+_id}
                       px={2}
                       py={1}
                       bg="white"
@@ -114,6 +119,7 @@ function Allproducts() {
                       _focus={{
                         bg: 'gray.400',
                       }}
+                      onClick={handleAddToCart}
                     >
                       Add to cart
                     </chakra.button>
@@ -122,7 +128,7 @@ function Allproducts() {
               </>
             )
           },
-        )}
+        ))}
       </SimpleGrid>
     </>
   )
