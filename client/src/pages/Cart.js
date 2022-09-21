@@ -104,7 +104,25 @@ export default function Cart() {
 
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
-  let initialCartCount = sessionStorage.length > 1 ? sessionStorage.length - 1 : 0
+    const [cart, setCart] = useState(cart_items);
+
+  const initialLoad = () => {
+
+    const data = products.filter(product => product._id in sessionStorage)
+    // console.log(data)
+    return data
+  }
+
+  // useEffect(() => {initialLoad()}, [])
+
+  useEffect(() => {(async () => {
+      const initial_data = await initialLoad;
+      setCart(initial_data);
+      return
+  })()
+  },[])
+
+  let initialCartCount = sessionStorage.length > 1 ? sessionStorage.length - 1 : 1
   let initialSubTotal = initialCartCount * 2.99
   let initialTax = initialSubTotal * .0475
   let initialTotal = initialSubTotal + initialTax
@@ -114,18 +132,15 @@ export default function Cart() {
   const [subTotal, setSubTotal] = useState(initialSubTotal)
   const [shipAndTax, setTax] = useState(initialTax)
   const [totalCost, setTotalCost] = useState(initialTotal)
-  const [cart, setCart] = useState([]);
   // console.log("INITIALCART: " +cart)
 
 
   // console.log("products: " + products)
   // console.log("cartItems: " + cart_items)
 
-  // const initialLoad = () => {
+  // console.log(cart_items)
 
-  // }
 
-  // useEffect(() => {initialLoad()}, `[])
 
   // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
   // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
@@ -136,11 +151,20 @@ export default function Cart() {
   useEffect(() => {set_Tax()}, [subTotal])
   useEffect(() => {set_Total_Cost()}, [shipAndTax])
 
-  const rmvFromCart = (el) => {
-    console.log("CART-initial: " + cart)
-    let cartAry =  []
+  const cartHasItem = (itemId) => {
+     cart.forEach(item => {
+      console.log(itemId + " : " + item._id)
+        if (item._id === itemId)
+          return true
+     })
+     return false;
+  }
+
+  let cartAry =  []
+
+  const updateCartArray = (el) => {
     cart_items.forEach(el => {
-      console.log(el)
+      // console.log(el)
       let item = {
         brand: el.brand,
         description: el.description,
@@ -151,22 +175,34 @@ export default function Cart() {
         size: el.size,
         _id: el._id,
       }
-      // console.log("ITEM: " + JSON.stringify(item))
-      let gotItem = Object.values(cartAry).includes(el._id)
-      console.log("gotItem: " + gotItem + " --ITEM: " + JSON.parse(JSON.stringify(item)))
-      if(!gotItem)
+      if(!cartHasItem(item._id))
         cartAry.push(item)
     });
-    setCart([...cart, ...cartAry]);
-    // setCart([...cart], JSON.parse(JSON.stringify(item)));
+    console.log("cartarray:")
+    console.log(Object.values(cartAry))
+    return cartAry
+  };
 
-    console.log("CART: " + cart)
+  const rmvFromCart = (el) => {
+    console.log("cart_initial:")
+    console.log(cart)
+
+    let cartArray = updateCartArray(el)
+
+    cartArray = cartArray.filter((item) => item._id !== el._id)
+
+    setCart(cartArray);
+
+    console.log("CART:")
+    console.log(cart)
+
     // let hardCopy = [...cart];
     // hardCopy = hardCopy.filter((cartItem) => cartItem._id !== el.id);
     // console.log("cart: " + hardCopy)
 
     // setCart(hardCopy);
   };
+
 
   const setTotalItemCount = () => {
     let total = 0;
@@ -252,7 +288,7 @@ export default function Cart() {
           Shopping Cart
         </Heading>
           <List key='product-list'>
-          {cart_items.map((item) => (
+          {cart.map((item) => (
           <Box key={'purchase_'+item._id} className={'purchase_'+item._id}>
           <Flex>
             <Box mb='5' mr='5' minH='200px' maxH='200px' minW='200px' maxW='200px'>

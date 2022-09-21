@@ -27,8 +27,7 @@ function Allproducts() {
     e.preventDefault()
     console.log('handleAddToCart fired for ' + e.target.id)
     sessionStorage.setItem(e.target.id, e.target.id)
-    sessionStorage.setItem("cartCount", (sessionStorage.length - 1).toString())
-    
+    sessionStorage.setItem("cartCount", (sessionStorage.length - 1).toString())    
   }
 
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
