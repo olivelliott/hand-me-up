@@ -55,7 +55,7 @@ function App() {
         <Router>
           <div className="App">
             <Header />
-            <Container my={5}>
+            <Container m={0} my={5}>
               <Routes>
                 <Route path="/all-products" element={<AllProducts />} />
                 <Route path="/" element={<Hero />} />

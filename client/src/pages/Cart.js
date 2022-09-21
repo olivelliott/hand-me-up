@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Box,
@@ -19,7 +19,7 @@ import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
 // import { selectionSetMatchesResult } from "@apollo/client/cache/inmemory/helpers";
 
-export default function Cart () {
+export default function Cart() {
 
   const productArr = [
     {
@@ -104,28 +104,79 @@ export default function Cart () {
 
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
+  let initialCartCount = sessionStorage.length > 1 ? sessionStorage.length - 1 : 0
+  let initialSubTotal = initialCartCount * 2.99
+  let initialTax = initialSubTotal * .0475
+  let initialTotal = initialSubTotal + initialTax
 
-  const [itmCount, setCount] = React.useState([{itmId: 0, Count: cart_items.length, Price: 2.99 * cart_items.length}])
-  const [totalCount, setTotalCount] = React.useState(0)
-  const [subTotal, setSubTotal] = React.useState(0)
-  const [shipAndTax, setTax] = React.useState(0)
-  const [totalCost, setTotalCost] = React.useState(0)
+  const [itmCount, setCount] = useState([{itmId: 0, Count: cart_items.length, Price: 2.99 * cart_items.length}])
+  const [totalCount, setTotalCount] = useState(initialCartCount)
+  const [subTotal, setSubTotal] = useState(initialSubTotal)
+  const [shipAndTax, setTax] = useState(initialTax)
+  const [totalCost, setTotalCost] = useState(initialTotal)
+  const [cart, setCart] = useState([]);
+  // console.log("INITIALCART: " +cart)
+
+
+  // console.log("products: " + products)
+  // console.log("cartItems: " + cart_items)
+
+  // const initialLoad = () => {
+
+  // }
+
+  // useEffect(() => {initialLoad()}, `[])
 
   // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
   // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
   // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo, talk w/ team about removing margin in app.js
 
-  React.useEffect(() => {setTotalItemCount()}, [itmCount])
-  React.useEffect(() => {set_Sub_Total()}, [totalCount])
-  React.useEffect(() => {set_Tax()}, [subTotal])
-  React.useEffect(() => {set_Total_Cost()}, [shipAndTax])
+  useEffect(() => {setTotalItemCount()}, [itmCount])
+  useEffect(() => {set_Sub_Total()}, [totalCount])
+  useEffect(() => {set_Tax()}, [subTotal])
+  useEffect(() => {set_Total_Cost()}, [shipAndTax])
+
+  const rmvFromCart = (el) => {
+    console.log("CART-initial: " + cart)
+    let cartAry =  []
+    cart_items.forEach(el => {
+      console.log(el)
+      let item = {
+        brand: el.brand,
+        description: el.description,
+        image: el.image,
+        name: el.name,
+        price: el.price,
+        quantity: el.quantity,
+        size: el.size,
+        _id: el._id,
+      }
+      // console.log("ITEM: " + JSON.stringify(item))
+      let gotItem = Object.values(cartAry).includes(el._id)
+      console.log("gotItem: " + gotItem + " --ITEM: " + JSON.parse(JSON.stringify(item)))
+      if(!gotItem)
+        cartAry.push(item)
+    });
+    setCart([...cart, ...cartAry]);
+    // setCart([...cart], JSON.parse(JSON.stringify(item)));
+
+    console.log("CART: " + cart)
+    // let hardCopy = [...cart];
+    // hardCopy = hardCopy.filter((cartItem) => cartItem._id !== el.id);
+    // console.log("cart: " + hardCopy)
+
+    // setCart(hardCopy);
+  };
 
   const setTotalItemCount = () => {
     let total = 0;
     for(let i=0; i < itmCount.length; i++) {
       total += Number(itmCount[i].Count)
     }
-    setTotalCount(total)
+    if(total > 0)
+      setTotalCount(total)
+    else
+      setTotalCount(initialCartCount)
   }
 
   const set_Sub_Total = () => {
@@ -133,19 +184,28 @@ export default function Cart () {
     for(let i=0; i < itmCount.length; i++) {
       total += Number(itmCount[i].Price)
     }
-    setSubTotal(total)
+    if(total > 0)
+      setSubTotal(total)
+    else
+      setSubTotal(initialSubTotal)
   }
 
   const set_Tax = () => {
     let total = 0
     total = total + (subTotal * .0475)
-    setTax(total.toFixed(2))
+    if(total > 0)
+      setTax(total.toFixed(2))
+    else
+      setTax(initialTax)
   }
 
   const set_Total_Cost = () => {
     let total = 0.0
     total = parseFloat(subTotal) + parseFloat(shipAndTax)
-    setTotalCost(total.toFixed(2))
+    if(total > 0)
+      setTotalCost(total.toFixed(2))
+    else
+      setTotalCost(initialTotal)
   }
 
   const handleUpdateSummary = (e, id, count, price) => {
@@ -173,11 +233,10 @@ export default function Cart () {
     }
   }
 
-   return(
+  return(
   <Container ml={0}>
   <Flex d='columns'>
   <Box align='left' key={'main-box'}
-    // TODO ADD A "CONTINUE SHOPPING" LINK
     maxW={{ base: '3xl', lg: '7xl' }}
     mx="auto"
     px={{ base: '4', md: '8', lg: '12' }}
@@ -192,10 +251,9 @@ export default function Cart () {
         <Heading key='main-heading' fontSize="2xl" fontWeight="extrabold">
           Shopping Cart
         </Heading>
-
           <List key='product-list'>
           {cart_items.map((item) => (
-          <Box key={'purchases_'+item._id}>
+          <Box key={'purchase_'+item._id} className={'purchase_'+item._id}>
           <Flex>
             <Box mb='5' mr='5' minH='200px' maxH='200px' minW='200px' maxW='200px'>
               <Image boxSize='200px' objectFit='cover' src={`images/${item.image}`} alt="product" />
@@ -211,13 +269,18 @@ export default function Cart () {
               <ListItem key={'price_'+item._id} mb='10' mr='5' maxH='10px' minW='200px' maxW='200px'><b>${item.price}</b></ListItem>
               <ListItem key={'select_'+item._id}>
               <Select maxW='75px' border='2px' borderColor='black' aria-label="Select quantity"
+              defaultValue="1"
                onChange={(e) => handleUpdateSummary(e, item._id, e.target.value, item.price)}
+
                className='add-item-input'>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
               </Select>
+              <Button key={'btn_rmv'+item._id}bg='red' color='white' size="sm" fontSize="sm" _hover={{ bg: 'brick_red'}} onClick={() => rmvFromCart(item)}>
+        Remove
+      </Button>
               </ListItem>
               </Box>
           </Flex>
