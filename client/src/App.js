@@ -45,7 +45,6 @@ function App() {
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    // link: httpLink,
     cache: new InMemoryCache(),
   })
 
@@ -55,19 +54,19 @@ function App() {
         <Router>
           <div className="App">
             <Header />
-            <Container m={0} my={5}>
-              <Routes>
-                <Route path="/all-products" element={<AllProducts />} />
-                <Route path="/" element={<Hero />} />
-                <Route path="/signup" element={<SignupForm />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/submit-product" element={<SubmitProduct />} />
-                <Route path="/my-cart" element={<Cart />} />
-                <Route path="/mens-products" element={<MensProducts />} />
-                <Route path="/womens-products" element={<WomensProducts />} />
-                <Route path="*" element={<NoMatch />} />
-              </Routes>
-            </Container>
+
+            <Routes>
+              <Route path="/all-products" element={<AllProducts />} />
+              <Route path="/" element={<Hero />} />
+              <Route path="/signup" element={<SignupForm />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/submit-product" element={<SubmitProduct />} />
+              <Route path="/my-cart" element={<Cart />} />
+              <Route path="/mens-products" element={<MensProducts />} />
+              <Route path="/womens-products" element={<WomensProducts />} />
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+
             <Footer />
           </div>
         </Router>
