@@ -180,9 +180,9 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <RouterLink
                 p={2}
-                href={navItem.href ?? '#'}
+                to={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -192,7 +192,7 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
-              </Link>
+              </RouterLink>
             </PopoverTrigger>
 
             {navItem.children && (
