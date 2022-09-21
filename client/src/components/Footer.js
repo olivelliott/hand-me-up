@@ -207,8 +207,26 @@ import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import footerlogo from '../assets/footer-logo-1.png'
+import { useQuery } from '@apollo/client'
+import { QUERY_CATEGORIES } from '../utils/queries'
+
 
 export default function Footer() {
+
+
+  const { loading, data: category } = useQuery(QUERY_CATEGORIES);
+
+  const categories = category?.categories || [];
+
+  const womensCategory = categories[0]._id;
+  const mensCategory = categories[1]._id;
+
+  console.log(mensCategory);
+  console.log(womensCategory);
+
+  window.sessionStorage.setItem("mensCategory", mensCategory);
+  window.sessionStorage.setItem("womensCategory", womensCategory);
+
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}

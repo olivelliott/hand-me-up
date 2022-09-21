@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Box,
   List,
@@ -16,10 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
-
-// TODO IF TIME GET SINGLE QUERY WORKING SO WE DON'T PULL ALL DATA TO GET CART UPDATED
-// TODO IF TIME RE WORK TO USE COOKIES INSTEAD OF SESSION STORAGE
-// TODO USE STATE TO MANAGE QUANTITIES AND NUMBER ORDERED
+// import { selectionSetMatchesResult } from "@apollo/client/cache/inmemory/helpers";
 
 export default function Cart () {
 
@@ -102,14 +100,81 @@ export default function Cart () {
       // user: users[2],
     },
   ]
-
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+  const { data } = useQuery(QUERY_ALL_PRODUCTS)
 
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
 
+  const [itmCount, setCount] = React.useState([])
+  const [totalCount, setTotalCount] = React.useState(0)
+  const [subTotal, setSubTotal] = React.useState(0)
+  const [shipAndTax, setTax] = React.useState(0)
+  const [totalCost, setTotalCost] = React.useState(0)
+
+  // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
+  // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
+  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo
+
+  React.useEffect(() => {setTotalItemCount()}, [itmCount])
+  React.useEffect(() => {set_Sub_Total()}, [totalCount])
+  React.useEffect(() => {set_Tax()}, [subTotal])
+  React.useEffect(() => {set_Total_Cost()}, [shipAndTax])
+
+  const setTotalItemCount = () => {
+    let total = 0;
+    for(let i=0; i < itmCount.length; i++) {
+      total += Number(itmCount[i].Count)
+    }
+    setTotalCount(total)
+  }
+
+  const set_Sub_Total = () => {
+    let total = 0;
+    for(let i=0; i < itmCount.length; i++) {
+      total += Number(itmCount[i].Price)
+    }
+    setSubTotal(total)
+  }
+
+  const set_Tax = () => {
+    let total = 0
+    total = total + (subTotal * .0475)
+    setTax(total.toFixed(2))
+  }
+
+  const set_Total_Cost = () => {
+    let total = 0.0
+    total = parseFloat(subTotal) + parseFloat(shipAndTax)
+    setTotalCost(total.toFixed(2))
+  }
+
+  const handleUpdateSummary = (e, id, count, price) => {
+    e.preventDefault()
+    console.log(id)
+    if(itmCount && itmCount.find(x => x.itmId === id)) {
+        const index = itmCount.map(e => e.itmId).indexOf(id)
+        const newCount = [...itmCount]
+        newCount[index].Count = count
+        newCount[index].Price = price
+
+        setCount(newCount)
+    }
+    else {
+
+      const newCount = {
+        itmId: id,
+        Count: count,
+        Price: price
+      }
+
+      const newCnt = [...itmCount, newCount ]
+
+      setCount(newCnt);
+    }
+  }
+
    return(
-  <Container>
+  <Container ml={0}>
   <Flex d='columns'>
   <Box align='left' key={'main-box'}
     // TODO ADD A "CONTINUE SHOPPING" LINK
@@ -145,7 +210,9 @@ export default function Cart () {
               <Box  minH='200px' maxH='200px' minW='125px' maxW='200px'>
               <ListItem key={'price_'+item._id} mb='10' mr='5' maxH='10px' minW='200px' maxW='200px'><b>${item.price}</b></ListItem>
               <ListItem key={'select_'+item._id}>
-              <Select maxW='75px' border='2px' borderColor='black' aria-label="Select quantity">
+              <Select maxW='75px' border='2px' borderColor='black' aria-label="Select quantity"
+               onChange={(e) => handleUpdateSummary(e, item._id, e.target.value, item.price)}
+               className='add-item-input'>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -162,21 +229,24 @@ export default function Cart () {
     </Stack>
 </Box>
 <Box mt='50px'>
-<Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
+<Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width='300px'>
       <Heading size="md">Order Summary</Heading>
-
       <Stack spacing="6">
+      <InputGroup>
+          <InputLeftAddon children="ItemCount" />
+          <Input placeholder={totalCount} />
+        </InputGroup>
         <InputGroup>
           <InputLeftAddon children="Subtotal" />
-          <Input placeholder="15" />
+          <Input placeholder={subTotal} />
         </InputGroup>
         <InputGroup>
           <InputLeftAddon children="Shipping + Tax" />
-          <Input placeholder="10" />
+          <Input placeholder={shipAndTax}/>
         </InputGroup>
         <InputGroup>
           <InputLeftAddon children="Total" />
-          <Input placeholder="25" />
+          <Input placeholder={totalCost} />
         </InputGroup>
       <Button bg='red' color='white' size="lg" fontSize="md" _hover={{ bg: 'brick_red'}}>
         Checkout
@@ -188,5 +258,3 @@ export default function Cart () {
   </Container>
   )
   }
-
- 

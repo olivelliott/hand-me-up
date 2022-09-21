@@ -50,7 +50,7 @@ export default function SignupForm() {
   }
 
   return (
-    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
+    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' m={10} >
     <form onSubmit={handleFormSubmit}>
       <FormControl isRequired>
       <Heading mb='20px'>Create an Account</Heading>

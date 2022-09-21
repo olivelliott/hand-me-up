@@ -23,6 +23,8 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
+import { QUERY_CATEGORIES } from '../utils/queries'
+import { useQuery } from '@apollo/client'
 
 import headerLogo from '../assets/navlogo.png'
 
@@ -173,6 +175,8 @@ const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+
+
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -334,39 +338,28 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'How it Works',
     children: [
       {
-        label: 'Organizations and Charities',
+        label: 'Buying and Selling',
+        subLabel: 'FAQs about the process',
+        href: '#',
+      },
+      {
+        label: 'Organizations / Charities',
         subLabel: 'See who we work with',
-        href: '#',
-      },
-      {
-        label: 'How Can I Help?',
-        subLabel: 'Learn more',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Find Resources',
-    children: [
-      {
-        label: 'Career services',
-        subLabel: 'Connect with us',
-        href: '#',
-      },
-      {
-        label: 'Beyond clothing',
-        subLabel: 'Find more help',
         href: '#',
       },
     ],
   },
   {
     label: "Men's Clothing",
-    href: '#',
+    href: './mens-products',
   },
   {
     label: "Women's Clothing",
-    href: '#',
+    href: './womens-products',
+  },
+  {
+    label: 'All Products',
+    href: './all-products',
   },
   {
     label: 'Go to Cart',

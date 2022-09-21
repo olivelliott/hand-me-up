@@ -15,29 +15,36 @@ import {
 import { SimpleGrid } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
+import {
+  QUERY_ALL_PRODUCTS,
+  QUERY_CATEGORIES,
+  QUERY_PRODUCTS_BY_CATEGORY,
+} from "../utils/queries";
 import { Link } from "react-router-dom";
 
 function MensProducts() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  // const { load, data: category } = useQuery(QUERY_CATEGORIES);
 
+  // const categories = category?.categories || [];
 
-  // function filterProducts() {
-  //   if (!currentCategory) {
-  //     return state.products;
-  //   }
+  // console.log(categories)
 
-  //   return state.products.filter(
-  //     (product) => product.category._id === currentCategory
-  //   );
-  // }
-  const products = data?.products || [];
+  // const currentCategory = categories[1]._id;
 
+  // console.log(currentCategory);
+
+  const mensCategory = window.sessionStorage.getItem("mensCategory");
+
+  const { data } = useQuery(QUERY_ALL_PRODUCTS, {
+    variables: { category: mensCategory[1] },
+  });
+
+  const products = data?.products || []
 
   // const productsByCategory = () => {
-  //   const newproducts = products.filter(product => product.category._id === product.category[0]._id )
-  //   console.log(newproducts);
-  //   return newproducts;
+  //   return products.map(product => product.category._id === product.category[0]._id )
+  // console.log(newproducts);
+  // return newproducts;
   // }
 
   // console.log(productsByCategory);
@@ -54,12 +61,16 @@ function MensProducts() {
   return (
     <>
       <Link to="/my-cart" pb={10}>
-        <Button mb={5} bg="red" color='white' _hover={{ bg: "brick_red" }}>
+        <Button mb={5} bg="red" color="white" _hover={{ bg: "brick_red" }}>
           Go To Cart
         </Button>
       </Link>
-
-      <SimpleGrid columns={[3, null, 4]} spacing="40px" minChildWidth="200px">
+      <SimpleGrid
+        columns={[3, null, 4]}
+        spacing="40px"
+        p={5}
+        minChildWidth="200px"
+      >
         {products.map(
           ({ name, brand, size, description, image, quantity, price }) => {
             return (
@@ -70,12 +81,12 @@ function MensProducts() {
                   mx="auto"
                   bg="white"
                   textAlign="center"
+                  boxShadow={"2xl"}
                   _dark={{
                     bg: "gray.800",
                   }}
                   shadow="lg"
                   rounded="lg"
-                  key={name}
                 >
                   <chakra.h1
                     color="gray.800"
@@ -83,7 +94,9 @@ function MensProducts() {
                       color: "white",
                     }}
                     fontWeight="bold"
+                    fontFamily="body"
                     fontSize="3xl"
+                    pt={5}
                     textTransform="uppercase"
                   >
                     {name}
@@ -101,7 +114,8 @@ function MensProducts() {
                       mt={1}
                       fontSize="sm"
                       color="gray.600"
-                      minH="75px"
+                      fontFamily="body"
+                      minH="50px"
                       _dark={{
                         color: "gray.400",
                       }}
@@ -123,10 +137,10 @@ function MensProducts() {
                     justifyContent="space-between"
                     px={4}
                     py={2}
-                    bg="cream"
+                    bg="darkest_teal"
                     roundedBottom="lg"
                   >
-                    <chakra.h1 fontWeight="bold" fontSize="lg">
+                    <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
                       {price}
                     </chakra.h1>
                     <chakra.button
