@@ -24,6 +24,7 @@ import Cart from './pages/Cart'
 import Sandbox from './pages/Sandbox'
 import NoMatch from './pages/NoMatch'
 
+import { StoreProvider } from './utils/GlobalState'
 import theme from './theme'
 
 import { ChakraProvider } from '@chakra-ui/react'
@@ -57,7 +58,8 @@ function App() {
       <ChakraProvider theme={theme}>
         <Router>
           <div className="App">
-            <Header />
+            <Header />                
+            <StoreProvider>
               <Routes>
                 <Route path="/all-products" element={<AllProducts />} />
                 <Route path="/" element={<Hero />} />
@@ -70,6 +72,7 @@ function App() {
                 <Route path='/sandbox' element={<Sandbox />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
+              </StoreProvider>
             <Footer />
           </div>
         </Router>
