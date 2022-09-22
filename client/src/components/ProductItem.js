@@ -143,7 +143,7 @@ function ProductItem(item) {
                     fontWeight="bold"
                     fontSize="lg"
                   >
-                    {price}
+                    {`$ ${price}`}
                   </chakra.h1>
                   <chakra.button
                     id={_id}
