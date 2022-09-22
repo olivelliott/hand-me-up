@@ -72,7 +72,7 @@ function ProductItem(item) {
                 _dark={{
                   bg: "gray.800",
                 }}
-                shadow="lg"
+                boxShadow='1px 1px 1px 1px'
                 rounded="lg"
               >
                 <chakra.h1
@@ -81,9 +81,13 @@ function ProductItem(item) {
                   _dark={{
                     color: "white",
                   }}
-                  fontWeight="bold"
-                  fontSize="3xl"
+                  fontWeight="extrabold"
+                  fontSize={18}
                   textTransform="uppercase"
+                  ml="2"
+                  mr="2"
+                  mt="2"
+                  minH="50px"
                 >
                   {name}
                 </chakra.h1>
@@ -93,10 +97,12 @@ function ProductItem(item) {
                   px="2"
                   backgroundColor="cream"
                   color="gray.800"
+                  ml="2"
+                  mt='2'
                 >
                   {size} | {brand}
                 </Badge>
-                <Box key={"box2" + _id} px={4} py={2}>
+                <Box key={"box2" + _id} minH='128px' px={4} py={2}>
                   <chakra.p
                     key={"p1" + _id}
                     mt={1}
@@ -109,23 +115,26 @@ function ProductItem(item) {
                     {description}
                   </chakra.p>
                 </Box>
+                <Box align='center'>
                 <Image
                   key={"image_" + _id}
-                  h={52}
-                  w="full"
-                  fit="cover"
+                  // h={52}
+                  // w="full"
+                  boxSize='250px'
                   mt={2}
-                  src={`images/${image}`}
+                  objectFit='full'
+                  src={`${image}`}
                   // src={`images/${products.image}`}
                   alt={`Picture of ${image}`}
                 />
+                </Box>
                 <Flex
                   key={"flex" + _id}
                   alignItems="center"
                   justifyContent="space-between"
                   px={4}
                   py={2}
-                  bg="cream"
+                  bg="darkest_teal"
                   roundedBottom="lg"
                 >
                   <chakra.h1

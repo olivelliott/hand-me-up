@@ -43,6 +43,7 @@ export default function Cart() {
   // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo, talk w/ team about removing margin in app.js
 
   const [state, dispatch] = useStoreContext();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     async function getCart() {
@@ -97,8 +98,8 @@ export default function Cart() {
     for (let i = 0; i < itmCount.length; i++) {
       total += Number(itmCount[i].Price);
     }
-    if (total > 0) setSubTotal(total);
-    else setSubTotal(initialSubTotal);
+    if (total > 0) setSubTotal(total.toFixed(2));
+    else setSubTotal(initialSubTotal.toFixed(2));
   };
 
   const set_Tax = () => {
@@ -149,6 +150,22 @@ export default function Cart() {
     return sum.toFixed(2);
   }
 
+  const handleShowAmtButtons = (e) => {
+    const val = e.target.value
+    // console.log('charityVal= ' + val)
+    if(!val || val === '0')
+      setShow(false)
+    if(val && parseInt(val) > 0)
+      setShow(true)
+  }
+
+ const updateSummaryWithDonation = (amount) => {
+  const curTotal = totalCost
+  // console.log('curTotal: ' + curTotal)
+  const newTotal = (parseFloat(curTotal) + amount).toFixed(2)
+  setTotalCost(newTotal)
+  };
+
   // const onChange = (e) => {
   //   const value = e.target.value;
 
@@ -171,7 +188,7 @@ export default function Cart() {
   // };
 
   return (
-    <Container ml={0} fontFamily="body">
+    <Container ml={0}>
       <Flex d="columns">
         <Box
           align="left"
@@ -191,7 +208,6 @@ export default function Cart() {
                 key="main-heading"
                 fontSize="2xl"
                 fontWeight="extrabold"
-                fontFamily="body"
               >
                 Shopping Cart
               </Heading>
@@ -203,7 +219,7 @@ export default function Cart() {
             </Stack>
           </Stack>
         </Box>
-        <Box mt="50px" mb={8}>
+        <Box mt="100px" mb={8}>
           <Stack
             spacing="8"
             borderWidth="1px"
@@ -211,15 +227,15 @@ export default function Cart() {
             padding="8"
             width="300px"
           >
-            <Heading size="md" fontFamily="body">
+            <Heading size="md" >
               Order Summary
             </Heading>
             <Stack spacing="6">
               <InputGroup>
                 <InputLeftAddon children="ItemCount" />
                 <Input
-                  value={totalCost}
-                  placeholder={totalCost}
+                  value={totalCount}
+                  placeholder={totalCount}
                   onChange={handleUpdateSummary}
                 />
               </InputGroup>
@@ -235,6 +251,61 @@ export default function Cart() {
                 <InputLeftAddon children="Total" />
                 <Input placeholder={totalCost} value={totalCost} />
               </InputGroup>
+              <Box borderWidth={1} pt='2' pl='2' pr='2'>
+          <Heading fontSize="1xl">Add a donation?</Heading>
+        <Select maxW='300px' maxH='40px' mt='2' mb='2'
+              defaultValue="0"
+               onChange={(e) => handleShowAmtButtons(e)}
+               className='add-item-input'>
+                <option value="0">Select a charity</option>
+                <option value="1">Charity 1</option>
+                <option value="2">Charity 2</option>
+                <option value="3">Charity 3</option>
+                <option value="4">Charity 4</option>
+          </Select>
+          <Flex>
+          <Button key='bntDonate5'
+            mt='10px' mr='2' ml='1'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(5)}>
+            $5
+          </Button>
+          <Button key='bntDonate10'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(10)}>
+            $10
+          </Button>
+          <Button key='bntDonate15'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(15)}>
+            $15
+          </Button>
+          <Button key='bntDonate20'
+            mt='10px'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(20)}>
+            $20
+          </Button>
+          </Flex>
+          </Box>
               <Button
                 bg="red"
                 color="white"

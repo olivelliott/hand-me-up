@@ -61,47 +61,50 @@ const CartItem = ({ item }) => {
         <Flex>
           <Box
             mb="5"
-            mr="5"
+            mr="0"
             minH="200px"
             maxH="200px"
-            minW="200px"
-            maxW="200px"
+            minW="275px"
+            maxW="275px"
           >
             <Image
-              boxSize="200px"
+              boxSize="220px"
               objectFit="cover"
-              src={`images/${item.image}`}
+              src={`${item.image}`}
               alt="product"
             />
           </Box>
           <Box>
             <ListItem
               key={"brand_" + item._id}
-              mr="5"
               maxH="20px"
-              minW="200px"
-              maxW="200px"
+              minW="250px"
+              maxW="250px"
+              mb='1'
             >
               {item.brand}
             </ListItem>
             <ListItem
               key={"name_" + item._id}
-              mb="2"
-              mr="5"
+              mb="3"
+              mr="8"
               minH="30px"
               maxH="30px"
-              minW="200px"
-              maxW="200px"
+              minW="250px"
+              maxW="250px"
+              fontWeight={'extrabold'}
+
             >
               <b>{item.name}</b>
             </ListItem>
             <ListItem
               key={"size_" + item._id}
               mb="5"
+              mt='0'
               mr="5"
               maxH="10px"
-              minW="200px"
-              maxW="200px"
+              minW="250px"
+              maxW="250px"
             >
               {item.size}
             </ListItem>
@@ -122,12 +125,22 @@ const CartItem = ({ item }) => {
               mb="10"
               mr="5"
               maxH="10px"
-              minW="200px"
-              maxW="200px"
+              minW="250px"
+              maxW="250px"
             >
               <b>${item.price}</b>
             </ListItem>
             <ListItem key={"select_" + item._id}>
+            <Select mb='5' maxW='75px' border='2px' borderColor='black' aria-label="Select quantity"
+              defaultValue="1"
+              //  onChange={(e) => handleUpdateSummary(e, item._id, e.target.value, item.price)}
+
+               className='add-item-input'>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </Select>
               <Button
                 key={"btn_rmv" + item._id}
                 bg="red"
