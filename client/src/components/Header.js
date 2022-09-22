@@ -94,7 +94,7 @@ export default function WithSubnavigation() {
                     color: 'brick_red',
                   }}
                 >
-                  Submit A New Item
+                  Submit a New Item
                 </Button>
               </RouterLink>
 
@@ -176,10 +176,8 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue('gray.800', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
-
-
   return (
-    <Stack direction={'row'} spacing={4} pt='3'>
+    <Stack direction={'row'} spacing={4} pt="3">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -334,29 +332,29 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'How it Works',
-    children: [
-      {
-        label: 'Buying and Selling',
-        subLabel: 'FAQs about the process',
-        href: '#',
-      },
-      {
-        label: 'Organizations / Charities',
-        subLabel: 'See who we work with',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: "Men's Clothing",
-    href: '/mens-products',
-  },
-  {
-    label: "Women's Clothing",
-    href: '/womens-products',
-  },
+  // {
+  //   label: 'How it Works',
+  //   children: [
+  //     {
+  //       label: 'Buying and Selling',
+  //       subLabel: 'FAQs about the process',
+  //       href: '#',
+  //     },
+  //     {
+  //       label: 'Organizations / Charities',
+  //       subLabel: 'See who we work with',
+  //       href: '#',
+  //     },
+  //   ],
+  // },
+  // {
+  //   label: "Men's Clothing",
+  //   href: '/mens-products',
+  // },
+  // {
+  //   label: "Women's Clothing",
+  //   href: '/womens-products',
+  // },
   {
     label: 'All Products',
     href: '/all-products',
