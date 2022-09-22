@@ -77,6 +77,7 @@ function Allproducts() {
                       fontSize="3xl"
                       textTransform="uppercase"
                       ml="2"
+                      mr="2"
                       mt="2"
                     >
                       {name}
@@ -110,7 +111,7 @@ function Allproducts() {
                       w="full"
                       fit="cover"
                       mt={2}
-                      src={`images/${image}`}
+                      src={`${image}`}
                       alt={`Picture of ${image}`}
                     />
                     <Flex
@@ -128,7 +129,7 @@ function Allproducts() {
                         fontWeight="bold"
                         fontSize="lg"
                       >
-                        {price}
+                        ${price.toFixed(2)}
                       </chakra.h1>
                       <chakra.button
                         id={_id}

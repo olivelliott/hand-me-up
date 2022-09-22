@@ -175,14 +175,14 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={'row'} spacing={4} pt='3'>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <RouterLink
                 p={2}
-                href={navItem.href ?? '#'}
+                to={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -192,7 +192,7 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
-              </Link>
+              </RouterLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -347,18 +347,18 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Men's Clothing",
-    href: './mens-products',
+    href: '/mens-products',
   },
   {
     label: "Women's Clothing",
-    href: './womens-products',
+    href: '/womens-products',
   },
   {
     label: 'All Products',
-    href: './all-products',
+    href: '/all-products',
   },
   {
     label: 'Go to Cart',
-    href: './my-cart',
+    href: '/my-cart',
   },
 ]
