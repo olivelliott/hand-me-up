@@ -7,10 +7,10 @@ const charitySchema = new Schema ({
         required: true,
         trim: true
     },
-    description: {
-        type: String,
-        trim: true
-    }
+    // dollarValue: {
+    //     type: NumberArr,
+    //     default: 0
+    // }
 });
 
 const Charity = mongoose.model('Charity', charitySchema);

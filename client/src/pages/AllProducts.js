@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState, useEffect } from "react";
 import {
   Flex,
   Badge,
@@ -11,27 +11,94 @@ import {
   Tooltip,
   list,
   Button,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
-import { SimpleGrid } from '@chakra-ui/react'
-import { FiShoppingCart } from 'react-icons/fi'
-import { useQuery } from '@apollo/client'
-import { QUERY_ALL_PRODUCTS } from '../utils/queries'
-import { Link } from 'react-router-dom'
+import ProductItem from '../components/ProductItem'
+
+import { SimpleGrid } from "@chakra-ui/react";
+import { FiShoppingCart } from "react-icons/fi";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { UPDATE_PRODUCTS } from "../utils/actions";
+import { Link, useParams } from "react-router-dom";
+import { idbPromise } from "../utils/helpers";
+
+import { useStoreContext } from "../utils/GlobalState";
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 
 function Allproducts() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
-  const products = data?.products || []
+  //   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+  //   const products = data?.products || []
 
-  const handleAddToCart = async (e) => {
-    e.preventDefault()
-    console.log('handleAddToCart fired for ' + e.target.id)
-    sessionStorage.setItem(e.target.id, e.target.id)
+  //   const { name, description } = products
+
+  //   const [state, dispatch] = useStoreContext();
+
+  // const handleAddToCart = () => {
+  //   dispatch({
+  //     type: ADD_TO_CART,
+  //     product: { ...name, purchaseQuantity: 1 }
+  //   });
+  //   console.log('Added to cart')
+  // };
+
+  // const [state, dispatch] = useStoreContext();
+  // const { id } = useParams();
+
+  // const [currentProduct, setCurrentProduct] = useState({});
+
+  // const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+  // const { products, cart } = state;
+
+  // console.log(products);
+
+  const [state, dispatch] = useStoreContext();
+
+  const { currentCategory } = state;
+
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+
+      data.products.forEach((product) => {
+        idbPromise("products", "put", product);
+      });
+    } else if (!loading) {
+      // since we're offline, get all of the data from the `products` store
+      idbPromise("products", "get").then((products) => {
+        // use retrieved data to set global state for offline browsing
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: products,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
+  function filterProducts() {
+    if (!currentCategory) {
+      return state.products;
+    }
+
+    return state.products.filter(
+      (product) => product.category._id === currentCategory
+    );
   }
 
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
     <>
+      <Link to="/my-cart" pb={10}>
+        <Button mb={5} bg="red" color="white" _hover={{ bg: "brick_red" }}>
+          Go To Cart
+        </Button>
+      </Link>
       <SimpleGrid
         columns={[3, null, 4]}
         mt="20"
@@ -41,127 +108,22 @@ function Allproducts() {
         spacing="40px"
         minChildWidth="275px"
       >
-        {React.Children.toArray(
-          products.map(
-            ({
-              _id,
-              name,
-              brand,
-              size,
-              description,
-              image,
-              quantity,
-              price,
-            }) => {
-              return (
-                <>
-                  <Box
-                    key={'box1' + _id}
-                    maxW="xs"
-                    maxH="lg"
-                    mx="auto"
-                    bg="white"
-                    _dark={{
-                      bg: 'gray.800',
-                    }}
-                    shadow="lg"
-                    rounded="lg"
-                  >
-                    <chakra.h1
-                      key={'h1a' + _id}
-                      color="gray.800"
-                      _dark={{
-                        color: 'white',
-                      }}
-                      fontWeight="bold"
-                      fontSize="3xl"
-                      textTransform="uppercase"
-                      ml="2"
-                      mr="2"
-                      mt="2"
-                    >
-                      {name}
-                    </chakra.h1>
-                    <Badge
-                      key={'badge' + _id}
-                      borderRadius="full"
-                      px="2"
-                      backgroundColor="cream"
-                      color="gray.800"
-                      ml="2"
-                    >
-                      {size} | {brand}
-                    </Badge>
-                    <Box key={'box2' + _id} px={4} py={2}>
-                      <chakra.p
-                        key={'p1' + _id}
-                        mt={1}
-                        fontSize="sm"
-                        color="gray.600"
-                        _dark={{
-                          color: 'gray.400',
-                        }}
-                      >
-                        {description}
-                      </chakra.p>
-                    </Box>
-                    <Image
-                      key={'image_' + _id}
-                      h={52}
-                      w="full"
-                      fit="cover"
-                      mt={2}
-                      src={`${image}`}
-                      alt={`Picture of ${image}`}
-                    />
-                    <Flex
-                      key={'flex' + _id}
-                      alignItems="center"
-                      justifyContent="space-between"
-                      px={4}
-                      py={2}
-                      bg="darkest_teal"
-                      roundedBottom="lg"
-                    >
-                      <chakra.h1
-                        key={'h1b' + _id}
-                        color="white"
-                        fontWeight="bold"
-                        fontSize="lg"
-                      >
-                        ${price.toFixed(2)}
-                      </chakra.h1>
-                      <chakra.button
-                        id={_id}
-                        key={'btn' + _id}
-                        px={2}
-                        py={1}
-                        bg="white"
-                        fontSize="xs"
-                        color="gray.900"
-                        fontWeight="bold"
-                        rounded="lg"
-                        textTransform="uppercase"
-                        _hover={{
-                          bg: 'gray.200',
-                        }}
-                        _focus={{
-                          bg: 'gray.400',
-                        }}
-                        onClick={handleAddToCart}
-                      >
-                        Add to cart
-                      </chakra.button>
-                    </Flex>
-                  </Box>
-                </>
-              )
-            },
-          ),
-        )}
-      </SimpleGrid>
+      {filterProducts().map((product) => (
+            <ProductItem
+              key={product._id}
+              _id={product._id}
+              image={product.image}
+              name={product.name}
+              size={product.size}
+              brand={product.brand}
+              description={product.description}
+              price={product.price}
+              quantity={product.quantity}
+            />
+          ))}
+        </SimpleGrid>
     </>
-  )
+  );
 }
 
-export default Allproducts
+export default Allproducts;
