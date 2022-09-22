@@ -30,6 +30,8 @@ const CartItem = ({ item }) => {
     });
     console.log("item deleted");
     idbPromise("cart", "delete", { ...item });
+
+    // return handleUpdateSummary(item, state, dispatch);
   };
 
 //   const onChange = (e) => {
