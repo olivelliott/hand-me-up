@@ -89,7 +89,9 @@ export default function SubmitProduct () {
       .then(res => {
         const imageUrl = res.data.url
         console.log("image now stored at ", imageUrl)
-        setFormState({ ...formState, image: imageUrl })
+        return imageUrl
+      }).then(data => {
+        setFormState({ ...formState, image: data })
       })
   }
 
