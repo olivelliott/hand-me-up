@@ -6,6 +6,7 @@ import Auth from '../utils/auth'
 import { validateEmail } from '../utils/helpers'
 
 import {
+  Container,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -44,67 +45,70 @@ export default function SignupForm() {
       Auth.login(data.addUser.token)
       navigate('/')
     } catch (err) {
+      alert('User already created')
       console.error(err)
     }
   }
 
   return (
-    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
-    <form onSubmit={handleFormSubmit}>
-      <FormControl isRequired>
-      <Heading mb='20px'>Create an Account</Heading>
-        <FormLabel htmlFor='firstNameField'>First Name</FormLabel>
-        <Input
-          border='2px'
-          mb='20px'
-          type='text'
-          name='firstName'
-          id='firstNameField'
-          onChange={handleChange} />
+    <Container>
+      <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' m='5' >
+        <form onSubmit={handleFormSubmit}>
+          <FormControl isRequired>
+            <Heading mb='20px'>Create an Account</Heading>
+            <FormLabel htmlFor='firstNameField'>First Name</FormLabel>
+            <Input
+              border='2px'
+              mb='20px'
+              type='text'
+              name='firstName'
+              id='firstNameField'
+              onChange={handleChange} />
 
-        <FormLabel htmlFor='lastNameField'>Last Name</FormLabel>
-        <Input
-          border='2px'
-          mb='20px'
-          type='text'
-          name='lastName'
-          id='lastNameField'
-          onChange={handleChange} />
+            <FormLabel htmlFor='lastNameField'>Last Name</FormLabel>
+            <Input
+              border='2px'
+              mb='20px'
+              type='text'
+              name='lastName'
+              id='lastNameField'
+              onChange={handleChange} />
 
-        <FormLabel htmlFor='emailField'>Email address</FormLabel>
-        <Input
-         border='2px'
-         mb='20px'
-          type='email'
-          name='email'
-          id='emailField'
-          onChange={handleChange} />
+            <FormLabel htmlFor='emailField'>Email address</FormLabel>
+            <Input
+              border='2px'
+              mb='20px'
+              type='email'
+              name='email'
+              id='emailField'
+              onChange={handleChange} />
 
-        <FormLabel htmlFor='passwordField'>Password</FormLabel>
-        <Input
-          border='2px'
-          type='password'
-          name='password'
-          id='passwordField'
-          onChange={handleChange} />
-      </FormControl>
+            <FormLabel htmlFor='passwordField'>Password</FormLabel>
+            <Input
+              border='2px'
+              type='password'
+              name='password'
+              id='passwordField'
+              onChange={handleChange} />
+          </FormControl>
 
-      <Button
-        type='submit'
-        display={{ base: 'none', md: 'inline-flex' }}
-        fontSize={'sm'}
-        fontWeight={600}
-        color={'white'}
-        bg={'red'}
-        my={5}
-        href={'#'}
-        _hover={{
-          bg: 'brick_red',
-        }}
-        >
-        Create My Account!
-      </Button>
-    </form>
-    </Box>
+          <Button
+            type='submit'
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'red'}
+            my={5}
+            href={'#'}
+            _hover={{
+              bg: 'brick_red',
+            }}
+          >
+            Create My Account!
+          </Button>
+        </form>
+      </Box>
+    </Container>
   )
 }

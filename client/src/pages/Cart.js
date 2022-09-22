@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Box,
@@ -14,145 +14,114 @@ import {
   InputLeftAddon,
   Button,
   Container,
-} from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
-import { QUERY_ALL_PRODUCTS } from '../utils/queries'
+} from "@chakra-ui/react";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+
+import { useLazyQuery } from "@apollo/client";
+
+import CartItem from "../components/CartItem";
+
+import {
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  ADD_MULTIPLE_TO_CART,
+} from "../utils/actions";
+
+import Auth from "../utils/auth";
+import { idbPromise } from "../utils/helpers";
+import { useStoreContext } from "../utils/GlobalState";
+import { QUERY_CHECKOUT } from "../utils/queries";
+import OrderSummary from "../components/OrderSummary";
+
 // import { selectionSetMatchesResult } from "@apollo/client/cache/inmemory/helpers";
 
-export default function Cart () {
-
-  const productArr = [
-    {
-      _id: '1',
-      name: 'Sweater Set',
-      brand: 'Free People',
-      size: 'Medium',
-      description:
-        'Free People gently used sweater set. Perfect for lounging at home!',
-      image: 'fp_sweater_set.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '2',
-      name: 'Linen Tank Top',
-      brand: 'Old Navy',
-      size: 'XX-Large',
-      description: 'Used linen tank top. Has one small stain on the back!',
-      image: 'linen_tank.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '3',
-      name: 'Black Long Sleeve',
-      brand: 'J Crew',
-      size: 'Small',
-      description:
-        'Simple black long sleeve top. Great for layering in the cold months!',
-      image: 'navy_long_sleeve.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[0],
-    },
-    {
-      _id: '4',
-      name: 'Printed Maxi Dress',
-      brand: 'Anthropologie',
-      size: 'Large',
-      description:
-        'In new condition without tags. Wore it once and its just not really my style.',
-      image: 'maxi_dress.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[1],
-    },
-    {
-      _id: '5',
-      name: 'Color Block Sneakers',
-      brand: 'New Balance',
-      size: 'Ten',
-      description:
-        'Super fun color block sneakers! In used condition but they have some miles to go!',
-      image: 'color_block_sneakers.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[2],
-    },
-    {
-      _id: '6',
-      name: 'Black Long Sleeve',
-      brand: 'Tommy Hilfiger',
-      size: 'Medium',
-      description:
-        'Button down collared linen shirt. Great for spring and summer and appropriate for work!',
-      image: 'blue_button_shirt.jpeg',
-      quantity: 1,
-      price: 2.99,
-      // category: categories[0]._id,
-      // user: users[2],
-    },
-  ]
-  const { data } = useQuery(QUERY_ALL_PRODUCTS)
-
-  const products = data?.products || productArr
-  const cart_items = products.filter(product => product._id in sessionStorage)
-
-  const [itmCount, setCount] = React.useState([])
-  const [totalCount, setTotalCount] = React.useState(0)
-  const [subTotal, setSubTotal] = React.useState(0)
-  const [shipAndTax, setTax] = React.useState(0)
-  const [totalCost, setTotalCost] = React.useState(0)
+export default function Cart() {
 
   // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
   // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
-  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo
+  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo, talk w/ team about removing margin in app.js
 
-  React.useEffect(() => {setTotalItemCount()}, [itmCount])
-  React.useEffect(() => {set_Sub_Total()}, [totalCount])
-  React.useEffect(() => {set_Tax()}, [subTotal])
-  React.useEffect(() => {set_Total_Cost()}, [shipAndTax])
+  const [state, dispatch] = useStoreContext();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    async function getCart() {
+      const cart = await idbPromise("cart", "get");
+      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+    }
+
+    if (!state.cart.length) {
+      getCart();
+    }
+  }, [state.cart.length, dispatch]);
+
+  console.log(state.cart);
+
+  let initialCartCount = state.cart.length > 1 ? state.cart.length : 1;
+  let initialSubTotal = initialCartCount * 2.99;
+  let initialTax = initialSubTotal * 0.0475;
+  let initialTotal = initialSubTotal + initialTax;
+
+  const [itmCount, setCount] = useState([
+    { itmId: 0, Count: state.cart.length, Price: 2.99 * state.length },
+  ]);
+  const [totalCount, setTotalCount] = useState(initialCartCount);
+  const [subTotal, setSubTotal] = useState(initialSubTotal);
+  const [shipAndTax, setTax] = useState(initialTax);
+  const [totalCost, setTotalCost] = useState(initialTotal);
+
+  useEffect(() => {
+    setTotalItemCount();
+  }, [itmCount]);
+  useEffect(() => {
+    set_Sub_Total();
+  }, [totalCount]);
+  useEffect(() => {
+    set_Tax();
+  }, [subTotal]);
+  useEffect(() => {
+    set_Total_Cost();
+  }, [shipAndTax]);
 
   const setTotalItemCount = () => {
     let total = 0;
-    for(let i=0; i < itmCount.length; i++) {
-      total += Number(itmCount[i].Count)
+    for (let i = 0; i < itmCount.length; i++) {
+      total += Number(itmCount[i].Count);
     }
-    setTotalCount(total)
-  }
+    if (total > 0) setTotalCount(total);
+    else setTotalCount(initialCartCount);
+  };
 
   const set_Sub_Total = () => {
     let total = 0;
-    for(let i=0; i < itmCount.length; i++) {
-      total += Number(itmCount[i].Price)
+    for (let i = 0; i < itmCount.length; i++) {
+      total += Number(itmCount[i].Price);
     }
-    setSubTotal(total)
-  }
+    if (total > 0) setSubTotal(total.toFixed(2));
+    else setSubTotal(initialSubTotal.toFixed(2));
+  };
 
   const set_Tax = () => {
-    let total = 0
-    total = total + (subTotal * .0475)
-    setTax(total.toFixed(2))
-  }
+    let total = 0;
+    total = total + subTotal * 0.0475;
+    if (total > 0) setTax(total.toFixed(2));
+    else setTax(initialTax);
+  };
 
   const set_Total_Cost = () => {
-    let total = 0.0
-    total = parseFloat(subTotal) + parseFloat(shipAndTax)
-    setTotalCost(total.toFixed(2))
-  }
+    let total = 0.0;
+    total = parseFloat(subTotal) + parseFloat(shipAndTax);
+    if (total > 0) setTotalCost(total.toFixed(2));
+    else setTotalCost(initialTotal);
+  };
 
-  const handleUpdateSummary = (e, id, count, price) => {
-    e.preventDefault()
+  const handleUpdateSummary = (id, count, price) => {
     console.log(id)
+    console.log('here')
     if(itmCount && itmCount.find(x => x.itmId === id)) {
         const index = itmCount.map(e => e.itmId).indexOf(id)
+        console.log('here')
         const newCount = [...itmCount]
         newCount[index].Count = count
         newCount[index].Price = price
@@ -173,88 +142,184 @@ export default function Cart () {
     }
   }
 
-   return(
-  <Container ml={0}>
-  <Flex d='columns'>
-  <Box align='left' key={'main-box'}
-    // TODO ADD A "CONTINUE SHOPPING" LINK
-    maxW={{ base: '3xl', lg: '7xl' }}
-    mx="auto"
-    px={{ base: '4', md: '8', lg: '12' }}
-    py={{ base: '6', md: '8', lg: '12' }}
-  >
-    <Stack
-      direction={{ base: 'column', lg: 'row' }}
-      align={{ lg: 'flex-start' }}
-      spacing={{ base: '8', md: '16' }}
-    >
-      <Stack spacing={{ base: '8', md: '10' }} flex="2">
-        <Heading key='main-heading' fontSize="2xl" fontWeight="extrabold">
-          Shopping Cart
-        </Heading>
+  function calculateTotal() {
+    let sum = 0;
+    state.cart.forEach((item) => {
+      sum += item.price * item.purchaseQuantity;
+    });
+    return sum.toFixed(2);
+  }
 
-          <List key='product-list'>
-          {cart_items.map((item) => (
-          <Box key={'purchases_'+item._id}>
-          <Flex>
-            <Box mb='5' mr='5' minH='200px' maxH='200px' minW='200px' maxW='200px'>
-              <Image boxSize='200px' objectFit='cover' src={`images/${item.image}`} alt="product" />
-            </Box>
-            <Box>
-              <ListItem key={'brand_'+item._id} mr='5' maxH='20px' minW='200px' maxW='200px'>{item.brand}</ListItem>
-              <ListItem key={'name_'+item._id} mb='2' mr='5' minH='30px' maxH='30px' minW='200px' maxW='200px'><b>{item.name}</b></ListItem>
-              <ListItem key={'size_'+item._id} mb='5' mr='5' maxH='10px' minW='200px' maxW='200px'>{item.size}</ListItem>
-              <ListItem key={'desc_'+item._id} mr='5' minH='175px' maxH='200px' minW='200px' maxW='200px'>{item.description}</ListItem>
+  const handleShowAmtButtons = (e) => {
+    const val = e.target.value
+    // console.log('charityVal= ' + val)
+    if(!val || val === '0')
+      setShow(false)
+    if(val && parseInt(val) > 0)
+      setShow(true)
+  }
 
-              </Box>
-              <Box  minH='200px' maxH='200px' minW='125px' maxW='200px'>
-              <ListItem key={'price_'+item._id} mb='10' mr='5' maxH='10px' minW='200px' maxW='200px'><b>${item.price}</b></ListItem>
-              <ListItem key={'select_'+item._id}>
-              <Select maxW='75px' border='2px' borderColor='black' aria-label="Select quantity"
-               onChange={(e) => handleUpdateSummary(e, item._id, e.target.value, item.price)}
+ const updateSummaryWithDonation = (amount) => {
+  const curTotal = totalCost
+  // console.log('curTotal: ' + curTotal)
+  const newTotal = (parseFloat(curTotal) + amount).toFixed(2)
+  setTotalCost(newTotal)
+  };
+
+  // const onChange = (e) => {
+  //   const value = e.target.value;
+
+  //   if (value === "0") {
+  //     dispatch({
+  //       type: REMOVE_FROM_CART,
+  //       _id: item._id,
+  //     });
+
+  //     idbPromise("cart", "delete", { ...item });
+  //   } else {
+  //     dispatch({
+  //       type: UPDATE_CART_QUANTITY,
+  //       _id: item._id,
+  //       purchaseQuantity: parseInt(value),
+  //     });
+
+  //     idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
+  //   }
+  // };
+
+  return (
+    <Container ml={0}>
+      <Flex d="columns">
+        <Box
+          align="left"
+          key={"main-box"}
+          maxW={{ base: "3xl", lg: "7xl" }}
+          mx="auto"
+          px={{ base: "4", md: "8", lg: "12" }}
+          py={{ base: "6", md: "8", lg: "12" }}
+        >
+          <Stack
+            direction={{ base: "column", lg: "row" }}
+            align={{ lg: "flex-start" }}
+            spacing={{ base: "8", md: "16" }}
+          >
+            <Stack spacing={{ base: "8", md: "10" }} flex="2">
+              <Heading
+                key="main-heading"
+                fontSize="2xl"
+                fontWeight="extrabold"
+              >
+                Shopping Cart
+              </Heading>
+              <List key="product-list">
+                {state.cart.map((item) => (
+                  <CartItem key={item._id} item={item} />
+                ))}
+              </List>
+            </Stack>
+          </Stack>
+        </Box>
+        <Box mt="100px" mb={8}>
+          <Stack
+            spacing="8"
+            borderWidth="1px"
+            rounded="lg"
+            padding="8"
+            width="300px"
+          >
+            <Heading size="md" >
+              Order Summary
+            </Heading>
+            <Stack spacing="6">
+              <InputGroup>
+                <InputLeftAddon children="ItemCount" />
+                <Input
+                  value={totalCount}
+                  placeholder={totalCount}
+                  onChange={handleUpdateSummary}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftAddon children="Subtotal" />
+                <Input placeholder={subTotal} />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftAddon children="Shipping + Tax" />
+                <Input placeholder={shipAndTax} />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftAddon children="Total" />
+                <Input placeholder={totalCost} value={totalCost} />
+              </InputGroup>
+              <Box borderWidth={1} pt='2' pl='2' pr='2'>
+          <Heading fontSize="1xl">Add a donation?</Heading>
+        <Select maxW='300px' maxH='40px' mt='2' mb='2'
+              defaultValue="0"
+               onChange={(e) => handleShowAmtButtons(e)}
                className='add-item-input'>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </Select>
-              </ListItem>
-              </Box>
+                <option value="0">Select a charity</option>
+                <option value="1">Charity 1</option>
+                <option value="2">Charity 2</option>
+                <option value="3">Charity 3</option>
+                <option value="4">Charity 4</option>
+          </Select>
+          <Flex>
+          <Button key='bntDonate5'
+            mt='10px' mr='2' ml='1'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(5)}>
+            $5
+          </Button>
+          <Button key='bntDonate10'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(10)}>
+            $10
+          </Button>
+          <Button key='bntDonate15'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(15)}>
+            $15
+          </Button>
+          <Button key='bntDonate20'
+            mt='10px'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(20)}>
+            $20
+          </Button>
           </Flex>
           </Box>
-          ))
-          }
-          </List>
-      </Stack>
-    </Stack>
-</Box>
-<Box mt='50px'>
-<Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width='300px'>
-      <Heading size="md">Order Summary</Heading>
-      <Stack spacing="6">
-      <InputGroup>
-          <InputLeftAddon children="ItemCount" />
-          <Input placeholder={totalCount} />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="Subtotal" />
-          <Input placeholder={subTotal} />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="Shipping + Tax" />
-          <Input placeholder={shipAndTax}/>
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="Total" />
-          <Input placeholder={totalCost} />
-        </InputGroup>
-      <Button bg='red' color='white' size="lg" fontSize="md" _hover={{ bg: 'brick_red'}}>
-        Checkout
-      </Button>
-    </Stack>
-    </Stack>
-</Box>
-  </Flex>
-  </Container>
-  )
-  }
+              <Button
+                bg="red"
+                color="white"
+                size="lg"
+                fontSize="md"
+                _hover={{ bg: "brick_red" }}
+                fontFamily="body"
+              >
+                Checkout
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+      </Flex>
+    </Container>
+  );
+}
