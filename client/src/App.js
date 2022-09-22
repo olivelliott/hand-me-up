@@ -47,7 +47,6 @@ function App() {
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    // link: httpLink,
     cache: new InMemoryCache(),
   })
 

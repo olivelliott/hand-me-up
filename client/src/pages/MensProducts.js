@@ -98,6 +98,8 @@ function MensProducts() {
                     fontSize="3xl"
                     pt={5}
                     textTransform="uppercase"
+                    ml="2"
+                    mt="2"
                   >
                     {name}
                   </chakra.h1>
@@ -106,6 +108,7 @@ function MensProducts() {
                     px="2"
                     backgroundColor="cream"
                     color="gray.800"
+                    ml="2"
                   >
                     {size} | {brand}
                   </Badge>
@@ -128,7 +131,7 @@ function MensProducts() {
                     w="full"
                     fit="cover"
                     mt={2}
-                    src={`images/${image}`}
+                    src={`${image}`}
                     alt="NIKE AIR"
                   />
 
