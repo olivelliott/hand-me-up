@@ -258,10 +258,10 @@ export default function Cart() {
                onChange={(e) => handleShowAmtButtons(e)}
                className='add-item-input'>
                 <option value="0">Select a charity</option>
-                <option value="1">Charity 1</option>
-                <option value="2">Charity 2</option>
-                <option value="3">Charity 3</option>
-                <option value="4">Charity 4</option>
+                <option value="1">OBX Hotline</option>
+                <option value="2">Planned Parenthood</option>
+                <option value="3">American Humane</option>
+                <option value="4">NAACP</option>
           </Select>
           <Flex>
           <Button key='bntDonate5'
