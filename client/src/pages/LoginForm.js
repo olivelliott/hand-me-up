@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Auth from '../utils/auth'
 
 import {
+  Container,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -41,8 +42,9 @@ export default function LoginForm() {
       })
       console.log(data)
       Auth.login(data.login.token)
-      navigate('/')
+      navigate('/all-products')
     } catch (err) {
+      alert('Incorrect credentials!')
       console.error(err)
     }
 
@@ -50,44 +52,46 @@ export default function LoginForm() {
   }
 
   return (
-    <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' >
-    <form onSubmit={handleFormSubmit}>
-      <FormControl isRequired >
-      <Heading mb='20px'>Log In</Heading>
-        <FormLabel htmlFor='emailField'>Email</FormLabel>
-        <Input
-        border='2px'
-        mb='20px'
-          name='email'
-          id='emailField'
-          type='email'
-          onChange={handleChange}/>
+    <Container>
+      <Box border='2px' pt='25px' pr='25px' pl='25px' borderColor='gray.200' m='5'>
+        <form onSubmit={handleFormSubmit}>
+          <FormControl isRequired >
+            <Heading mb='20px'>Log In</Heading>
+            <FormLabel htmlFor='emailField'>Email</FormLabel>
+            <Input
+              border='2px'
+              mb='20px'
+              name='email'
+              id='emailField'
+              type='email'
+              onChange={handleChange} />
 
-        <FormLabel htmlFor='passwordField'>Password</FormLabel>
-        <Input
-        border='2px'
-        name='password'
-        id='passwordField'
-        type='password' 
-        onChange={handleChange}/>
-      </FormControl>
+            <FormLabel htmlFor='passwordField'>Password</FormLabel>
+            <Input
+              border='2px'
+              name='password'
+              id='passwordField'
+              type='password'
+              onChange={handleChange} />
+          </FormControl>
 
-      <Button
-        type = 'submit'
-        display={{ base: 'none', md: 'inline-flex' }}
-        fontSize={'sm'}
-        fontWeight={600}
-        color={'white'}
-        bg='red'
-        my={5}
-        href={'#'}
-        _hover={{
-          bg: 'brick_red',
-        }}
-      >
-        Sign In!
-      </Button>
-    </form>
-    </Box>
+          <Button
+            type='submit'
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg='red'
+            my={5}
+            href={'#'}
+            _hover={{
+              bg: 'brick_red',
+            }}
+          >
+            Sign In!
+          </Button>
+        </form>
+      </Box>
+    </Container>
   )
 }

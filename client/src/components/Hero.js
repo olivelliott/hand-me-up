@@ -97,9 +97,9 @@ import image from '../assets/donation.png'
 
 export default function Hero() {
   return (
-    <Container maxW={'7xl'}>
+    <Container maxW={'7xl'} pt={10} pb={10}>
       <Stack
-        align={'center'}
+        textAlign={'center'}
         spacing={{ base: 75, md: 100 }}
         py={{ base: 17, md: 22 }}
         direction={{ base: 'column', md: 'row' }}
@@ -152,7 +152,8 @@ export default function Hero() {
             <Button
               rounded={'full'}
               size={'lg'}
-              fontWeight={'normal'}
+              fontWeight={'bold'}
+              fontFamily='body'
               px={6}
               bg="red"
               color="white"
@@ -164,7 +165,9 @@ export default function Hero() {
             <Button
               rounded={'full'}
               size={'lg'}
-              fontWeight={'normal'}
+              fontWeight={'bold'}
+                            fontFamily='body'
+
               px={6}
               bg="red"
               color="white"

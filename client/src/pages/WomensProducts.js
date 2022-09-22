@@ -94,7 +94,7 @@ function WomensProducts() {
                     w="full"
                     fit="cover"
                     mt={2}
-                    src={`images/${image}`}
+                    src={`${image}`}
                     alt=""
                   />
 
