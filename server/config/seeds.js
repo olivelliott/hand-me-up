@@ -1,8 +1,8 @@
 const db = require('./connection')
 const { User, Product, Charity, Category } = require('../models')
 
-db.once("open", async () => {
-  await User.deleteMany();
+db.once('open', async () => {
+  await User.deleteMany()
 
   // !added by CPM to connected products to a user.
   // !Oliva - I commented out the individuate create users below... not sure the benefit of individual vs the array but I think I needed an array in order to get the user email connected to a product
@@ -49,7 +49,7 @@ db.once("open", async () => {
         'Tan Free People gently used sweater set with button details at the top. Perfect for fall lounging at home!',
       image: 'fp_sweater_set.jpeg',
       quantity: 1,
-      price: 2.99,
+      price: '2.99',
       category: categories[0].id,
       user: users[0],
     },
@@ -138,9 +138,9 @@ db.once("open", async () => {
       user: users[2],
     },
     {
-      name: "Black Flannel",
-      brand: "REI",
-      size: "Medium",
+      name: 'Black Flannel',
+      brand: 'REI',
+      size: 'Medium',
       description:
         'Really warm flannel. Its in well-loved condition but it will keep you warm. Great for fall and winter layering',
       image: 'flannel.jpeg',
