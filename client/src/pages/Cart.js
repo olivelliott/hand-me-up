@@ -268,14 +268,21 @@ export default function Cart() {
     }
   }
 
-  const handleAddAmtButtons = (e) => {
+  const handleShowAmtButtons = (e) => {
     const val = e.target.value
-    console.log('charityVal= ' + val)
+    // console.log('charityVal= ' + val)
     if(!val || val === '0')
       setShow(false)
     if(val && parseInt(val) > 0)
       setShow(true)
   }
+
+ const updateSummaryWithDonation = (amount) => {
+  const curTotal = totalCost
+  // console.log('curTotal: ' + curTotal)
+  const newTotal = (parseFloat(curTotal) + amount).toFixed(2)
+  setTotalCost(newTotal)
+  };
 
   return(
   <Container ml={0}>
@@ -359,7 +366,7 @@ export default function Cart() {
           <Heading fontSize="1xl">Add a donation?</Heading>
         <Select maxW='300px' maxH='40px' mt='2' mb='2'
               defaultValue="0"
-               onChange={(e) => handleAddAmtButtons(e)}
+               onChange={(e) => handleShowAmtButtons(e)}
                className='add-item-input'>
                 <option value="0">Select a charity</option>
                 <option value="1">Charity 1</option>
@@ -374,9 +381,8 @@ export default function Cart() {
             size="sm"
             fontSize="sm"
             _hover={{ bg: 'brick_red'}}
-            style={{ visibility: show ? "visible" : "hidden"}}>
-            
-            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(5)}>
             $5
           </Button>
           <Button key='bntDonate10'
@@ -385,8 +391,8 @@ export default function Cart() {
             size="sm"
             fontSize="sm"
             _hover={{ bg: 'brick_red'}}
-            style={{ visibility: show ? "visible" : "hidden"}}>
-            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(10)}>
             $10
           </Button>
           <Button key='bntDonate15'
@@ -395,8 +401,8 @@ export default function Cart() {
             size="sm"
             fontSize="sm"
             _hover={{ bg: 'brick_red'}}
-            style={{ visibility: show ? "visible" : "hidden"}}>
-            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(15)}>
             $15
           </Button>
           <Button key='bntDonate20'
@@ -405,8 +411,8 @@ export default function Cart() {
             size="sm"
             fontSize="sm"
             _hover={{ bg: 'brick_red'}}
-            style={{ visibility: show ? "visible" : "hidden"}}>
-            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            style={{ visibility: show ? "visible" : "hidden"}}
+            onClick={() => updateSummaryWithDonation(20)}>
             $20
           </Button>
           </Flex>
