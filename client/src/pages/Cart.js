@@ -13,7 +13,7 @@ import {
   InputGroup,
   InputLeftAddon,
   Button,
-  Container,
+  Container
 } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
@@ -104,7 +104,7 @@ export default function Cart() {
 
   const products = data?.products || productArr
   const cart_items = products.filter(product => product._id in sessionStorage)
-    const [cart, setCart] = useState(cart_items);
+  const [cart, setCart] = useState(cart_items);
 
   const initialLoad = () => {
 
@@ -132,6 +132,7 @@ export default function Cart() {
   const [subTotal, setSubTotal] = useState(initialSubTotal)
   const [shipAndTax, setTax] = useState(initialTax)
   const [totalCost, setTotalCost] = useState(initialTotal)
+  const [show, setShow] = useState(false);
   // console.log("INITIALCART: " +cart)
 
 
@@ -139,8 +140,6 @@ export default function Cart() {
   // console.log("cartItems: " + cart_items)
 
   // console.log(cart_items)
-
-
 
   // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
   // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
@@ -269,6 +268,15 @@ export default function Cart() {
     }
   }
 
+  const handleAddAmtButtons = (e) => {
+    const val = e.target.value
+    console.log('charityVal= ' + val)
+    if(!val || val === '0')
+      setShow(false)
+    if(val && parseInt(val) > 0)
+      setShow(true)
+  }
+
   return(
   <Container ml={0}>
   <Flex d='columns'>
@@ -314,7 +322,7 @@ export default function Cart() {
                 <option value="3">3</option>
                 <option value="4">4</option>
               </Select>
-              <Button key={'btn_rmv'+item._id}bg='red' color='white' size="sm" fontSize="sm" _hover={{ bg: 'brick_red'}} onClick={() => rmvFromCart(item)}>
+              <Button mt='15px' key={'btn_rmv'+item._id}bg='red' color='white' size="sm" fontSize="sm" _hover={{ bg: 'brick_red'}} onClick={() => rmvFromCart(item)}>
         Remove
       </Button>
               </ListItem>
@@ -347,6 +355,62 @@ export default function Cart() {
           <InputLeftAddon children="Total" />
           <Input placeholder={totalCost} />
         </InputGroup>
+        <Box borderWidth={1} pt='2' pl='2' pr='2'>
+          <Heading fontSize="1xl">Add a donation?</Heading>
+        <Select maxW='300px' maxH='40px' mt='2' mb='2'
+              defaultValue="0"
+               onChange={(e) => handleAddAmtButtons(e)}
+               className='add-item-input'>
+                <option value="0">Select a charity</option>
+                <option value="1">Charity 1</option>
+                <option value="2">Charity 2</option>
+                <option value="3">Charity 3</option>
+                <option value="4">Charity 4</option>
+          </Select>
+          <Flex>
+          <Button key='bntDonate5'
+            mt='10px' mr='2' ml='1'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}>
+            
+            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            $5
+          </Button>
+          <Button key='bntDonate10'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}>
+            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            $10
+          </Button>
+          <Button key='bntDonate15'
+            mt='10px' mr='2'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}>
+            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            $15
+          </Button>
+          <Button key='bntDonate20'
+            mt='10px'
+            bg='red' color='white'
+            size="sm"
+            fontSize="sm"
+            _hover={{ bg: 'brick_red'}}
+            style={{ visibility: show ? "visible" : "hidden"}}>
+            {/* onClick={() => updateSummaryWithDonation(5)} */}
+            $20
+          </Button>
+          </Flex>
+          </Box>
       <Button bg='red' color='white' size="lg" fontSize="md" _hover={{ bg: 'brick_red'}}>
         Checkout
       </Button>

@@ -3,31 +3,23 @@ import {
   Flex,
   Badge,
   Box,
-  Circle,
-  Wrap,
   Image,
-  Icon,
   chakra,
-  Tooltip,
-  list,
-  Button,
 } from '@chakra-ui/react'
 
 import { SimpleGrid } from '@chakra-ui/react'
-import { FiShoppingCart } from 'react-icons/fi'
 import { useQuery } from '@apollo/client'
 import { QUERY_ALL_PRODUCTS } from '../utils/queries'
-import { Link } from 'react-router-dom'
 
 function Allproducts() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS)
+  const { data } = useQuery(QUERY_ALL_PRODUCTS)
   const products = data?.products || []
 
   const handleAddToCart = async (e) => {
     e.preventDefault()
     console.log('handleAddToCart fired for ' + e.target.id)
     sessionStorage.setItem(e.target.id, e.target.id)
-    sessionStorage.setItem("cartCount", (sessionStorage.length - 1).toString())    
+    sessionStorage.setItem("cartCount", (sessionStorage.length - 1).toString())
   }
 
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
@@ -65,7 +57,8 @@ function Allproducts() {
                     _dark={{
                       bg: 'gray.800',
                     }}
-                    shadow="lg"
+                    // shadow="1px 1px 2px 2px"
+                    boxShadow='1px 1px 1px 1px'
                     rounded="lg"
                   >
                     <chakra.h1
@@ -74,8 +67,8 @@ function Allproducts() {
                       _dark={{
                         color: 'white',
                       }}
-                      fontWeight="bold"
-                      fontSize="3xl"
+                      fontWeight="extrabold"
+                      fontSize={18}
                       textTransform="uppercase"
                       ml="2"
                       mr="2"
@@ -106,15 +99,18 @@ function Allproducts() {
                         {description}
                       </chakra.p>
                     </Box>
+                    <Box align='center'>
                     <Image
                       key={'image_' + _id}
-                      h={52}
-                      w="full"
-                      fit="cover"
+                      // h={52}
+                      // w="full"
+                      boxSize='250px'
                       mt={2}
-                      src={`${image}`}
+                      src={`/images/${image}`}
                       alt={`Picture of ${image}`}
+                      objectFit='full'
                     />
+                    </Box>
                     <Flex
                       key={'flex' + _id}
                       alignItems="center"
