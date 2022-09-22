@@ -13,10 +13,7 @@ import footerlogo from '../assets/footer-logo-1.png'
 import { useQuery } from '@apollo/client'
 import { QUERY_CATEGORIES } from '../utils/queries'
 
-
 export default function Footer() {
-
-
   // const { loading, data: category } = useQuery(QUERY_CATEGORIES);
 
   // const categories = category?.categories || [];
@@ -47,7 +44,7 @@ export default function Footer() {
         <Stack direction={'row'} spacing={6}>
           <Link to="/">Home</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Log In</Link>
           <Link to="/all-products">Products</Link>
         </Stack>
       </Container>
