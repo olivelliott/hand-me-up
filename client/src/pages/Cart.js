@@ -27,6 +27,7 @@ import { idbPromise } from "../utils/helpers";
 import { useStoreContext } from "../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../utils/actions";
 import { QUERY_CHECKOUT } from "../utils/queries";
+import OrderSummary from "../components/OrderSummary";
 
 // import { selectionSetMatchesResult } from "@apollo/client/cache/inmemory/helpers";
 
@@ -366,6 +367,8 @@ export default function Cart() {
           </List>
       </Stack>
     </Stack>
+
+    <OrderSummary/>
 </Box>
   </Flex>
   </Container>

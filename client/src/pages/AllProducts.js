@@ -90,7 +90,7 @@ function Allproducts() {
       (product) => product.category._id === currentCategory
     );
   }
-  
+
   // TODO Add conditional rendering so the page displays 'loading' until data loads from db
   return (
     <>
@@ -99,16 +99,29 @@ function Allproducts() {
           Go To Cart
         </Button>
       </Link>
+      <SimpleGrid
+        columns={[3, null, 4]}
+        mt="20"
+        ml="20"
+        mr="20"
+        mb="20"
+        spacing="40px"
+        minChildWidth="275px"
+      >
       {filterProducts().map((product) => (
             <ProductItem
               key={product._id}
               _id={product._id}
               image={product.image}
               name={product.name}
+              size={product.size}
+              brand={product.brand}
+              description={product.description}
               price={product.price}
               quantity={product.quantity}
             />
           ))}
+        </SimpleGrid>
     </>
   );
 }

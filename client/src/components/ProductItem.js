@@ -21,7 +21,14 @@ import {
   } from "@chakra-ui/react";
 
 function ProductItem(item) {
-  const { image, name, _id, price, quantity } = item;
+  const { _id,
+    name,
+    brand,
+    size,
+    description,
+    image,
+    quantity,
+    price } = item;
 
   const [state, dispatch] = useStoreContext();
 
@@ -31,6 +38,7 @@ function ProductItem(item) {
     // find the cart item with the matching id
     const itemInCart = cart.find((cartItem) => cartItem._id === _id);
 
+    console.log('>>item in cart', itemInCart);
     // if there was a match, call UPDATE with a new purchase quantity
     if (itemInCart) {
       dispatch({
@@ -54,22 +62,6 @@ function ProductItem(item) {
   };
 
   return (
-    <SimpleGrid columns={[3, null, 4]} spacing="40px" minWidth="200px">
-    {
-      //  React.Children.toArray(
-      state.products.map(
-        ({
-          _id,
-          name,
-          brand,
-          size,
-          description,
-          image,
-          quantity,
-          price,
-        }) => {
-          return (
-            <>
               <Box
                 key={"box1" + _id}
                 maxW="xs"
@@ -167,12 +159,6 @@ function ProductItem(item) {
                   </chakra.button>
                 </Flex>
               </Box>
-            </>
-          );
-        }
-      )
-    }
-  </SimpleGrid>
 
   );
 }
