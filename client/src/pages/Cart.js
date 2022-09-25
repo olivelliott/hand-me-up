@@ -60,53 +60,42 @@ export default function Cart() {
   const [itmCount, setCount] = useState([
     { itmId: 0, Count: state.cart.length, Price: 2.99 * state.length },
   ]);
-  const [totalCount, setTotalCount] = useState(initialCartCount);
-  const [subTotal, setSubTotal] = useState(initialSubTotal);
-  const [shipAndTax, setTax] = useState(initialTax);
   const [totalCost, setTotalCost] = useState(initialTotal);
 
-  useEffect(() => {
-    set_Sub_Total();
-  }, [totalCount]);
-  useEffect(() => {
-    set_Tax();
-  }, [subTotal]);
-  useEffect(() => {
-    set_Total_Cost();
-  }, [shipAndTax]);
-
   const totalItemCount =  state.cart.length;
-    // let total = 0;
-    // for (let i = 0; i < itmCount.length; i++) {
-    //   total += Number(itmCount[i].Count);
-    // }
-    // if (total > 0) setTotalCount(total);
-    // else setTotalCount(initialCartCount);
 
+  const calculateSubTotal = () => {
+    let sum = 0;
+    state.cart.forEach((item) => {
+      sum += item.price * item.purchaseQuantity;
+    });
+    return sum.toFixed(2);
+  };
   
+  const calculateTax = () => {
+    let sum = 0;
+    state.cart.forEach((item) => {
+      sum += item.price * 0.0475;
+    });
+    return sum.toFixed(2);
+  }
 
-  const set_Sub_Total = () => {
-    let total = 0;
-    for (let i = 0; i < state.cart.length; i++) {
-      total += Number(itmCount[i].Price);
-    }
-    if (total > 0) setSubTotal(total.toFixed(2));
-    else setSubTotal(initialSubTotal.toFixed(2));
-  };
+  const calculateTotal = () => {
+    let sum = 0;
+    state.cart.forEach((item) => {
+      sum += (item.price * calculateTax()) + (item.price * item.purchaseQuantity);
+    })
 
-  const set_Tax = () => {
-    let total = 0;
-    total = total + subTotal * 0.0475;
-    if (total > 0) setTax(total.toFixed(2));
-    else setTax(initialTax);
-  };
+    return sum.toFixed(2);
+  }
 
-  const set_Total_Cost = () => {
-    let total = 0.0;
-    total = parseFloat(subTotal) + parseFloat(shipAndTax);
-    if (total > 0) setTotalCost(total.toFixed(2));
-    else setTotalCost(initialTotal);
-  };
+
+  // const set_Total_Cost = () => {
+  //   let total = 0.0;
+  //   total = parseFloat(subTotal) + parseFloat(shipAndTax);
+  //   if (total > 0) setTotalCost(total.toFixed(2));
+  //   else setTotalCost(initialTotal);
+  // };
 
   const handleUpdateSummary = (id, count, price) => {
     console.log(id)
@@ -135,13 +124,6 @@ export default function Cart() {
 
   console.log(state.cart);
 
-  function calculateTotal() {
-    let sum = 0;
-    state.cart.forEach((item) => {
-      sum += item.price * item.purchaseQuantity;
-    });
-    return sum.toFixed(2);
-  }
 
   const handleShowAmtButtons = (e) => {
     const val = e.target.value
@@ -206,14 +188,16 @@ export default function Cart() {
               <InputGroup>
                 <InputLeftAddon children="ItemCount" />
               </InputGroup>
-              <h1>{totalItemCount}</h1>
+              <Text>{totalItemCount}</Text>
               <InputGroup>
                 <InputLeftAddon children="Subtotal" />
-                <Input placeholder={subTotal} />
+                <Input />
+                <Text>${calculateSubTotal()}</Text>
               </InputGroup>
               <InputGroup>
                 <InputLeftAddon children="Shipping + Tax" />
-                <Input placeholder={shipAndTax} />
+                <Input />
+                <Text>${calculateTax()}</Text>
               </InputGroup>
               <Box>
                 <Text>${calculateTotal()}</Text>
