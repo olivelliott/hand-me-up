@@ -66,8 +66,8 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/submit-product" element={<SubmitProduct />} />
                 <Route path="/my-cart" element={<Cart />} />
-                <Route path="/mens-products" element={<MensProducts />} />
-                <Route path="/womens-products" element={<WomensProducts />} />
+                {/* <Route path="/mens-products" element={<MensProducts />} />
+                <Route path="/womens-products" element={<WomensProducts />} /> */}
                 <Route path='/sandbox' element={<Sandbox />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>

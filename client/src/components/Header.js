@@ -30,6 +30,7 @@ import headerLogo from '../assets/navlogo.png'
 
 import Auth from '../utils/auth'
 
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
   const logout = (e) => {

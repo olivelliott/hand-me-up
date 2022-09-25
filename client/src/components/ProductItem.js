@@ -72,7 +72,7 @@ function ProductItem(item) {
                 _dark={{
                   bg: "gray.800",
                 }}
-                boxShadow='1px 1px 1px 1px'
+                boxShadow='2xl'
                 rounded="lg"
               >
                 <chakra.h1

@@ -21,16 +21,17 @@ app.use(express.json());
 // app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-
-  app.get("/", (req, res) => {
+  app.use(express.static(path.join(__dirname, "../client/build")))
+  
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
+// * suggested update from Josh
 
   // wildcard for pages not found
-  app.get('*', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, './public/404.html'));
-  })
+  // app.get('*', (req, res) => {
+  // res.status(404).sendFile(path.join(__dirname, './public/404.html'));
+  // })
 }
 
 // Create a new instance of an Apollo server with the GraphQL schema

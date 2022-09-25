@@ -50,7 +50,7 @@ db.once('open', async () => {
       image: 'fp_sweater_set.jpeg',
       quantity: 1,
       price: '2.99',
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[0],
     },
     {
@@ -62,7 +62,7 @@ db.once('open', async () => {
       image: 'linen_tank.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[0],
     },
     {
@@ -74,7 +74,7 @@ db.once('open', async () => {
       image: 'navy_long_sleeve.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[0],
     },
     {
@@ -86,7 +86,7 @@ db.once('open', async () => {
       image: 'maxi_dress.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[1],
     },
     {
@@ -98,7 +98,7 @@ db.once('open', async () => {
       image: 'color_block_sneakers.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[2],
     },
     {
@@ -110,7 +110,7 @@ db.once('open', async () => {
       image: 'blue_button_shirt.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[2],
     },
     {
@@ -122,7 +122,7 @@ db.once('open', async () => {
       image: 'mens_sweatshirt.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[1].id,
+      category: categories[1]._id,
       user: users[2],
     },
     {
@@ -134,7 +134,7 @@ db.once('open', async () => {
       image: 'white_pants.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[1].id,
+      category: categories[1]._id,
       user: users[2],
     },
     {
@@ -146,7 +146,7 @@ db.once('open', async () => {
       image: 'flannel.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[1].id,
+      category: categories[1]._id,
       user: users[0],
     },
     {
@@ -158,7 +158,7 @@ db.once('open', async () => {
       image: 'navy_long_sleeve.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[0].id,
+      category: categories[0]._id,
       user: users[2],
     },
     {
@@ -169,7 +169,7 @@ db.once('open', async () => {
       image: 'navy_tie.jpeg',
       quantity: 1,
       price: 2.99,
-      category: categories[1].id,
+      category: categories[1]._id,
       user: users[2],
     },
   ])
