@@ -221,7 +221,7 @@ const DesktopNav = () => {
   )
 }
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
@@ -272,7 +272,7 @@ const MobileNav = () => {
   )
 }
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -325,37 +325,14 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   )
 }
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
+// interface NavItem {
+//   label: string;
+//   subLabel?: string;
+//   children?: Array<NavItem>;
+//   href?: string;
+// }
 
-const NAV_ITEMS: Array<NavItem> = [
-  // {
-  //   label: 'How it Works',
-  //   children: [
-  //     {
-  //       label: 'Buying and Selling',
-  //       subLabel: 'FAQs about the process',
-  //       href: '#',
-  //     },
-  //     {
-  //       label: 'Organizations / Charities',
-  //       subLabel: 'See who we work with',
-  //       href: '#',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: "Men's Clothing",
-  //   href: '/mens-products',
-  // },
-  // {
-  //   label: "Women's Clothing",
-  //   href: '/womens-products',
-  // },
+const NAV_ITEMS = [
   {
     label: 'Products',
     href: '/all-products',
