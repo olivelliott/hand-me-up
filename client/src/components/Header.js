@@ -357,7 +357,7 @@ const NAV_ITEMS: Array<NavItem> = [
   //   href: '/womens-products',
   // },
   {
-    label: 'All Products',
+    label: 'Products',
     href: '/all-products',
   },
   {

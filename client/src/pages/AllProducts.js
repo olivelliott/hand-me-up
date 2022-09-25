@@ -78,12 +78,6 @@ function Allproducts() {
     <>
       <CategoryMenu/>
 
-      <Link to="/my-cart">
-        <Button ml={5} mt={10} bg="red" color="white" _hover={{ bg: 'brick_red' }}>
-          Go To Cart
-        </Button>
-      </Link>
-
       {state.products.length ? (
       <SimpleGrid
       columns={[3, null, 4]}

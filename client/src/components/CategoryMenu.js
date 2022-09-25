@@ -1,8 +1,9 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from '@chakra-ui/react'
 
 import React, { useEffect } from 'react';
 import { useQuery } from "@apollo/client";
 import { idbPromise } from '../utils/helpers';
+import { Link } from 'react-router-dom'
 
 import { QUERY_CATEGORIES } from "../utils/queries";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../utils/actions';
@@ -42,7 +43,7 @@ function CategoryMenu() {
 
   return (
     <>
-    <Tabs variant='soft-rounded' colorScheme='green'>
+    <Tabs variant='soft-rounded' colorScheme='yellow' mt={5} ml={5}>
     <TabList>
       {categories.map((item) => (
         <Tab
@@ -56,6 +57,12 @@ function CategoryMenu() {
       ))}
     </TabList>
     </Tabs>
+
+    <Link to="/my-cart">
+        <Button ml={5} mt={10} bg="red" color="white" _hover={{ bg: 'brick_red' }}>
+          Go To Cart
+        </Button>
+      </Link>
     </>
   );
 }
