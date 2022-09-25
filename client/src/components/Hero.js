@@ -1,81 +1,3 @@
-// import React from "react";
-// import {
-//   chakra,
-//   Box,
-//   Flex,
-//   Badge,
-//   SimpleGrid,
-//   Image,
-//   Container
-// } from "@chakra-ui/react";
-
-// import image from '../assets/hand-me-up-1.png';
-
-// export default function Hero(){
-//   return (
-//     <Container>
-//     <SimpleGrid
-//       columns={{ base: 1, md: 2 }}
-//       spacing={0}
-//       background= "darkest_teal"
-//       borderRadius = "rounded"
-//       _after={{
-//         bg: "brand.500",
-//         opacity: 0.25,
-//         pos: "absolute",
-//         top: 0,
-//         left: 0,
-//         bottom: 0,
-//         right: 0,
-//         zIndex: -1,
-//         content: '" "',
-//       }}
-//     >
-//       <Flex
-//         direction="column"
-//         alignItems="start"
-//         justifyContent="center"
-//         px={{ base: 4, lg: 20 }}
-//         py={24}
-//       >
-//         <Badge
-//           color="white"
-//           px={3}
-//           py={1}
-//           mb={3}
-//           variant="solid"
-//           colorScheme="brand"
-//           rounded="full"
-//         >
-//           Pre Beta
-//         </Badge>
-//         <chakra.h1
-//           mb={6}
-//           fontSize={{ base: "2xl", md: "2xl", lg: "3xl" }}
-//           fontWeight="bold"
-//           color="teal"
-//           _dark={{ color: "gray.300" }}
-//           lineHeight="shorter"
-//         >
-//           A place to donate your clothes and give back to your community
-//         </chakra.h1>
-//       </Flex>
-//       <Box>
-//         <Image
-//           src={image}
-//           alt="hand me up logo"
-//           objectFit="50%"
-//           w="full"
-//           h={{ base: 64, md: "full" }}
-//           bg="gray.100"
-//           loading="lazy"
-//         />
-//       </Box>
-//     </SimpleGrid>
-//     </Container>
-//   );
-// };
-
 import {
   Container,
   Stack,
@@ -84,12 +6,7 @@ import {
   Heading,
   Text,
   Button,
-  Image,
-  Icon,
-  IconButton,
-  createIcon,
-  IconProps,
-  useColorModeValue,
+  Image
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 

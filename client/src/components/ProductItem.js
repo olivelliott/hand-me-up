@@ -118,13 +118,10 @@ function ProductItem(item) {
                 <Box align='center'>
                 <Image
                   key={"image_" + _id}
-                  // h={52}
-                  // w="full"
                   boxSize='250px'
-                  mt={2}
+                  mb={2}
                   objectFit='full'
                   src={`${image}`}
-                  // src={`images/${products.image}`}
                   alt={`Picture of ${image}`}
                 />
                 </Box>

@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Button } from '@chakra-ui/react'
+import { Tabs, TabList, Tab, Button } from '@chakra-ui/react'
 
 import React, { useEffect } from 'react';
 import { useQuery } from "@apollo/client";

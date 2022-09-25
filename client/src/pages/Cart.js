@@ -5,15 +5,15 @@ import {
   List,
   Flex,
   Heading,
-  Image,
   Select,
-  ListItem,
   Input,
   Stack,
   InputGroup,
   InputLeftAddon,
   Button,
   Container,
+  Textarea,
+  Text
 } from "@chakra-ui/react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PRODUCTS } from "../utils/queries";
@@ -34,14 +34,8 @@ import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_CHECKOUT } from "../utils/queries";
 import OrderSummary from "../components/OrderSummary";
 
-// import { selectionSetMatchesResult } from "@apollo/client/cache/inmemory/helpers";
 
 export default function Cart() {
-
-  // TODO: USE REDUCERS INSTEAD OF FOR LOOPS
-  // TODO: GET THE TOTALS WORKING CORRECTLY (on form load and update)
-  // TODO: Fix the page so it centers or put the summary on the bottom to get through the demo, talk w/ team about removing margin in app.js
-
   const [state, dispatch] = useStoreContext();
   const [show, setShow] = useState(false);
 
@@ -56,9 +50,9 @@ export default function Cart() {
     }
   }, [state.cart.length, dispatch]);
 
-  console.log(state.cart);
+  // console.log(state.cart);
 
-  let initialCartCount = state.cart.length > 1 ? state.cart.length : 1;
+  let initialCartCount = state.cart.length > 1 ? state.cart.length : 0;
   let initialSubTotal = initialCartCount * 2.99;
   let initialTax = initialSubTotal * 0.0475;
   let initialTotal = initialSubTotal + initialTax;
@@ -72,9 +66,6 @@ export default function Cart() {
   const [totalCost, setTotalCost] = useState(initialTotal);
 
   useEffect(() => {
-    setTotalItemCount();
-  }, [itmCount]);
-  useEffect(() => {
     set_Sub_Total();
   }, [totalCount]);
   useEffect(() => {
@@ -84,18 +75,19 @@ export default function Cart() {
     set_Total_Cost();
   }, [shipAndTax]);
 
-  const setTotalItemCount = () => {
-    let total = 0;
-    for (let i = 0; i < itmCount.length; i++) {
-      total += Number(itmCount[i].Count);
-    }
-    if (total > 0) setTotalCount(total);
-    else setTotalCount(initialCartCount);
-  };
+  const totalItemCount =  state.cart.length;
+    // let total = 0;
+    // for (let i = 0; i < itmCount.length; i++) {
+    //   total += Number(itmCount[i].Count);
+    // }
+    // if (total > 0) setTotalCount(total);
+    // else setTotalCount(initialCartCount);
+
+  
 
   const set_Sub_Total = () => {
     let total = 0;
-    for (let i = 0; i < itmCount.length; i++) {
+    for (let i = 0; i < state.cart.length; i++) {
       total += Number(itmCount[i].Price);
     }
     if (total > 0) setSubTotal(total.toFixed(2));
@@ -121,7 +113,6 @@ export default function Cart() {
     console.log('here')
     if(itmCount && itmCount.find(x => x.itmId === id)) {
         const index = itmCount.map(e => e.itmId).indexOf(id)
-        console.log('here')
         const newCount = [...itmCount]
         newCount[index].Count = count
         newCount[index].Price = price
@@ -141,6 +132,8 @@ export default function Cart() {
       setCount(newCnt);
     }
   }
+
+  console.log(state.cart);
 
   function calculateTotal() {
     let sum = 0;
@@ -165,27 +158,6 @@ export default function Cart() {
   const newTotal = (parseFloat(curTotal) + amount).toFixed(2)
   setTotalCost(newTotal)
   };
-
-  // const onChange = (e) => {
-  //   const value = e.target.value;
-
-  //   if (value === "0") {
-  //     dispatch({
-  //       type: REMOVE_FROM_CART,
-  //       _id: item._id,
-  //     });
-
-  //     idbPromise("cart", "delete", { ...item });
-  //   } else {
-  //     dispatch({
-  //       type: UPDATE_CART_QUANTITY,
-  //       _id: item._id,
-  //       purchaseQuantity: parseInt(value),
-  //     });
-
-  //     idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
-  //   }
-  // };
 
   return (
     <Container ml={0}>
@@ -233,12 +205,8 @@ export default function Cart() {
             <Stack spacing="6">
               <InputGroup>
                 <InputLeftAddon children="ItemCount" />
-                <Input
-                  value={totalCount}
-                  placeholder={totalCount}
-                  onChange={handleUpdateSummary}
-                />
               </InputGroup>
+              <h1>{totalItemCount}</h1>
               <InputGroup>
                 <InputLeftAddon children="Subtotal" />
                 <Input placeholder={subTotal} />
@@ -247,10 +215,9 @@ export default function Cart() {
                 <InputLeftAddon children="Shipping + Tax" />
                 <Input placeholder={shipAndTax} />
               </InputGroup>
-              <InputGroup>
-                <InputLeftAddon children="Total" />
-                <Input placeholder={totalCost} value={totalCost} />
-              </InputGroup>
+              <Box>
+                <Text>${calculateTotal()}</Text>
+              </Box>
               <Box borderWidth={1} pt='2' pl='2' pr='2'>
           <Heading fontSize="1xl">Add a donation?</Heading>
         <Select maxW='300px' maxH='40px' mt='2' mb='2'

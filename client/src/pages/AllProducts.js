@@ -1,16 +1,5 @@
 import { React, useState, useEffect } from "react";
 import {
-  Flex,
-  Badge,
-  Box,
-  Circle,
-  Wrap,
-  Image,
-  Icon,
-  chakra,
-  Tooltip,
-  list,
-  Button,
   SimpleGrid
 } from "@chakra-ui/react";
 
