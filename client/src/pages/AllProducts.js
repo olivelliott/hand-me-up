@@ -70,24 +70,20 @@ function Allproducts() {
       return state.products;
     }
 
-    // console.log(state.products);
-    console.log(currentCategory);
-    // console.log(state.products[0].category[0]._id);
-
     return state.products.filter(
-      (product) => 
-      // console.log(product.category[0]._id)
-      product.category[0]._id === currentCategory
+      (product) => product.category[0]._id === currentCategory
     );
   }
   return (
     <>
+      <CategoryMenu/>
+
       <Link to="/my-cart">
         <Button ml={5} mt={10} bg="red" color="white" _hover={{ bg: 'brick_red' }}>
           Go To Cart
         </Button>
       </Link>
-      <CategoryMenu/>
+
       {state.products.length ? (
       <SimpleGrid
       columns={[3, null, 4]}

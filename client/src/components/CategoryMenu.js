@@ -1,9 +1,12 @@
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+
+import React, { useEffect } from 'react';
 import { useQuery } from "@apollo/client";
+import { idbPromise } from '../utils/helpers';
+
 import { QUERY_CATEGORIES } from "../utils/queries";
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../utils/actions';
 import { useStoreContext } from "../utils/GlobalState";
-import React, { useEffect } from 'react';
-import { idbPromise } from '../utils/helpers';
 
 function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
@@ -38,19 +41,22 @@ function CategoryMenu() {
   };
 
   return (
-    <div>
-      <h2>Choose a Category:</h2>
+    <>
+    <Tabs variant='soft-rounded' colorScheme='green'>
+    <TabList>
       {categories.map((item) => (
-        <button
+        <Tab
           key={item._id}
           onClick={() => {
             handleClick(item._id);
           }}
         >
           {item.name}
-        </button>
+        </Tab>
       ))}
-    </div>
+    </TabList>
+    </Tabs>
+    </>
   );
 }
 
