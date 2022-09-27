@@ -1,11 +1,29 @@
 const db = require('./connection')
-const { User, Product, Charity, Category } = require('../models')
+const { User, Product, Charity, Category, Donation } = require('../models')
 
 db.once('open', async () => {
+
+  await Charity.deleteMany()
+
+  const charities = await Charity.insertMany([
+    {
+      name: 'Planned Parenthood',
+    },
+    {
+      name: 'OBX Hotline'
+    },
+    {
+      name: 'NAACP'
+    },
+    {
+      name: 'American Humane'
+    }
+  ])
+
+  console.log('charities seeded 💫')
+
   await User.deleteMany()
 
-  // !added by CPM to connected products to a user.
-  // !Oliva - I commented out the individuate create users below... not sure the benefit of individual vs the array but I think I needed an array in order to get the user email connected to a product
   const users = await User.insertMany([
     {
       firstName: 'Pamela',

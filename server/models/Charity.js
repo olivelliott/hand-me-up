@@ -7,11 +7,24 @@ const charitySchema = new Schema ({
         required: true,
         trim: true
     },
-    // dollarValue: {
-    //     type: NumberArr,
-    //     default: 0
-    // }
-});
+    fiveValue: {
+        type: Number,
+        default: 5
+    },
+    tenValue: {
+        type: Number,
+        default: 10
+    },
+    fifteenValue: {
+        type: Number,
+        default: 15
+    },
+    twentyValue: {
+        type: Number,
+        default: 20
+    }
+
+    });
 
 const Charity = mongoose.model('Charity', charitySchema);
 

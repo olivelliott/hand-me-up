@@ -21,6 +21,7 @@ import { QUERY_ALL_PRODUCTS } from "../utils/queries";
 import { useLazyQuery } from "@apollo/client";
 
 import CartItem from "../components/CartItem";
+import DonationItem from "../components/DonationItem";
 
 import {
   REMOVE_FROM_CART,
@@ -49,9 +50,9 @@ export default function Cart() {
     }
   }, [state.cart.length, dispatch]);
 
-  useEffect(() => {
-    calculateTotal();
-  }, [state.cartTotal])
+  // useEffect(() => {
+  //   calculateTotal();
+  // }, [state.cartTotal])
 
   let initialCartCount = state.cart.length > 1 ? state.cart.length : 0;
   let initialSubTotal = initialCartCount * 2.99;
@@ -64,8 +65,6 @@ export default function Cart() {
   const [totalCost, setTotalCost] = useState(initialTotal);
 
   const totalItemCount = state.cart.length;
-
-  // console.log(state.cartTotal)
 
   const calculateSubTotal = () => {
     let sum = 0;
@@ -88,13 +87,13 @@ export default function Cart() {
       let sum = number;
       console.log(sum);
 
-      state.cart.forEach((item) => {
-        sum += item.price * calculateTax() + item.price * item.purchaseQuantity;
-      });
-      console.log(state.cartTotal);
+      // state.cart.forEach((item) => {
+      //   sum += item.price * calculateTax() + item.price * item.purchaseQuantity;
+      // });
+      // console.log(state.cartTotal);
       // setTotalCost(state.cartTotal)
       // console.log(totalCost);
-      return (state.cartTotal = sum.toFixed(2));
+      return sum.toFixed(2);
     }
 
     let sum = 0;
@@ -142,15 +141,14 @@ export default function Cart() {
     // console.log(newTotal);
     const updatedTotal = (state.cartTotal = newTotal);
     // console.log(updatedTotal);
-    console.log(this.state.cartTotal);
+    // console.log(this.state.cartTotal);
     calculateTotal(updatedTotal);
     // console.log(state.cartTotal + amount);
   };
 
-  console.log(state.cartTotal);
-
   return (
     <Container ml={0}>
+      <DonationItem />
       <Flex d="columns">
         <Box
           align="left"

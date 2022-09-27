@@ -2,7 +2,7 @@
 
 const { AuthenticationError } = require("apollo-server-express");
 const { default: Stripe } = require("stripe");
-const { User, Product, Category, Order, Charity } = require("../models");
+const { User, Product, Category, Order, Charity, Donation } = require("../models");
 const { signToken } = require("../utils/auth");
 // Put stripe here too
 
@@ -72,7 +72,7 @@ const resolvers = {
     // GET all charities
     charities: async () => {
       return Charity.find()
-    }
+    },
   },
 
   // =========
